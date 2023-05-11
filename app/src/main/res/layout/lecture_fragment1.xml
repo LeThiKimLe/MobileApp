@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="381dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="162dp"
+        android:layout_marginEnd="15dp"
+        android:text="Tên bài giảng"
+        android:textColor="#078DC8"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <VideoView
+        android:id="@+id/video"
+        android:layout_width="386dp"
+        android:layout_height="277dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="244dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="382dp"
+        android:layout_height="170dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="68dp"
+        android:background="@drawable/vien"
+        android:padding="10dp"
+        android:text="MO TA"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="139dp"
+        android:background="@drawable/header_lec" />
+
+</RelativeLayout>

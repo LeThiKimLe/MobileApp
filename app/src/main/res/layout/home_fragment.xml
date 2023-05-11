@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/home_fragment"
+            android:layout_marginBottom="65dp"
+            android:padding="5dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ground"
+                android:layout_width="match_parent"
+                android:layout_height="157dp"
+                android:layout_gravity="center|top"
+                android:background="@drawable/border_15_gradient"
+                tools:layout_editor_absoluteX="5dp"
+                tools:layout_editor_absoluteY="5dp">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="59dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="110dp"
+                    android:layout_marginEnd="30dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/state4" />
+
+                <TextView
+                    android:id="@+id/txtHi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="125dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Chào bạn"
+                    android:textColor="#103A6C"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="116dp"
+                android:layout_gravity="center|top"
+                android:background="@drawable/eternal_moon_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="158dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/border_15_stroke"
+                    android:text="300+     Khóa học" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button2"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginHorizontal="50dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toEndOf="@id/button"
+                    android:background="@drawable/border_15_stroke"
+                    android:text="1000+     Bài giảng" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button3"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_toEndOf="@id/button2"
+                    android:background="@drawable/border_15_stroke"
+                    android:text="1500+     Học viên" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/circleIndicator"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Danh mục Khóa học"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/textView"
+                    android:layout_marginStart="130dp"
+                    android:layout_toEndOf="@id/textView"
+                    android:text="Xem tất cả"
+                    android:textColor="#F4C46F"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nestedScrollView2"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Khóa học nổi bật"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/viewAllCourse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rc_attractivecourse"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="20dp"
+                    android:background="@drawable/border_15_stroke"
+                    android:paddingHorizontal="25dp"
+                    android:text="Xem tất cả"
+                    android:textColor="#D5992F" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rc_attractivecourse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textView3"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="16dp"
+                    android:minHeight="300dp"
+                    tools:listitem="@layout/course_item_layout">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/circleIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/viewpage"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    app:ci_drawable="@drawable/border_15_red" >
+
+                </me.relex.circleindicator.CircleIndicator>
+
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewpage"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_below="@id/button"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp">
+
+                </androidx.viewpager.widget.ViewPager>
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/nestedScrollView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="105dp"
+                    android:layout_below="@id/textView"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="1dp"
+                    android:fillViewport="true">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rc_coursecategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="vertical" />
+
+                </androidx.core.widget.NestedScrollView>
+
+            </RelativeLayout>
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

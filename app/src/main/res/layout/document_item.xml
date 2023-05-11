@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="5dp"
+    android:padding="10dp"
+    android:layout_margin="15dp"
+    android:background="@drawable/doc_item_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_nameDoc"
+        android:layout_width="363dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="3dp"
+        android:ellipsize="end"
+        android:text="TITLE"
+        android:textColor="#2c3e50"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <TextView
+        android:id="@+id/tv_NDDoc"
+        android:layout_width="364dp"
+        android:layout_height="40dp"
+        android:text="Artist"
+        android:textColor="#7f8c8d"
+        android:textSize="14dp"
+        tools:ignore="MissingConstraints,TextSizeCheck"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="37dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

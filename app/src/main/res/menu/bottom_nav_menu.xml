@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Trang chủ"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_home"/>
+
+    <item
+        android:id="@+id/course"
+        android:title="Khóa học"
+        android:orderInCategory="2"
+        android:icon="@drawable/ic_listcourse"/>
+    <item
+        android:id="@+id/placeholder"
+        android:title=""
+        android:orderInCategory="3"
+        />
+
+    <item
+        android:id="@+id/about"
+        android:title="Về chúng tôi"
+        android:orderInCategory="5"
+        android:icon="@drawable/ic_about"/>
+
+    <item
+        android:id="@+id/notice"
+        android:title="Thông báo"
+        android:orderInCategory="4"
+        android:icon="@drawable/ic_notice"/>
+</menu>
