@@ -10,7 +10,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.List;
 
-import vn.iotstar.finalproject.Model.ViewPageImage;
+import vn.iotstar.finalproject.ViewModel.ViewPageImage;
 import vn.iotstar.finalproject.R;
 
 public class ImagesViewPageAdapter extends PagerAdapter {

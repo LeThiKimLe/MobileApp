@@ -63,4 +63,5 @@ public class CourseFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.course_list_layout, container, false);
     }
+
 }

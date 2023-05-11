@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vn.iotstar.finalproject.Adapter.ImagesViewPageAdapter;
-import vn.iotstar.finalproject.Model.ViewPageImage;
+import vn.iotstar.finalproject.ViewModel.ViewPageImage;
 import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.databinding.HomeFragmentBinding;
 

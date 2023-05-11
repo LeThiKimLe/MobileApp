@@ -1,4 +1,4 @@
-package vn.iotstar.finalproject.Model;
+package vn.iotstar.finalproject.ViewModel;
 
 public class ViewPageImage {
     private int imagesId;

@@ -4,32 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.viewpager.widget.ViewPager;
 
-import android.media.Image;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Layout;
 import android.view.Menu;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.bumptech.glide.manager.SupportRequestManagerFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import me.relex.circleindicator.CircleIndicator;
-import vn.iotstar.finalproject.Adapter.ImagesViewPageAdapter;
-import vn.iotstar.finalproject.Model.ViewPageImage;
 import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.databinding.ActivityMain2Binding;
 

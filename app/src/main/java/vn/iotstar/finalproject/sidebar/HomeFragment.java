@@ -21,7 +21,7 @@ import vn.iotstar.finalproject.BottomNav.AboutFragment;
 import vn.iotstar.finalproject.BottomNav.CourseFragment;
 import vn.iotstar.finalproject.BottomNav.HomePageFragment;
 import vn.iotstar.finalproject.BottomNav.NoticeFragment;
-import vn.iotstar.finalproject.Model.ViewPageImage;
+import vn.iotstar.finalproject.ViewModel.ViewPageImage;
 import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.databinding.MainLayoutBinding;
 
@@ -134,7 +134,4 @@ public class HomeFragment extends Fragment {
         transaction.setReorderingAllowed(true);
         transaction.commit();
     }
-
-
-
 }

@@ -1,0 +1,18 @@
+package vn.iotstar.finalproject.Retrofit;
+
+import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
+import vn.iotstar.finalproject.Response.HocVienReponse;
+
+public interface HocVienApi {
+
+    @FormUrlEncoded
+    @POST("api/general/signup")
+    Call<HocVienReponse> registerHocVien(@Field("username") String username, @Field("name") String name, @Field("sdt") String sdt, @Field("email") String email, @Field("ngaysinh") String ngaysinh, @Field("password") String password);
+    @FormUrlEncoded
+    @POST("api/general/login")
+    Call<HocVienReponse> loginHocVien(@Field("username") String username, @Field("password") String password);
+
+}
