@@ -3,9 +3,12 @@ package vn.iotstar.finalproject.BottomNav;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import vn.iotstar.finalproject.Adapter.ImagesViewPageAdapter;
+import vn.iotstar.finalproject.Adapter.SubjectAdapter;
+import vn.iotstar.finalproject.Adapter.TypicalCourseAdapter;
+import vn.iotstar.finalproject.Model.PhanMon;
+import vn.iotstar.finalproject.PageActivity.MainActivity;
+import vn.iotstar.finalproject.Response.StatisticResponse;
+import vn.iotstar.finalproject.Retrofit.GeneralAPI;
+import vn.iotstar.finalproject.Retrofit.*;
 import vn.iotstar.finalproject.ViewModel.ViewPageImage;
 import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.databinding.HomeFragmentBinding;
@@ -42,6 +56,14 @@ public class HomePageFragment extends Fragment {
     private Handler handler = new Handler();
 
     private HomeFragmentBinding binding;
+
+    GeneralAPI apiService;
+    StatisticResponse statistic;
+    TypicalCourseAdapter typicalAdapter;
+
+    SubjectAdapter subjectAdapter;
+
+    List<PhanMon> listSubject;
 
     public HomePageFragment() {
         // Required empty public constructor
@@ -81,6 +103,8 @@ public class HomePageFragment extends Fragment {
         binding = HomeFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         addViewPager();
+        GetTypicalCourse();
+        GetSubject();
         return root;
     }
 
@@ -137,7 +161,6 @@ public class HomePageFragment extends Fragment {
             public void onPageScrollStateChanged(int state) {
             }
         });
-
     }
     private List<ViewPageImage> getImageList(){
         List<ViewPageImage> list = new ArrayList<>();
@@ -146,4 +169,59 @@ public class HomePageFragment extends Fragment {
         list.add(new ViewPageImage(R.drawable.banner3));
         return list;
     }
+
+    private void GetTypicalCourse() {
+        apiService = RetrofitClient.getRetrofit().create(GeneralAPI.class);
+        apiService.getTypical().enqueue(new Callback<StatisticResponse>() {
+            @Override
+            public void onResponse(Call<StatisticResponse> call, Response<StatisticResponse> response) {
+                if(response.isSuccessful()) {
+                    statistic = response.body();
+
+                    typicalAdapter = new TypicalCourseAdapter(MainActivity.getInstance(),statistic.getDangKyNhieu());
+                    binding.rcAttractivecourse.setHasFixedSize(true);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.getInstance().getApplicationContext());
+                    binding.rcAttractivecourse.setLayoutManager(layoutManager);
+                    binding.rcAttractivecourse.setAdapter(typicalAdapter);
+                    typicalAdapter.notifyDataSetChanged();
+                }else {
+                    int statusCode = response.code();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StatisticResponse> call, Throwable t) {
+                Log.d("logg",t.getMessage());
+            }
+        });
+    }
+
+    private void GetSubject() {
+        apiService = RetrofitClient.getRetrofit().create(GeneralAPI.class);
+        apiService.getSubject().enqueue(new Callback<List<PhanMon>>() {
+            @Override
+            public void onResponse(Call<List<PhanMon>> call, Response<List<PhanMon>> response) {
+                if(response.isSuccessful()) {
+                    listSubject = response.body();
+                    subjectAdapter = new SubjectAdapter(MainActivity.getInstance(), listSubject);
+                    binding.rcCoursecategory.setHasFixedSize(true);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.getInstance().getApplicationContext()
+                            ,LinearLayoutManager.HORIZONTAL, false);
+                    binding.rcCoursecategory.setLayoutManager(layoutManager);
+                    binding.rcCoursecategory.setAdapter(subjectAdapter);
+                    subjectAdapter.notifyDataSetChanged();
+                }else {
+                    int statusCode = response.code();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PhanMon>> call, Throwable t) {
+                Log.d("logg",t.getMessage());
+            }
+        });
+    }
+
+
+
 }

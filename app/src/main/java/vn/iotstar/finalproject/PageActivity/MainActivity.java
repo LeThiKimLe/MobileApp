@@ -26,10 +26,12 @@ public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private ActivityMain2Binding binding;
     private AppBarConfiguration mAppBarConfiguration;
+    private static MainActivity instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -39,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         //AnhXa();
         addSideBar();
         //addViewPager();
+    }
+
+    public static MainActivity getInstance() {
+        return instance;
     }
 
     private void addSideBar()

@@ -9,6 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.Response.HocVienReponse;
+import vn.iotstar.finalproject.Response.StatisticResponse;
 
 public interface HocVienApi {
 
@@ -20,5 +21,7 @@ public interface HocVienApi {
     Call<HocVienReponse> loginHocVien(@Field("username") String username, @Field("password") String password);
     @GET("api/general/listCourse")
     Call<List<KhoaHoc>> getKHAll();
+
+
 
 }
