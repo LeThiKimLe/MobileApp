@@ -62,7 +62,7 @@
         android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/priceValue"
+        android:id="@+id/regisNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/coursePic"
