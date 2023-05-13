@@ -41,16 +41,22 @@
             android:theme="@style/Theme.FinalProject.NoActionBar"
             >
         </activity>
+<!--        <activity-->
+<!--            android:name=".PageActivity.IntroActivity"-->
+<!--            android:exported="false"-->
+<!--            android:theme="@style/Theme.FinalProject.NoActionBar"-->
+<!--            >-->
+<!--        </activity>-->
+
         <activity
-            android:name=".PageActivity.IntroActivity"
+            android:name=".PageActivity.RegisterActivity"
             android:exported="false"
             android:theme="@style/Theme.FinalProject.NoActionBar"
             >
         </activity>
 
-
         <activity
-            android:name=".PageActivity.RegisterActivity"
+            android:name=".PageActivity.IntroActivity"
             android:exported="true"
             android:theme="@style/Theme.FinalProject.NoActionBar">
             <intent-filter>
@@ -59,5 +65,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

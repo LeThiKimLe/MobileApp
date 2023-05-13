@@ -42,7 +42,7 @@ public class IntroActivity extends AppCompatActivity {
     public void ChuyenActivity()
     {
         IntroActivity.this.finish();
-        Intent intent = new Intent(IntroActivity.this.getApplicationContext(), (Class) MainActivity.class);
+        Intent intent = new Intent(IntroActivity.this.getApplicationContext(), (Class) LoginActivity.class);
         IntroActivity.this.startActivity(intent);
         return;
     }
