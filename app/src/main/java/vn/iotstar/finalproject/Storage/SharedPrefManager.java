@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import vn.iotstar.finalproject.Model.HocVien;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
 
@@ -49,10 +46,10 @@ public class SharedPrefManager {
         editor.putString(KEY_ID, hv.getMaHocVien());
         editor.putString(KEY_NAME, hv.getTenHocVien());
         editor.putString(KEY_EMAIL, hv.getEmail());
-        editor.putString(KEY_USERNAME, hv.getUsername());
-        editor.putString(KEY_USERNAME, hv.getUsername());
+        editor.putString(KEY_IMAGE,hv.getImage());
+
         editor.putString(KEY_SDT, hv.getSdt());
-        editor.putString(KEY_DATE, hv.getNgaySinh().toString());
+        editor.putString(KEY_DATE, hv.getNgaySinh());
         editor.apply();
     }
 
@@ -67,19 +64,17 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences= ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
 
-        try {
+
             return new HocVien(
                     sharedPreferences.getString(KEY_ID, null),
-                    sharedPreferences.getString(KEY_USERNAME, null),
-                    new SimpleDateFormat("dd/MM/yyyy").parse(sharedPreferences.getString(KEY_DATE, null)),
+
+                    sharedPreferences.getString(KEY_DATE, null),
                     sharedPreferences.getString(KEY_SDT, null),
                     sharedPreferences.getString(KEY_EMAIL, null),
                     sharedPreferences.getString(KEY_IMAGE, null),
                     sharedPreferences.getString(KEY_NAME, null)
             );
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     public void logout()

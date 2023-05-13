@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+ >
 
     <EditText
         android:id="@+id/text_password"
@@ -27,7 +28,7 @@
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginStart="84dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="80dp"
         android:drawableStart="@drawable/name"
         android:drawablePadding="10dp"
@@ -36,25 +37,25 @@
         android:inputType="textPersonName"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_ngaysinh" />
+        app:layout_constraintTop_toBottomOf="@+id/text_email" />
 
-    <EditText
+    <TextView
         android:id="@+id/text_ngaysinh"
-        android:layout_width="312dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="80dp"
+        android:layout_width="229dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="20dp"
         android:drawableStart="@drawable/date"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="Ngày sinh"
         android:inputType="textPersonName"
+        android:text="Ngày sinh"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_email" />
+        app:layout_constraintTop_toBottomOf="@+id/text_password" />
 
     <EditText
         android:id="@+id/text_email"
@@ -141,7 +142,8 @@
         android:text="Đăng ký"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_password" />
+        app:layout_constraintTop_toBottomOf="@+id/text_ngaysinh" />
+
 
     <TextView
         android:id="@+id/text_dangnhap"
@@ -164,5 +166,21 @@
         android:textColor="#3F51B5"
         app:layout_constraintStart_toEndOf="@+id/text_dangnhap"
         app:layout_constraintTop_toBottomOf="@+id/signup_bt" />
+
+    <ImageButton
+        android:id="@+id/ngaysinh_bt"
+        android:layout_width="73dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="49dp"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+
+        app:srcCompat="@drawable/ngaysinh_bt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toEndOf="@+id/text_ngaysinh"
+        app:layout_constraintTop_toBottomOf="@+id/text_password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

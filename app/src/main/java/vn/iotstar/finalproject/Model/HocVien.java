@@ -1,7 +1,5 @@
 package vn.iotstar.finalproject.Model;
 
-import java.util.Date;
-
 public class HocVien {
     private static final long serialVersionUID = 1L;
     private String maHocVien;
@@ -22,11 +20,11 @@ public class HocVien {
         this.tenHocVien = tenHocVien;
     }
 
-    public Date getNgaySinh() {
+    public String getNgaySinh() {
         return ngaySinh;
     }
 
-    public void setNgaySinh(Date ngaySinh) {
+    public void setNgaySinh(String ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
 
@@ -34,26 +32,26 @@ public class HocVien {
         return sdt;
     }
 
-    public HocVien(String maHocVien, String tenHocVien, Date ngaySinh, String sdt, String email, String image, String username, String password) {
-        this.maHocVien = maHocVien;
-        this.tenHocVien = tenHocVien;
-        this.ngaySinh = ngaySinh;
-        this.sdt = sdt;
-        this.email = email;
-        this.image = image;
-        this.username = username;
-        this.password = password;
-    }
-    public HocVien(String maHocVien, String tenHocVien, Date ngaySinh, String sdt, String email, String image, String username) {
-        this.maHocVien = maHocVien;
-        this.tenHocVien = tenHocVien;
-        this.ngaySinh = ngaySinh;
-        this.sdt = sdt;
-        this.email = email;
-        this.image = image;
-        this.username = username;
-
-    }
+//    public HocVien(String maHocVien, String tenHocVien, String ngaySinh, String sdt, String email, String image, String username, String password) {
+//        this.maHocVien = maHocVien;
+//        this.tenHocVien = tenHocVien;
+//        this.ngaySinh = ngaySinh;
+//        this.sdt = sdt;
+//        this.email = email;
+//        this.image = image;
+//        this.username = username;
+//        this.password = password;
+//    }
+//    public HocVien(String maHocVien, String tenHocVien, String ngaySinh, String sdt, String email, String image, String username) {
+//        this.maHocVien = maHocVien;
+//        this.tenHocVien = tenHocVien;
+//        this.ngaySinh = ngaySinh;
+//        this.sdt = sdt;
+//        this.email = email;
+//        this.image = image;
+//        this.username = username;
+//
+//    }
 
     public void setSdt(String sdt) {
         this.sdt = sdt;
@@ -79,7 +77,7 @@ public class HocVien {
 
     private String tenHocVien;
 
-    private Date ngaySinh;
+    private String ngaySinh;
     private String sdt;
     private String email;
     private String image;
@@ -102,4 +100,13 @@ public class HocVien {
 
     private String username;
     private String password;
+
+    public HocVien(String maHocVien, String tenHocVien, String ngaySinh, String sdt, String email, String image) {
+        this.maHocVien = maHocVien;
+        this.tenHocVien = tenHocVien;
+        this.ngaySinh = ngaySinh;
+        this.sdt = sdt;
+        this.email = email;
+        this.image = image;
+    }
 }

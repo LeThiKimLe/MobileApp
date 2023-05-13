@@ -36,7 +36,21 @@
              >
          </activity>
         <activity
+            android:name=".PageActivity.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FinalProject.NoActionBar"
+            >
+        </activity>
+        <activity
             android:name=".PageActivity.IntroActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FinalProject.NoActionBar"
+            >
+        </activity>
+
+
+        <activity
+            android:name=".PageActivity.RegisterActivity"
             android:exported="true"
             android:theme="@style/Theme.FinalProject.NoActionBar">
             <intent-filter>

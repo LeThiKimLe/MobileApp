@@ -3,12 +3,25 @@ package vn.iotstar.finalproject.BottomNav;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import vn.iotstar.finalproject.Adapter.KhoaHocAdapter;
+import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.R;
+import vn.iotstar.finalproject.Retrofit.HocVienApi;
+import vn.iotstar.finalproject.Retrofit.RetrofitClient;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +38,12 @@ public class CourseFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    CircleImageView imageViewprofile;
+    RecyclerView rcCate;
+    List<KhoaHoc> KhoaHocList;
+    KhoaHocAdapter hoaHocAdapter;
+
+    HocVienApi apiService;
 
     public CourseFragment() {
         // Required empty public constructor
@@ -62,6 +81,29 @@ public class CourseFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.course_list_layout, container, false);
+    }
+    private void LayKhoaHoc() {
+        apiService = RetrofitClient.getRetrofit().create(HocVienApi.class);
+        apiService.getKHAll().enqueue(new Callback<List<KhoaHoc>>() {
+            @Override
+            public void onResponse(Call<List<KhoaHoc>> call, Response<List<KhoaHoc>> response) {
+                if(response.isSuccessful()) {
+                    KhoaHocList = response.body();
+                    KhoaHocAdapter = new KhoaHocAdapter(CourseFragment.this,KhoaHocList);
+                    rcCate.setHasFixedSize(true);
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 3);
+                    rcCate.setLayoutManager(layoutManager);
+                    rcCate.setAdapter(KhoaHocAdapter);
+                    KhoaHocAdapter.notifyDataSetChanged();
+                }else {
+                    int statusCode = response.code();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<KhoaHoc>> call, Throwable t) {
+                Log.d("logg",t.getMessage());
+            }
+        });
     }
 
 }
