@@ -82,28 +82,27 @@ public class CourseFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.course_list_layout, container, false);
     }
-    private void LayKhoaHoc() {
-        apiService = RetrofitClient.getRetrofit().create(HocVienApi.class);
-        apiService.getKHAll().enqueue(new Callback<List<KhoaHoc>>() {
-            @Override
-            public void onResponse(Call<List<KhoaHoc>> call, Response<List<KhoaHoc>> response) {
-                if(response.isSuccessful()) {
-                    KhoaHocList = response.body();
-                    KhoaHocAdapter = new KhoaHocAdapter(CourseFragment.this,KhoaHocList);
-                    rcCate.setHasFixedSize(true);
-                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 3);
-                    rcCate.setLayoutManager(layoutManager);
-                    rcCate.setAdapter(KhoaHocAdapter);
-                    KhoaHocAdapter.notifyDataSetChanged();
-                }else {
-                    int statusCode = response.code();
-                }
+//    private void LayKhoaHoc() {
+//        apiService = RetrofitClient.getRetrofit().create(HocVienApi.class);
+//        apiService.getKHAll().enqueue(new Callback<List<KhoaHoc>>() {
+////            @Override
+//            public void onResponse(Call<List<KhoaHoc>> call, Response<List<KhoaHoc>> response) {
+//                if(response.isSuccessful()) {
+//                    KhoaHocList = response.body();
+//                    KhoaHocAdapter = new KhoaHocAdapter(CourseFragment.this,KhoaHocList);
+//                    rcCate.setHasFixedSize(true);
+//                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 3);
+//                    rcCate.setLayoutManager(layoutManager);
+//                    rcCate.setAdapter(KhoaHocAdapter);
+//                    KhoaHocAdapter.notifyDataSetChanged();
+//                }else {
+//                    int statusCode = response.code();
+//                }
             }
-            @Override
-            public void onFailure(Call<List<KhoaHoc>> call, Throwable t) {
-                Log.d("logg",t.getMessage());
-            }
-        });
-    }
+//            @Override
+//            public void onFailure(Call<List<KhoaHoc>> call, Throwable t) {
+//                Log.d("logg",t.getMessage());
+//            }
+//        });
+//    }
 
-}
