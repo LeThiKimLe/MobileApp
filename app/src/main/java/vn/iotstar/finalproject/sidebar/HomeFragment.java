@@ -125,7 +125,6 @@ public class HomeFragment extends Fragment {
             }});
     }
 
-
     private void loadFragment(Fragment fragment) {
         // load fragment
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
