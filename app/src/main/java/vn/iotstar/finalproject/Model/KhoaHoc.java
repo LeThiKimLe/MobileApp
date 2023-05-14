@@ -1,8 +1,16 @@
 package vn.iotstar.finalproject.Model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
+
+@Entity(tableName = "MyCourse")
 public class  KhoaHoc implements Serializable {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String maKhoaHoc;
     private String giaoVien;
     private String phanMon;
@@ -10,7 +18,6 @@ public class  KhoaHoc implements Serializable {
     private String moTa;
     private Integer soBaiHoc;
     private Integer giaTien;
-
     private String ngayCapNhat;
     private String hinhAnhMoTa;
 
@@ -96,5 +103,13 @@ public class  KhoaHoc implements Serializable {
         this.giaTien = giaTien;
         this.ngayCapNhat = ngayCapNhat;
         this.hinhAnhMoTa = hinhAnhMoTa;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

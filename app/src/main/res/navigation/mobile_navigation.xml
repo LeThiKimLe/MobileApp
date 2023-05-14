@@ -23,10 +23,4 @@
         android:label="Giỏ hàng của tôi"
         tools:layout="@layout/cart_layout" />
 
-    <fragment
-        android:id="@+id/nav_logout"
-        android:name="vn.iotstar.finalproject.sidebar.LogoutFragment"
-        android:label="Đăng xuất"
-        tools:layout="@layout/logout_fragment" />
-
 </navigation>

@@ -3,8 +3,10 @@ package vn.iotstar.finalproject.Storage;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import vn.iotstar.finalproject.Model.HocVien;
+import vn.iotstar.finalproject.PageActivity.LoginActivity;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
 
 public class SharedPrefManager {
@@ -34,20 +36,19 @@ public class SharedPrefManager {
         if (mInstance==null)
         {
             mInstance = new SharedPrefManager(context);
-
         }
         return mInstance;
     }
 
     public void hocvienLogin(HocVien hv)
     {
+        Toast.makeText(ctx, "Đã lưu", Toast.LENGTH_SHORT).show();
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor= sharedPreferences.edit();
         editor.putString(KEY_ID, hv.getMaHocVien());
         editor.putString(KEY_NAME, hv.getTenHocVien());
         editor.putString(KEY_EMAIL, hv.getEmail());
         editor.putString(KEY_IMAGE,hv.getImage());
-
         editor.putString(KEY_SDT, hv.getSdt());
         editor.putString(KEY_DATE, hv.getNgaySinh());
         editor.apply();
@@ -56,23 +57,19 @@ public class SharedPrefManager {
     public boolean isLoggedIn()
     {
         SharedPreferences sharedPreferences=ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_USERNAME, null)!= null;
+        return sharedPreferences.getString(KEY_NAME, null)!= null;
     }
 
     public HocVien getHocVien()
     {
         SharedPreferences sharedPreferences= ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-
-
-
             return new HocVien(
                     sharedPreferences.getString(KEY_ID, null),
-
+                    sharedPreferences.getString(KEY_NAME, null),
                     sharedPreferences.getString(KEY_DATE, null),
                     sharedPreferences.getString(KEY_SDT, null),
                     sharedPreferences.getString(KEY_EMAIL, null),
-                    sharedPreferences.getString(KEY_IMAGE, null),
-                    sharedPreferences.getString(KEY_NAME, null)
+                    sharedPreferences.getString(KEY_IMAGE, null)
             );
 
     }
@@ -83,7 +80,7 @@ public class SharedPrefManager {
         SharedPreferences.Editor editor= sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        ctx.startActivity(new Intent(ctx, MainActivity.class));
+        ctx.startActivity(new Intent(ctx, LoginActivity.class));
     }
 
 }

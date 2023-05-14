@@ -1,5 +1,7 @@
 package vn.iotstar.finalproject.sidebar;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import vn.iotstar.finalproject.PageActivity.MainActivity;
 import vn.iotstar.finalproject.R;
+import vn.iotstar.finalproject.Storage.SharedPrefManager;
 import vn.iotstar.finalproject.databinding.LogoutFragmentBinding;
 
 /**
@@ -66,5 +70,29 @@ public class LogoutFragment extends Fragment {
         binding = LogoutFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         return root;
+    }
+
+    public void showDialog()
+    {
+        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.getInstance());
+        alert.setTitle("Xác nhận đăng xuất");
+        alert.setMessage("Bạn có chắc muốn đăng xuất?");
+        alert.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPrefManager.getInstance(MainActivity.getInstance().getApplicationContext()).logout();
+            }
+        });
+
+        alert.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alert.show();
     }
 }

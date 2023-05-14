@@ -7,15 +7,24 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.manager.SupportRequestManagerFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import vn.iotstar.finalproject.Model.HocVien;
 import vn.iotstar.finalproject.R;
+import vn.iotstar.finalproject.Storage.SharedPrefManager;
 import vn.iotstar.finalproject.databinding.ActivityMain2Binding;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMain2Binding binding;
     private AppBarConfiguration mAppBarConfiguration;
     private static MainActivity instance;
+
+    View headerView;
+
+    TextView userName, userEmail, logout;
+    ImageView imageViewprofile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +54,29 @@ public class MainActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_main2);
         //AnhXa();
         addSideBar();
+        setPersonalInfor();
         //addViewPager();
+    }
+
+    public void setPersonalInfor()
+    {
+        if(SharedPrefManager.getInstance(this).isLoggedIn()) {
+            headerView = binding.navView.getHeaderView(0);
+            userName=(TextView)headerView.findViewById(R.id.personName);
+            userEmail = (TextView) headerView.findViewById(R.id.personalEmail);
+            imageViewprofile = (ImageView) headerView.findViewById(R.id.personalImg);
+            HocVien user = SharedPrefManager.getInstance(this).getHocVien();
+            userName.setText(user.getTenHocVien());
+            userEmail.setText(user.getEmail());
+            Glide.with(getApplicationContext()).load(user.getImage()).into(imageViewprofile);
+//            logout.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    SharedPrefManager.getInstance(getApplicationContext()).logout();
+//                }
+//            });
+            addLogOut();
+        }
     }
 
     public static MainActivity getInstance() {
@@ -55,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_mypage,R.id.nav_cart, R.id.nav_logout)
+                R.id.nav_home, R.id.nav_mypage,R.id.nav_cart)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -75,6 +111,38 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void addLogOut()
+    {
+        logout= (TextView) headerView.findViewById(R.id.logoutBtn);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
+    }
+
+    public void showDialog()
+    {
+        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.getInstance());
+        alert.setTitle("Xác nhận đăng xuất");
+        alert.setMessage("Bạn có chắc muốn đăng xuất?");
+        alert.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPrefManager.getInstance(MainActivity.getInstance().getApplicationContext()).logout();
+            }
+        });
+
+        alert.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alert.show();
     }
 
 }
