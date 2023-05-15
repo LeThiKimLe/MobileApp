@@ -1,5 +1,6 @@
 package vn.iotstar.finalproject.sidebar;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import vn.iotstar.finalproject.BottomNav.HomePageFragment;
+import vn.iotstar.finalproject.Model.HocVien;
+import vn.iotstar.finalproject.PageActivity.MainActivity;
 import vn.iotstar.finalproject.R;
+import vn.iotstar.finalproject.Storage.SharedPrefManager;
 import vn.iotstar.finalproject.databinding.MainLayoutBinding;
 import vn.iotstar.finalproject.databinding.ProfileFragmentBinding;
 
@@ -18,6 +30,12 @@ import vn.iotstar.finalproject.databinding.ProfileFragmentBinding;
  * create an instance of this fragment.
  */
 public class PersonalFragment extends Fragment {
+
+    TextView id, userName,name, userEmail, sdt, date;
+    Button Update, Refuse;
+    ImageView update_btn;
+    //CircleImageView imageViewprofile;
+    private static PersonalFragment instance;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,8 +82,36 @@ public class PersonalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         binding = ProfileFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        loadData();
         return root;
     }
+    public void loadData()
+    {
+        if(SharedPrefManager.getInstance(MainActivity.getInstance()).isLoggedIn())
+        {
+            HocVien hocVien = SharedPrefManager.getInstance(MainActivity.getInstance()).getHocVien();
+            binding.idBox.setText(String.valueOf(hocVien.getMaHocVien()));
+            binding.usernameBox.setText(String.valueOf(hocVien.getTenHocVien()));
+            binding.emailBox.setText(String.valueOf(hocVien.getEmail()));
+            binding.sdtBox.setText(String.valueOf(hocVien.getSdt()));
+            binding.dateBox.setText(String.valueOf(hocVien.getNgaySinh()));
+            binding.tvName.setText(String.valueOf(hocVien.getTenHocVien()));
+        }
+    }
+
+    int vitri = -1;
+    public void update()
+    {
+        binding.updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+
+
 }
