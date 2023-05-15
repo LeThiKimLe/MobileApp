@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     TextView userName, userEmail, logout;
     ImageView imageViewprofile;
 
-    HocVien hocVien;
+    public static HocVien hocVien;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

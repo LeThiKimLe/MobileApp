@@ -90,16 +90,13 @@ public class PersonalFragment extends Fragment {
     }
     public void loadData()
     {
-        if(SharedPrefManager.getInstance(MainActivity.getInstance()).isLoggedIn())
-        {
-            HocVien hocVien = SharedPrefManager.getInstance(MainActivity.getInstance()).getHocVien();
-            binding.idBox.setText(String.valueOf(hocVien.getMaHocVien()));
-            binding.usernameBox.setText(String.valueOf(hocVien.getTenHocVien()));
-            binding.emailBox.setText(String.valueOf(hocVien.getEmail()));
-            binding.sdtBox.setText(String.valueOf(hocVien.getSdt()));
-            binding.dateBox.setText(String.valueOf(hocVien.getNgaySinh()));
-            binding.tvName.setText(String.valueOf(hocVien.getTenHocVien()));
-        }
+        HocVien hocVien = MainActivity.hocVien;
+        binding.idBox.setText(String.valueOf(hocVien.getMaHocVien()));
+        binding.usernameBox.setText(String.valueOf(hocVien.getTenHocVien()));
+        binding.emailBox.setText(String.valueOf(hocVien.getEmail()));
+        binding.sdtBox.setText(String.valueOf(hocVien.getSdt()));
+        binding.dateBox.setText(String.valueOf(hocVien.getNgaySinh()));
+        binding.tvName.setText(String.valueOf(hocVien.getTenHocVien()));
     }
 
     int vitri = -1;
@@ -112,6 +109,4 @@ public class PersonalFragment extends Fragment {
             }
         });
     }
-
-
 }
