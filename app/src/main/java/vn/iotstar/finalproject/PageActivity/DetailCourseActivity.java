@@ -25,6 +25,7 @@ import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.Response.StatisticResponse;
 import vn.iotstar.finalproject.Retrofit.GeneralAPI;
 import vn.iotstar.finalproject.Retrofit.RetrofitClient;
+import vn.iotstar.finalproject.Storage.CartItem;
 import vn.iotstar.finalproject.databinding.ActivityMain2Binding;
 import vn.iotstar.finalproject.databinding.CourseInforLayoutBinding;
 
@@ -38,6 +39,8 @@ public class DetailCourseActivity extends AppCompatActivity {
     GiaoVien giaoVien;
 
     CourseInforLayoutBinding binding;
+
+    CartItem new_item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +105,8 @@ public class DetailCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!isCheckExist(khoaHoc)) {
-                    CartDatabase.getInstance(DetailCourseActivity.this).cartDao().insertAll(khoaHoc);
+                    new_item= new CartItem(khoaHoc);
+                    CartDatabase.getInstance(DetailCourseActivity.this).cartDao().insertAll(new_item);
                     Toast.makeText(DetailCourseActivity.this, "Đã thêm vào giỏ thành công", Toast.LENGTH_SHORT).show();
                 }
                 else
@@ -122,8 +126,8 @@ public class DetailCourseActivity extends AppCompatActivity {
         finish();
     }
 
-    private boolean isCheckExist(@NonNull KhoaHoc khoaHoc){
-        List<KhoaHoc> list = CartDatabase.getInstance(this).cartDao().checkCourse(khoaHoc.getMaKhoaHoc());
+    private boolean isCheckExist(@NonNull KhoaHoc kH){
+        List<CartItem> list = CartDatabase.getInstance(this).cartDao().checkCourse(kH.getMaKhoaHoc(), MainActivity.userId);
         return list!=null && !list.isEmpty();
     }
 }

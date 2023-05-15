@@ -9,22 +9,24 @@ import androidx.room.Update;
 import java.util.List;
 
 import vn.iotstar.finalproject.Model.KhoaHoc;
+import vn.iotstar.finalproject.Storage.CartItem;
 
 @Dao
 public interface CartDao {
-    @Query("SELECT * FROM MyCourse")
-    List<KhoaHoc> getAll();
+    @Query("SELECT * FROM MyCourse where maHocVien= (:userId)")
+    List<CartItem> getAll(String userId);
 
-    @Query("SELECT * FROM MyCourse WHERE maKhoaHoc = (:Ids)")
-    List<KhoaHoc> checkCourse(String Ids);
+    @Query("SELECT * FROM MyCourse WHERE maKhoaHoc = (:Ids) and maHocVien= (:userId)")
+    List<CartItem> checkCourse(String Ids, String userId);
+
 
     @Insert
-    void insertAll(KhoaHoc... course);
+    void insertAll(CartItem... cartItems);
 
     @Update
-    void update(KhoaHoc... cartItems);
+    void update(CartItem... cartItems);
 
     @Delete
-    void delete(KhoaHoc cartItems);
+    void delete(CartItem cartItems);
 
 }

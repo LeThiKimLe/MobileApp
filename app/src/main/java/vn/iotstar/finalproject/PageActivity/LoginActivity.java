@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.iotstar.finalproject.Model.HocVien;
 import vn.iotstar.finalproject.Response.HocVienReponse;
 import vn.iotstar.finalproject.Retrofit.HocVienApi;
 import vn.iotstar.finalproject.Storage.SharedPrefManager;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private LoginLayoutBinding login_layout;
     HocVienApi hvApi;
     HocVienReponse hvReponse;
+    HocVien hocVien;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         initComponents();
         handleLoginButton();
-
     }
     private void handleLoginButton() {
 
@@ -69,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                             if (login_layout.checkBoxRemember.isChecked())
                                 SharedPrefManager.getInstance(getApplicationContext()).hocvienLogin(hvReponse.getHocVien());
+                            hocVien= hvReponse.getHocVien();
                             goToHomeActivity();
                         }
                         else
@@ -93,6 +95,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToHomeActivity() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("currentUser",hocVien);
+        intent.putExtras(bundle);
         startActivity(intent);
         finish();
     }
@@ -101,7 +106,6 @@ public class LoginActivity extends AppCompatActivity {
         login_layout.textDangky.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
-
         });
     }
 

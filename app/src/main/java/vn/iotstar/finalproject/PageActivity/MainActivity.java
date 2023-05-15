@@ -43,11 +43,14 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int MY_REQUEST_CODE=10;
     public static final String TAG = MainActivity.class.getName();
+    public static String userId;
 
     View headerView;
 
     TextView userName, userEmail, logout;
     ImageView imageViewprofile;
+
+    HocVien hocVien;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = ActivityMain2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        if(SharedPrefManager.getInstance(this).isLoggedIn()) {
+            hocVien = SharedPrefManager.getInstance(this).getHocVien();
+        }
+        else{
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            hocVien = (HocVien) extras.getSerializable("currentUser");
+        }
+        }
         //setContentView(R.layout.activity_main2);
         //AnhXa();
         addSideBar();
@@ -67,23 +81,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void setPersonalInfor()
     {
-        if(SharedPrefManager.getInstance(this).isLoggedIn()) {
-            headerView = binding.navView.getHeaderView(0);
-            userName=(TextView)headerView.findViewById(R.id.personName);
-            userEmail = (TextView) headerView.findViewById(R.id.personalEmail);
-            imageViewprofile = (ImageView) headerView.findViewById(R.id.personalImg);
-            HocVien user = SharedPrefManager.getInstance(this).getHocVien();
-            userName.setText(user.getTenHocVien());
-            userEmail.setText(user.getEmail());
-            Glide.with(getApplicationContext()).load(user.getImage()).into(imageViewprofile);
-//            logout.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    SharedPrefManager.getInstance(getApplicationContext()).logout();
-//                }
-//            });
-            addLogOut();
-        }
+        headerView = binding.navView.getHeaderView(0);
+        userName=(TextView)headerView.findViewById(R.id.personName);
+        userEmail = (TextView) headerView.findViewById(R.id.personalEmail);
+        imageViewprofile = (ImageView) headerView.findViewById(R.id.personalImg);
+        userName.setText(hocVien.getTenHocVien());
+        userEmail.setText(hocVien.getEmail());
+        userId=hocVien.getMaHocVien();
+        Glide.with(getApplicationContext()).load(hocVien.getImage()).into(imageViewprofile);
+        addLogOut();
     }
 
     public static MainActivity getInstance() {
@@ -182,7 +188,6 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
             System.exit(0);
         }
-
     }
 
 }
