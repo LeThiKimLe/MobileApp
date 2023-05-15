@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +14,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import vn.iotstar.finalproject.PageActivity.MainActivity;
 import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.Response.StatisticResponse;
 
@@ -61,13 +61,13 @@ public class TypicalCourseAdapter extends RecyclerView.Adapter<TypicalCourseAdap
             images = (ImageView) itemView.findViewById(R.id.coursePic);
             courseName = (TextView) itemView.findViewById(R.id.courseName);
             teacherName = (TextView) itemView.findViewById(R.id.teacherName);
-            regisNumber = (TextView) itemView.findViewById(R.id.regisNumber);
+            regisNumber = (TextView) itemView.findViewById(R.id.deleteBtn);
             courseId = (TextView) itemView.findViewById(R.id.courseId);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context,"Bạn đã chọn product", Toast.LENGTH_SHORT).show();
-//                    MenuActivity.getInstance().GetDetailProductInFrame(Integer.parseInt((String) idMeal.getText()));
+//                    Toast.makeText(context,"Bạn đã chọn product", Toast.LENGTH_SHORT).show();
+                    MainActivity.getInstance().goToCourseDetail((String) courseId.getText());
                 }
             });
         }

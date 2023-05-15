@@ -31,6 +31,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         login_layout= LoginLayoutBinding.inflate(getLayoutInflater());
         setContentView(login_layout.getRoot());
+        if(SharedPrefManager.getInstance(this).isLoggedIn())
+        {
+            finish();
+            goToHomeActivity();
+        }
         initComponents();
         handleLoginButton();
         goToRegisterForm();
@@ -63,7 +68,8 @@ public class LoginActivity extends AppCompatActivity {
                         {
                             hvReponse= response.body();
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                            SharedPrefManager.getInstance(getApplicationContext()).hocvienLogin(hvReponse.getHocVien());
+                            if (login_layout.checkBoxRemember.isChecked())
+                                SharedPrefManager.getInstance(getApplicationContext()).hocvienLogin(hvReponse.getHocVien());
                             goToHomeActivity();
                         }
                         else
@@ -79,20 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("Loi", t.getMessage());
                     }})
                 ;
-//                    Nếu có checked thì mới lưu thông tin vào
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
 //
-//                if(checkBoxRemember.isChecked()) {
-//                    editor.putString("username", username);
-//                    editor.putString("password", password);
-//                    editor.putBoolean("checked", checkBoxRemember.isChecked());
-//                    editor.apply();
-//                } else {
-//                    editor.remove("username");
-//                    editor.remove("password");
-//                    editor.remove("checked");
-//                    editor.apply();
-//                }
             } else {
                 Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
             }

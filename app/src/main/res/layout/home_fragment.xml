@@ -30,7 +30,7 @@
                 tools:layout_editor_absoluteY="5dp">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/personalImg"
                     android:layout_width="59dp"
                     android:layout_height="55dp"
                     android:layout_marginTop="110dp"
@@ -49,7 +49,7 @@
                     android:text="Chào bạn"
                     android:textColor="#103A6C"
                     android:textSize="16sp"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView"
+                    app:layout_constraintEnd_toStartOf="@+id/personalImg"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -100,7 +100,7 @@
                     android:text="1500+     Học viên" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/personalEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/circleIndicator"
@@ -115,9 +115,9 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/textView"
+                    android:layout_alignTop="@id/personalEmail"
                     android:layout_marginStart="130dp"
-                    android:layout_toEndOf="@id/textView"
+                    android:layout_toEndOf="@id/personalEmail"
                     android:text="Xem tất cả"
                     android:textColor="#F4C46F"
                     android:textSize="16sp"
@@ -183,7 +183,7 @@
                     android:id="@+id/nestedScrollView2"
                     android:layout_width="match_parent"
                     android:layout_height="105dp"
-                    android:layout_below="@id/textView"
+                    android:layout_below="@id/personalEmail"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="1dp"
