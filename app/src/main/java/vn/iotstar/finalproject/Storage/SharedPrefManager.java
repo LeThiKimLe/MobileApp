@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import vn.iotstar.finalproject.Model.HocVien;
 import vn.iotstar.finalproject.PageActivity.LoginActivity;
-import vn.iotstar.finalproject.PageActivity.MainActivity;
 
 public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "HocVienregisterlogin";

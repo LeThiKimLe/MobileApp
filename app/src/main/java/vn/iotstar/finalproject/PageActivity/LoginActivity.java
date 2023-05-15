@@ -40,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         initComponents();
         handleLoginButton();
+        goToRegisterForm();
+
     }
     private void handleLoginButton() {
 
