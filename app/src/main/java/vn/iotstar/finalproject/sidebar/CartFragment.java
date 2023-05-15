@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import vn.iotstar.finalproject.Adapter.CartAdapter;
 import vn.iotstar.finalproject.BottomNav.HomePageFragment;
+import vn.iotstar.finalproject.Dao.iClickListener;
 import vn.iotstar.finalproject.Database.CartDatabase;
 import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
@@ -85,12 +87,30 @@ public class CartFragment extends Fragment {
 
     public void getCart(){
         listkhoaHoc = new ArrayList<>();
-        listkhoaHoc = CartDatabase.getInstance(MainActivity.getInstance()).cartDao().getAll();
-        adapter = new CartAdapter(MainActivity.getInstance(), listkhoaHoc);
-        binding.cartItemList.setHasFixedSize(true);
+//        listkhoaHoc = CartDatabase.getInstance(MainActivity.getInstance()).cartDao().getAll();
+//        adapter = new CartAdapter(MainActivity.getInstance(), listkhoaHoc);
+        adapter= new CartAdapter(new iClickListener() {
+            @Override
+            public void deleteCartItem(KhoaHoc khoaHoc) {
+                clickDeleteFromCart(khoaHoc);
+            }
+        });
+        loadData();
+        binding.cartItemList.setHasFixedSize(false);
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.getInstance());
         binding.cartItemList.setLayoutManager(layoutManager);
         binding.cartItemList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+    }
+
+    private void clickDeleteFromCart(KhoaHoc khoaHoc)
+    {
+        CartDatabase.getInstance(MainActivity.getInstance()).cartDao().delete(khoaHoc);
+        loadData();
+        Toast.makeText(MainActivity.getInstance(), "Đã xóa khỏi giỏ hàng", Toast.LENGTH_SHORT).show();
+    }
+
+    public void loadData(){
+        listkhoaHoc= CartDatabase.getInstance(MainActivity.getInstance()).cartDao().getAll();
+        adapter.setData(listkhoaHoc);
     }
 }

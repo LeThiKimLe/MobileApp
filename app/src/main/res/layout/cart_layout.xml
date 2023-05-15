@@ -69,14 +69,13 @@
                 android:drawableStart="@drawable/ic_num"
                 android:gravity="center_vertical"
                 android:text="  Số khóa học đã chọn: "
-                android:textAlignment="textStart"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/numCourse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center|end"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:paddingRight="10dp"
@@ -107,12 +106,12 @@
                 android:id="@+id/sumTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center|end"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:gravity="end"
                 android:text="đ200.000"
-                android:textAlignment="textEnd"
                 android:textColor="#DF3030"
                 android:textSize="16sp"
                 android:textStyle="bold" />

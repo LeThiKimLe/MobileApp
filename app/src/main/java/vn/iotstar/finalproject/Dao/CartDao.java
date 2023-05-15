@@ -16,7 +16,7 @@ public interface CartDao {
     List<KhoaHoc> getAll();
 
     @Query("SELECT * FROM MyCourse WHERE maKhoaHoc = (:Ids)")
-    List<KhoaHoc> loadAllByIds(String[] Ids);
+    List<KhoaHoc> checkCourse(String Ids);
 
     @Insert
     void insertAll(KhoaHoc... course);

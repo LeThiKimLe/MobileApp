@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private static MainActivity instance;
 
+    private static final int MY_REQUEST_CODE=10;
+    public static final String TAG = MainActivity.class.getName();
+
     View headerView;
 
     TextView userName, userEmail, logout;
@@ -155,9 +158,9 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString("courseId", courseId);
         intent.putExtras(bundle);
-//        startActivity(intent);
-        startActivityForResult(intent, 1);
-        finish();
+        startActivity(intent);
+//        startActivityForResult(intent, 1);
+//        finish();
     }
 
     @Override

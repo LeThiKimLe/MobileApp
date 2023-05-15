@@ -1,5 +1,6 @@
 package vn.iotstar.finalproject.PageActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -10,9 +11,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.iotstar.finalproject.Adapter.CartAdapter;
 import vn.iotstar.finalproject.Adapter.TypicalCourseAdapter;
 import vn.iotstar.finalproject.Database.CartDatabase;
 import vn.iotstar.finalproject.Model.GiaoVien;
@@ -97,17 +101,29 @@ public class DetailCourseActivity extends AppCompatActivity {
         binding.addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CartDatabase.getInstance(DetailCourseActivity.this).cartDao().insertAll(khoaHoc);
-                Toast.makeText(DetailCourseActivity.this, "Đã thêm vào giỏ thành công", Toast.LENGTH_SHORT).show();
+                if (!isCheckExist(khoaHoc)) {
+                    CartDatabase.getInstance(DetailCourseActivity.this).cartDao().insertAll(khoaHoc);
+                    Toast.makeText(DetailCourseActivity.this, "Đã thêm vào giỏ thành công", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(DetailCourseActivity.this, "Khóa học đã tồn tại trong giỏ hàng của bạn", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-        Intent returnIntent = new Intent();
-        returnIntent.putExtra("result","1");
-        setResult(Activity.RESULT_OK,returnIntent);
+//        Intent returnIntent = new Intent();
+//        returnIntent.putExtra("result","1");
+//        setResult(Activity.RESULT_OK,returnIntent);
         finish();
+    }
+
+    private boolean isCheckExist(@NonNull KhoaHoc khoaHoc){
+        List<KhoaHoc> list = CartDatabase.getInstance(this).cartDao().checkCourse(khoaHoc.getMaKhoaHoc());
+        return list!=null && !list.isEmpty();
     }
 }

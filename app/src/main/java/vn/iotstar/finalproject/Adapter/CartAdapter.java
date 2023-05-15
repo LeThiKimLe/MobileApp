@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import vn.iotstar.finalproject.Dao.iClickListener;
 import vn.iotstar.finalproject.Database.CartDatabase;
 import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
@@ -23,18 +24,22 @@ import vn.iotstar.finalproject.databinding.RowcourseLayoutBinding;
 import vn.iotstar.finalproject.databinding.SignupLayoutBinding;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter .MyViewHolder> {
-    Context context;
     List<KhoaHoc> array;
+    Context context;
+    private iClickListener listener;
+    public CartAdapter(iClickListener listener){ this.listener = listener;}
 
-    public CartAdapter(Context context, List<KhoaHoc> array)
+    public void setData(List<KhoaHoc> list)
     {
-        this.context=context;
-        this.array=array;
+        this.array = list;
+        notifyDataSetChanged();
     }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
+        context=parent.getContext();
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item_layout, null);
         MyViewHolder myViewHolder= new MyViewHolder(view);
         return myViewHolder;
@@ -49,7 +54,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter .MyViewHolder>
         holder.coursePrice.setText(khoaHoc.getGiaTien()+"đ");
         holder.courseType.setText(khoaHoc.getPhanMon());
         holder.courseTeacher.setText(khoaHoc.getGiaoVien());
-        holder.innerkhoaHoc=khoaHoc;
+        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.deleteCartItem(khoaHoc);
+            }
+        });
     }
 
 
@@ -60,7 +70,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter .MyViewHolder>
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        public KhoaHoc innerkhoaHoc;
         public ImageView coursePic;
         public TextView courseName, courseTeacher, courseType, coursePrice, deleteBtn, courseId;
         public MyViewHolder(@NonNull View itemView)
@@ -82,15 +91,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter .MyViewHolder>
 
                 }
             });
-
-            deleteBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    CartDatabase.getInstance(MainActivity.getInstance()).cartDao().delete(innerkhoaHoc);
-
-                }
-            });
         }
-
     }
 }
