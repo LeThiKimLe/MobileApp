@@ -20,6 +20,7 @@ import vn.iotstar.finalproject.Database.CartDatabase;
 import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
 import vn.iotstar.finalproject.R;
+import vn.iotstar.finalproject.Storage.CartItem;
 import vn.iotstar.finalproject.databinding.CartLayoutBinding;
 import vn.iotstar.finalproject.databinding.MainLayoutBinding;
 
@@ -39,7 +40,7 @@ public class CartFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private List<KhoaHoc> listkhoaHoc;
+    private List<CartItem> listCartItem;
 
     private CartAdapter adapter;
 
@@ -86,12 +87,13 @@ public class CartFragment extends Fragment {
     }
 
     public void getCart(){
-        listkhoaHoc = new ArrayList<>();
+        Toast.makeText(MainActivity.getInstance(), "Load Giỏ hàng thành công", Toast.LENGTH_SHORT).show();
+        listCartItem = new ArrayList<>();
 //        listkhoaHoc = CartDatabase.getInstance(MainActivity.getInstance()).cartDao().getAll();
 //        adapter = new CartAdapter(MainActivity.getInstance(), listkhoaHoc);
         adapter= new CartAdapter(new iClickListener() {
             @Override
-            public void deleteCartItem(KhoaHoc khoaHoc) {
+            public void deleteCartItem(CartItem khoaHoc) {
                 clickDeleteFromCart(khoaHoc);
             }
         });
@@ -102,7 +104,7 @@ public class CartFragment extends Fragment {
         binding.cartItemList.setAdapter(adapter);
     }
 
-    private void clickDeleteFromCart(KhoaHoc khoaHoc)
+    private void clickDeleteFromCart(CartItem khoaHoc)
     {
         CartDatabase.getInstance(MainActivity.getInstance()).cartDao().delete(khoaHoc);
         loadData();
@@ -110,7 +112,7 @@ public class CartFragment extends Fragment {
     }
 
     public void loadData(){
-        listkhoaHoc= CartDatabase.getInstance(MainActivity.getInstance()).cartDao().getAll();
-        adapter.setData(listkhoaHoc);
+        listCartItem= CartDatabase.getInstance(MainActivity.getInstance()).cartDao().getAll(MainActivity.userId);
+        adapter.setData(listCartItem);
     }
 }

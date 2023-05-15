@@ -21,7 +21,7 @@ public interface HocVienApi {
     Call<HocVienReponse> loginHocVien(@Field("username") String username, @Field("password") String password);
     @GET("api/general/listCourse")
     Call<List<KhoaHoc>> getKHAll();
-    @FormUrlEncoded
+
     @POST("api/general/updateProfile")
     Call<HocVienReponse> updateProfile(@Field("maUser") String maUser,@Field("name") String name, @Field("ngaysinh") String ngaysinh, @Field("sdt") String sdt, @Field("email") String email, @Field("images") String images);
 

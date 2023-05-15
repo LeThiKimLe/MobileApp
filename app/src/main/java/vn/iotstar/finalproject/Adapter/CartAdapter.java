@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vn.iotstar.finalproject.Dao.iClickListener;
@@ -20,7 +21,7 @@ import vn.iotstar.finalproject.Database.CartDatabase;
 import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
 import vn.iotstar.finalproject.R;
-import vn.iotstar.finalproject.databinding.RowcourseLayoutBinding;
+import vn.iotstar.finalproject.Storage.CartItem;
 import vn.iotstar.finalproject.databinding.SignupLayoutBinding;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter .MyViewHolder> {
@@ -29,10 +30,22 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter .MyViewHolder>
     private iClickListener listener;
     public CartAdapter(iClickListener listener){ this.listener = listener;}
 
-    public void setData(List<KhoaHoc> list)
+    public void setData(List<CartItem> list)
     {
-        this.array = list;
+        this.array = convertToCourse(list);
         notifyDataSetChanged();
+    }
+
+    private  List<KhoaHoc> convertToCourse(List<CartItem> list)
+    {
+        List<KhoaHoc> array1= new ArrayList<>();
+        if (list!=null) {
+            for (int i = 0; i < list.size(); i++) {
+                array1.add(list.get(i).getKhoaHoc());
+            }
+            return array1;
+        }
+        return null;
     }
 
     @NonNull
@@ -48,6 +61,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter .MyViewHolder>
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         KhoaHoc khoaHoc= array.get(position);
+        CartItem item = (CartDatabase.getInstance(context).cartDao().checkCourse(khoaHoc.getMaKhoaHoc(), MainActivity.userId)).get(0);
         Glide.with(context).load(khoaHoc.getHinhAnhMoTa()).into(holder.coursePic);
         holder.courseId.setText(khoaHoc.getMaKhoaHoc());
         holder.courseName.setText(khoaHoc.getTenKhoaHoc());
@@ -57,11 +71,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter .MyViewHolder>
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.deleteCartItem(khoaHoc);
+                listener.deleteCartItem(item);
             }
         });
     }
-
 
     @Override
     public int getItemCount() {
