@@ -1,25 +1,39 @@
 package vn.iotstar.finalproject.sidebar;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import vn.iotstar.finalproject.BottomNav.HomePageFragment;
 import vn.iotstar.finalproject.Model.HocVien;
+import vn.iotstar.finalproject.PageActivity.LoginActivity;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
+import vn.iotstar.finalproject.PageActivity.RegisterActivity;
 import vn.iotstar.finalproject.R;
+import vn.iotstar.finalproject.Response.HocVienReponse;
+import vn.iotstar.finalproject.Retrofit.HocVienApi;
 import vn.iotstar.finalproject.Storage.SharedPrefManager;
 import vn.iotstar.finalproject.databinding.MainLayoutBinding;
 import vn.iotstar.finalproject.databinding.ProfileFragmentBinding;
@@ -31,7 +45,7 @@ import vn.iotstar.finalproject.databinding.ProfileFragmentBinding;
  */
 public class PersonalFragment extends Fragment {
 
-    TextView id, userName,name, userEmail, sdt, date;
+    EditText id, userName,name, userEmail, sdt, date;
     Button Update, Refuse;
     ImageView update_btn;
     //CircleImageView imageViewprofile;
@@ -45,6 +59,10 @@ public class PersonalFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    HocVienApi hvApi;
+
+    HocVienReponse hvReponse;
 
     private ProfileFragmentBinding binding;
 
@@ -85,7 +103,10 @@ public class PersonalFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = ProfileFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        initComponents();
         loadData();
+        Modify();
+        update();
         return root;
     }
     public void loadData()
@@ -100,18 +121,89 @@ public class PersonalFragment extends Fragment {
             binding.dateBox.setText(String.valueOf(hocVien.getNgaySinh()));
             binding.tvName.setText(String.valueOf(hocVien.getTenHocVien()));
         }
+        TrangThai(tt);
     }
 
-    int vitri = -1;
-    public void update()
+    boolean tt = false;
+    public void TrangThai( boolean tt)
     {
-        binding.updateBtn.setOnClickListener(new View.OnClickListener() {
+        binding.usernameBox.setEnabled(tt);
+        binding.emailBox.setEnabled(tt);
+        binding.sdtBox.setEnabled(tt);
+        binding.dateBox.setEnabled(tt);
+    }
+    int vitri = -1;
+    public void Modify()
+    {
+        binding.modifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tt = true;
+                TrangThai(tt);
 
+                for (int i = 0; i < binding.tableLayout.getChildCount(); i++) {
+                    final int rowIndex = i;
+
+                    TableRow tableRow = (TableRow) binding.tableLayout.getChildAt(i);
+                    tableRow.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            TableRow tableRow = (TableRow) binding.tableLayout.getChildAt(rowIndex);
+                            TextView textView = (TextView) tableRow.getChildAt(1);
+                        }
+                    });
+                }
+//
+//                TableRow tableRow = (TableRow) binding.tableLayout.getChildAt(1);
+//                //vitri = (TableRow) binding.tableLayout.indexOfChild(tableRow);
+//                TextView textView = (TextView) tableRow.getChildAt(1);
+//                textView.setText("Nguyễn Thị Thùy Trang");
             }
         });
+
     }
 
+    public void update(){
+        binding.updatebtn.setOnClickListener(view -> {
+            String maUser = binding.idBox.getText().toString();
+            String name = binding.usernameBox.getText().toString();
+            String email = binding.emailBox.getText().toString();
+            String sdt = binding.sdtBox.getText().toString();
+            String ngaysinh = binding.dateBox.getText().toString();
+            String images = binding.image2.toString();
 
+            hvApi.updateProfile(maUser,name,ngaysinh,sdt,email,images).enqueue(new Callback<HocVienReponse>(){
+                @Override
+                public void onResponse(Call<HocVienReponse> call, Response<HocVienReponse> response)
+                {
+                    if (response.isSuccessful())
+                    {
+                        hvReponse = response.body();
+                        if (hvReponse.getResult().compareTo("success")==0) {
+                            Toast.makeText(MainActivity.getInstance(),"Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(MainActivity.getInstance(),"Cập nhật dữ liệu chưa thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        Toast.makeText(MainActivity.getInstance(),"Không kết nối", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<HocVienReponse> call, Throwable t)
+                {
+                    Toast.makeText(MainActivity.getInstance(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, t.getMessage());
+                }
+            });
+        } );
+    }
+
+    private void initComponents() {
+        hvApi = vn.iotstar.finalproject.Retrofit.RetrofitClient.getRetrofit().create(HocVienApi.class);
+    }
 }
