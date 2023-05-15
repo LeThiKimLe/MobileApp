@@ -5,4 +5,5 @@ import vn.iotstar.finalproject.Storage.CartItem;
 
 public interface iClickListener {
     void deleteCartItem(CartItem khoaHoc);
+    void updateBill (int count, int price);
 }
