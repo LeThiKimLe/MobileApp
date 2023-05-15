@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(login_layout.getRoot());
         initComponents();
         handleLoginButton();
+        goToRegisterForm();
 
     }
     private void handleLoginButton() {

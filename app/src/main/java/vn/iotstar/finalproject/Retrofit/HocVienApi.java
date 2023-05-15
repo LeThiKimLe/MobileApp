@@ -19,8 +19,7 @@ public interface HocVienApi {
     @FormUrlEncoded
     @POST("api/general/login")
     Call<HocVienReponse> loginHocVien(@Field("username") String username, @Field("password") String password);
-    @GET("api/general/listCourse")
-    Call<List<KhoaHoc>> getKHAll();
+
 
 
 
