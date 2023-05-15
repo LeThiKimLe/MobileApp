@@ -36,7 +36,7 @@
         android:layout_margin="5dp"
         android:layout_weight="8"
         app:cardCornerRadius="20dp">
-        >
+
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

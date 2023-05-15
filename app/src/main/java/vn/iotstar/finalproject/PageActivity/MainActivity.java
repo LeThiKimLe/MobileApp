@@ -2,6 +2,7 @@ package vn.iotstar.finalproject.PageActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -9,6 +10,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -21,6 +23,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.manager.SupportRequestManagerFragment;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 import vn.iotstar.finalproject.Model.HocVien;
 import vn.iotstar.finalproject.R;
@@ -36,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMain2Binding binding;
     private AppBarConfiguration mAppBarConfiguration;
     private static MainActivity instance;
+
+    private static final int MY_REQUEST_CODE=10;
+    public static final String TAG = MainActivity.class.getName();
 
     View headerView;
 
@@ -143,6 +150,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         alert.show();
+    }
+
+    public void goToCourseDetail(String courseId)
+    {
+        Intent intent = new Intent(MainActivity.this, DetailCourseActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("courseId", courseId);
+        intent.putExtras(bundle);
+        startActivity(intent);
+//        startActivityForResult(intent, 1);
+//        finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                getSupportFragmentManager().popBackStack();
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        int backstack = getSupportFragmentManager().getBackStackEntryCount();
+        if (backstack > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+            System.exit(0);
+        }
+
     }
 
 }

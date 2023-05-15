@@ -125,10 +125,9 @@ public class HomeFragment extends Fragment {
             }});
     }
 
-
     private void loadFragment(Fragment fragment) {
         // load fragment
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.setReorderingAllowed(true);

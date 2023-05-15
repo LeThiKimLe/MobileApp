@@ -1,76 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginVertical="10dp"
-    android:background="#F4EFEF">
+    android:layout_height="match_parent">
 
-    <CheckBox
-        android:id="@+id/checkBox"
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="5dp" />
+        android:layout_margin="10dp"
+        android:elevation="8dp"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/coursePic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerVertical="true"
-        android:layout_marginVertical="10dp"
-        android:layout_toEndOf="@id/checkBox"
-        tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/courseName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/coursePic"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_toEndOf="@id/coursePic"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="Học lập trình hướng đối tượng"
-        android:textColor="#1E1515"
-        android:textSize="16sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:background="#F4F8C8">
 
-    <TextView
-        android:id="@+id/teacherName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/courseName"
-        android:layout_alignStart="@id/courseName"
-        android:layout_marginBottom="10dp"
-        android:layout_toEndOf="@id/coursePic"
-        android:text="Giáo viên: Lê Lệ"
-        android:textStyle="italic" />
+            <CheckBox
+                android:id="@+id/chooseCourse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="5dp" />
 
-    <TextView
-        android:id="@+id/typeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/teacherName"
-        android:layout_alignStart="@id/courseName"
-        android:layout_toEndOf="@id/coursePic"
-        android:background="#CFCDCD"
-        android:paddingHorizontal="10dp"
-        android:text="Phân môn: Code lớp 2"
-        android:textColor="#433F3F"
-        android:textSize="12sp" />
+            <ImageView
+                android:id="@+id/coursePic"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:layout_marginVertical="10dp"
+                android:layout_toEndOf="@id/chooseCourse"
+                tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/regisNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/coursePic"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="false"
-        android:layout_marginRight="10dp"
-        android:text="đ230.000"
-        android:textColor="#EF4B4B"
-        android:textSize="12sp"
-        android:textStyle="bold" />
-</RelativeLayout>
+            <TextView
+                android:id="@+id/courseName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/coursePic"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/coursePic"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Học lập trình hướng đối tượng"
+                android:textColor="#1E1515"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/teacherName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/courseName"
+                android:layout_alignStart="@id/courseName"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/coursePic"
+                android:text="Giáo viên: Lê Lệ"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/typeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teacherName"
+                android:layout_alignStart="@id/courseName"
+                android:layout_toEndOf="@id/coursePic"
+                android:background="#CFCDCD"
+                android:paddingHorizontal="10dp"
+                android:text="Phân môn: Code lớp 2"
+                android:textColor="#433F3F"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/deleteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/coursePic"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="false"
+                android:layout_marginRight="10dp"
+                android:drawableStart="@drawable/ic_delete"
+                android:textColor="#EF4B4B"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/coursePricee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/typeName"
+                android:layout_alignStart="@id/typeName"
+                android:layout_marginTop="5dp"
+                android:text="250.000đ"
+                android:textColor="#D64F4F"
+                android:textSize="12sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/courseIdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:visibility="invisible" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
