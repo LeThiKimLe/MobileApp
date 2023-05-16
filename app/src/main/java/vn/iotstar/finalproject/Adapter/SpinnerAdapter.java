@@ -54,5 +54,10 @@ public class SpinnerAdapter extends BaseAdapter{
         tenkhoi.setText(khoilop.get(i).getTenKhoi());
 
         return  rootview;
+
+
+
+
+
     }
 }

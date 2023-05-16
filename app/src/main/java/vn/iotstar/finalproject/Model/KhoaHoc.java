@@ -11,6 +11,7 @@ public class  KhoaHoc implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
+
     private String maKhoaHoc;
     private String giaoVien;
     private String phanMon;
@@ -104,6 +105,9 @@ public class  KhoaHoc implements Serializable {
         this.ngayCapNhat = ngayCapNhat;
         this.hinhAnhMoTa = hinhAnhMoTa;
     }
+
+
+
 
     public int getId() {
         return id;

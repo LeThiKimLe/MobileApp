@@ -20,7 +20,7 @@ import vn.iotstar.finalproject.Database.CartDatabase;
 import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
 import vn.iotstar.finalproject.R;
-import vn.iotstar.finalproject.databinding.RowcourseLayoutBinding;
+
 import vn.iotstar.finalproject.databinding.SignupLayoutBinding;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter .MyViewHolder> {

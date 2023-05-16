@@ -1,6 +1,7 @@
 package vn.iotstar.finalproject.sidebar;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,10 @@ import vn.iotstar.finalproject.BottomNav.AboutFragment;
 import vn.iotstar.finalproject.BottomNav.CourseFragment;
 import vn.iotstar.finalproject.BottomNav.HomePageFragment;
 import vn.iotstar.finalproject.BottomNav.NoticeFragment;
+import vn.iotstar.finalproject.PageActivity.LoginActivity;
+import vn.iotstar.finalproject.PageActivity.MainActivity;
+import vn.iotstar.finalproject.PageActivity.MyCourseActivity;
+import vn.iotstar.finalproject.PageActivity.RegisterActivity;
 import vn.iotstar.finalproject.ViewModel.ViewPageImage;
 import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.databinding.MainLayoutBinding;
@@ -87,6 +92,7 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         loadFragment(new HomePageFragment());
         addMenu();
+        onMyCourse();
         return root;
     }
 
@@ -132,5 +138,13 @@ public class HomeFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.setReorderingAllowed(true);
         transaction.commit();
+    }
+    public  void onMyCourse()
+    {
+        binding.fab.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.getInstance(), MyCourseActivity.class);
+            startActivity(intent);
+
+        });
     }
 }
