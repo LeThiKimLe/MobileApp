@@ -37,6 +37,7 @@ import vn.iotstar.finalproject.Retrofit.HocVienApi;
 import vn.iotstar.finalproject.Storage.SharedPrefManager;
 import vn.iotstar.finalproject.databinding.MainLayoutBinding;
 import vn.iotstar.finalproject.databinding.ProfileFragmentBinding;
+import vn.iotstar.finalproject.ui.home.HomeFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -107,6 +108,7 @@ public class PersonalFragment extends Fragment {
         loadData();
         Modify();
         update();
+        back();
         return root;
     }
     public void loadData()
@@ -200,6 +202,16 @@ public class PersonalFragment extends Fragment {
             });
         } );
     }
+
+    private void back(){
+        binding.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setExitTransition(this);
+            }
+        });
+    }
+
 
     private void initComponents() {
         hvApi = vn.iotstar.finalproject.Retrofit.RetrofitClient.getRetrofit().create(HocVienApi.class);
