@@ -23,5 +23,9 @@ public interface KhoaHocAPI {
     @POST("api/general/search")
     Call<List<KhoaHoc>>getTimKiem(@Field("key") String key);
 
+    @FormUrlEncoded
+    @POST("api/student/myCourse")
+    Call<List<KhoaHoc>>getMyCourse(@Field("maHocVien") String maHocVien);
+
 
 }

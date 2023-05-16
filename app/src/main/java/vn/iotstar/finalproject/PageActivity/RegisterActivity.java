@@ -67,13 +67,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                     if (response.isSuccessful())
                     {
-
-
                         hvReponse = response.body();
 
                         if (hvReponse.getResult().compareTo("success")==0) {
                             Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-                            SharedPrefManager.getInstance(getApplicationContext()).hocvienLogin(hvReponse.getHocVien());
+                           // SharedPrefManager.getInstance(getApplicationContext()).hocvienLogin(hvReponse.getHocVien());
                             startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                         }
                        else

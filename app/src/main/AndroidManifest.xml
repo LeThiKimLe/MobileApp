@@ -35,15 +35,26 @@
         <activity
             android:name=".PageActivity.MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar" />
+            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
+
         <activity
             android:name=".PageActivity.DetailCourseActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar" />
+            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
+
         <activity
             android:name=".PageActivity.LoginActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar" /> <!-- <activity -->
+            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
+
+        <activity
+            android:name=".PageActivity.MyCourseActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FinalProject.NoActionBar"></activity><!-- <activity -->
+        <activity
+            android:name=".PageActivity.MyLessionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FinalProject.NoActionBar"></activity><!-- <activity -->
         <!-- android:name=".PageActivity.IntroActivity" -->
         <!-- android:exported="false" -->
         <!-- android:theme="@style/Theme.FinalProject.NoActionBar" -->
@@ -52,7 +63,7 @@
         <activity
             android:name=".PageActivity.RegisterActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar" />
+            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
         <activity
             android:name=".PageActivity.IntroActivity"
             android:exported="true"

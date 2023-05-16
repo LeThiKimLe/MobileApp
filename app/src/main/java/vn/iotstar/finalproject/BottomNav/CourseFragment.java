@@ -130,7 +130,7 @@ public class CourseFragment extends Fragment {
                 if(response.isSuccessful()) {
                     listkhoilop = response.body();
 
-                    listkhoilop.add(new KhoiLop(null,"Tất cả"));
+                    listkhoilop.add(0,new KhoiLop(null,"Tất cả"));
 
                     spinnerAdapter = new SpinnerAdapter(MainActivity.getInstance().getApplication(),listkhoilop);
                     spinner.setAdapter(spinnerAdapter);
