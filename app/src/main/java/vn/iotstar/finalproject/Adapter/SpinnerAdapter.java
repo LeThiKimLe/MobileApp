@@ -55,9 +55,5 @@ public class SpinnerAdapter extends BaseAdapter{
 
         return  rootview;
 
-
-
-
-
     }
 }
