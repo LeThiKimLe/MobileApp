@@ -1,5 +1,6 @@
 package vn.iotstar.finalproject.sidebar;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +20,12 @@ import vn.iotstar.finalproject.BottomNav.HomePageFragment;
 import vn.iotstar.finalproject.Dao.iClickListener;
 import vn.iotstar.finalproject.Database.CartDatabase;
 import vn.iotstar.finalproject.Model.KhoaHoc;
+import vn.iotstar.finalproject.PageActivity.CourseRegisterActivity;
+import vn.iotstar.finalproject.PageActivity.LoginActivity;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
+import vn.iotstar.finalproject.PageActivity.RegisterActivity;
 import vn.iotstar.finalproject.R;
+import vn.iotstar.finalproject.Storage.CartItem;
 import vn.iotstar.finalproject.databinding.CartLayoutBinding;
 import vn.iotstar.finalproject.databinding.MainLayoutBinding;
 
@@ -39,7 +45,7 @@ public class CartFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private List<KhoaHoc> listkhoaHoc;
+    private List<CartItem> listCartItem;
 
     private CartAdapter adapter;
 
@@ -82,17 +88,25 @@ public class CartFragment extends Fragment {
         binding = CartLayoutBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         getCart();
+        addRegisterBtn();
         return root;
     }
 
     public void getCart(){
-        listkhoaHoc = new ArrayList<>();
+        Toast.makeText(MainActivity.getInstance(), "Load Giỏ hàng thành công", Toast.LENGTH_SHORT).show();
+        listCartItem = new ArrayList<>();
 //        listkhoaHoc = CartDatabase.getInstance(MainActivity.getInstance()).cartDao().getAll();
 //        adapter = new CartAdapter(MainActivity.getInstance(), listkhoaHoc);
         adapter= new CartAdapter(new iClickListener() {
             @Override
-            public void deleteCartItem(KhoaHoc khoaHoc) {
+            public void deleteCartItem(CartItem khoaHoc) {
                 clickDeleteFromCart(khoaHoc);
+            }
+
+            @Override
+            public void updateBill(int count, int price) {
+                binding.numCourse.setText(""+count);
+                binding.sumTotal.setText("đ"+price);
             }
         });
         loadData();
@@ -102,7 +116,7 @@ public class CartFragment extends Fragment {
         binding.cartItemList.setAdapter(adapter);
     }
 
-    private void clickDeleteFromCart(KhoaHoc khoaHoc)
+    private void clickDeleteFromCart(CartItem khoaHoc)
     {
         CartDatabase.getInstance(MainActivity.getInstance()).cartDao().delete(khoaHoc);
         loadData();
@@ -110,7 +124,23 @@ public class CartFragment extends Fragment {
     }
 
     public void loadData(){
-        listkhoaHoc= CartDatabase.getInstance(MainActivity.getInstance()).cartDao().getAll();
-        adapter.setData(listkhoaHoc);
+        listCartItem= CartDatabase.getInstance(MainActivity.getInstance()).cartDao().getAll(MainActivity.userId);
+        adapter.setData(listCartItem);
     }
+
+    private void addRegisterBtn()
+    {
+
+        binding.checkOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.getInstance(), CourseRegisterActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("registerCourse", (Serializable) adapter.getRegisterCourse());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+    }
+
 }

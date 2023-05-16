@@ -1,7 +1,9 @@
 package vn.iotstar.finalproject.Dao;
 
 import vn.iotstar.finalproject.Model.KhoaHoc;
+import vn.iotstar.finalproject.Storage.CartItem;
 
 public interface iClickListener {
-    void deleteCartItem(KhoaHoc khoaHoc);
+    void deleteCartItem(CartItem khoaHoc);
+    void updateBill (int count, int price);
 }

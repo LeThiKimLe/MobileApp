@@ -12,8 +12,9 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import vn.iotstar.finalproject.Dao.CartDao;
 import vn.iotstar.finalproject.Model.KhoaHoc;
+import vn.iotstar.finalproject.Storage.CartItem;
 
-@Database(entities = {KhoaHoc.class}, version = 1)
+@Database(entities = {CartItem.class}, version = 2)
 public abstract class CartDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "cart.db";
     private static CartDatabase instance;
@@ -21,7 +22,11 @@ public abstract class CartDatabase extends RoomDatabase {
     public static synchronized CartDatabase getInstance(Context context)
     {
         if (instance== null){
-            instance = Room.databaseBuilder(context.getApplicationContext(), CartDatabase.class, DATABASE_NAME).allowMainThreadQueries().build();
+//            instance = Room.databaseBuilder(context.getApplicationContext(), CartDatabase.class, DATABASE_NAME).allowMainThreadQueries().build();
+            instance = Room.databaseBuilder(context.getApplicationContext(),
+                            CartDatabase.class, DATABASE_NAME).allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
         return instance;
     }

@@ -1,6 +1,8 @@
 package vn.iotstar.finalproject.Model;
 
-public class HocVien {
+import java.io.Serializable;
+
+public class HocVien implements Serializable {
     private static final long serialVersionUID = 1L;
     private String maHocVien;
 

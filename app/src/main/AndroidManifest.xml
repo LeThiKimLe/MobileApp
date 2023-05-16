@@ -23,7 +23,9 @@
         android:theme="@style/Theme.FinalProject"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".PageActivity.CourseRegisterActivity"
+            android:exported="false" />
         <!-- <activity -->
         <!-- android:name=".PageActivity.IntroActivity" -->
         <!-- android:exported="false" /> -->
