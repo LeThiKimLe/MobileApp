@@ -145,8 +145,7 @@ public class PersonalFragment extends Fragment {
                     tableRow.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            TableRow tableRow = (TableRow) binding.tableLayout.getChildAt(rowIndex);
-                            TextView textView = (TextView) tableRow.getChildAt(1);
+
                         }
                     });
                 }
@@ -168,6 +167,8 @@ public class PersonalFragment extends Fragment {
             String sdt = binding.sdtBox.getText().toString();
             String ngaysinh = binding.dateBox.getText().toString();
             String images = binding.image2.toString();
+            tt = false;
+            TrangThai(tt);
 
             hvApi.updateProfile(maUser,name,ngaysinh,sdt,email,images).enqueue(new Callback<HocVienReponse>(){
                 @Override
