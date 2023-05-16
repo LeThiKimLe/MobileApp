@@ -1,5 +1,6 @@
 package vn.iotstar.finalproject.sidebar;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,10 @@ import vn.iotstar.finalproject.BottomNav.HomePageFragment;
 import vn.iotstar.finalproject.Dao.iClickListener;
 import vn.iotstar.finalproject.Database.CartDatabase;
 import vn.iotstar.finalproject.Model.KhoaHoc;
+import vn.iotstar.finalproject.PageActivity.CourseRegisterActivity;
+import vn.iotstar.finalproject.PageActivity.LoginActivity;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
+import vn.iotstar.finalproject.PageActivity.RegisterActivity;
 import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.Storage.CartItem;
 import vn.iotstar.finalproject.databinding.CartLayoutBinding;
@@ -83,6 +88,7 @@ public class CartFragment extends Fragment {
         binding = CartLayoutBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         getCart();
+        addRegisterBtn();
         return root;
     }
 
@@ -95,6 +101,12 @@ public class CartFragment extends Fragment {
             @Override
             public void deleteCartItem(CartItem khoaHoc) {
                 clickDeleteFromCart(khoaHoc);
+            }
+
+            @Override
+            public void updateBill(int count, int price) {
+                binding.numCourse.setText(""+count);
+                binding.sumTotal.setText("đ"+price);
             }
         });
         loadData();
@@ -115,4 +127,20 @@ public class CartFragment extends Fragment {
         listCartItem= CartDatabase.getInstance(MainActivity.getInstance()).cartDao().getAll(MainActivity.userId);
         adapter.setData(listCartItem);
     }
+
+    private void addRegisterBtn()
+    {
+
+        binding.checkOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.getInstance(), CourseRegisterActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("registerCourse", (Serializable) adapter.getRegisterCourse());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+    }
+
 }

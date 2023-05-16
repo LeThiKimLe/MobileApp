@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import vn.iotstar.finalproject.Model.KhoaHoc;
+import vn.iotstar.finalproject.PageActivity.MainActivity;
 import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.databinding.BillItemLayoutBinding;
 
@@ -49,6 +50,7 @@ public class KhoaHocAdapter extends RecyclerView.Adapter<KhoaHocAdapter.MyViewHo
         holder.tenkh.setText(product.getTenKhoaHoc());
         holder.tengv.setText(product.getGiaoVien());
         holder.tenpm.setText(product.getPhanMon());
+        holder.maKhoa.setText(product.getMaKhoaHoc());
     }
 
 
@@ -59,7 +61,7 @@ public class KhoaHocAdapter extends RecyclerView.Adapter<KhoaHocAdapter.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public ImageView images;
-        public TextView tenkh,tengv,tenpm;
+        public TextView tenkh,tengv,tenpm, maKhoa;
 
         public MyViewHolder(@NonNull View itemView)
         {
@@ -68,14 +70,15 @@ public class KhoaHocAdapter extends RecyclerView.Adapter<KhoaHocAdapter.MyViewHo
             tenkh=(TextView)itemView.findViewById(R.id.courseName) ;
             tengv=(TextView)itemView.findViewById(R.id.teacherName) ;
             tenpm=(TextView)itemView.findViewById(R.id.typeName) ;
+            maKhoa= (TextView)itemView.findViewById(R.id.maCourse);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context,"Bạn đã chọn Khóa học", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context,"Bạn đã chọn Khóa học", Toast.LENGTH_SHORT).show();
+                    MainActivity.getInstance().goToCourseDetail((String) maKhoa.getText());
                 }
             });
         }
-
     }
 }

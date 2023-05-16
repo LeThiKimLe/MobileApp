@@ -23,7 +23,9 @@
         android:theme="@style/Theme.FinalProject"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".PageActivity.CourseRegisterActivity"
+            android:exported="false" />
         <!-- <activity -->
         <!-- android:name=".PageActivity.IntroActivity" -->
         <!-- android:exported="false" /> -->
@@ -33,17 +35,15 @@
         <activity
             android:name=".PageActivity.MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
-
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
         <activity
             android:name=".PageActivity.DetailCourseActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
-
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
         <activity
             android:name=".PageActivity.LoginActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity> <!-- <activity -->
+            android:theme="@style/Theme.FinalProject.NoActionBar" /> <!-- <activity -->
         <!-- android:name=".PageActivity.IntroActivity" -->
         <!-- android:exported="false" -->
         <!-- android:theme="@style/Theme.FinalProject.NoActionBar" -->
@@ -52,7 +52,7 @@
         <activity
             android:name=".PageActivity.RegisterActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
         <activity
             android:name=".PageActivity.IntroActivity"
             android:exported="true"

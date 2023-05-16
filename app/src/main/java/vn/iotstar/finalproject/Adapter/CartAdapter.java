@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +29,29 @@ import vn.iotstar.finalproject.databinding.SignupLayoutBinding;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter .MyViewHolder> {
     List<KhoaHoc> array;
     Context context;
+
+    List<KhoaHoc> regisCourse= new ArrayList<>();
     private iClickListener listener;
+
+    private int courseCount=0;
+    private int totalPrice=0;
+
+    public int getCourseCount() {
+        return courseCount;
+    }
+
+    public void setCourseCount(int courseCount) {
+        this.courseCount = courseCount;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     public CartAdapter(iClickListener listener){ this.listener = listener;}
 
     public void setData(List<CartItem> list)
@@ -71,9 +95,38 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter .MyViewHolder>
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (holder.chooseBox.isChecked()) {
+                    courseCount -= 1;
+                    totalPrice-= khoaHoc.getGiaTien();
+                    regisCourse.remove(khoaHoc);
+                }
+                listener.updateBill(courseCount, totalPrice);
                 listener.deleteCartItem(item);
             }
         });
+
+        holder.chooseBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if (isChecked) {
+                    courseCount += 1;
+                    totalPrice+=khoaHoc.getGiaTien();
+                    regisCourse.add(khoaHoc);
+                }
+                else
+                {
+                    courseCount -= 1;
+                    totalPrice-=khoaHoc.getGiaTien();
+                    regisCourse.remove(khoaHoc);
+                }
+                listener.updateBill(courseCount, totalPrice);
+            }
+        }
+        );
+    }
+
+    public List<KhoaHoc> getRegisterCourse(){
+        return regisCourse;
     }
 
     @Override
@@ -85,6 +138,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter .MyViewHolder>
 
         public ImageView coursePic;
         public TextView courseName, courseTeacher, courseType, coursePrice, deleteBtn, courseId;
+        public CheckBox chooseBox;
         public MyViewHolder(@NonNull View itemView)
         {
             super(itemView);
@@ -95,7 +149,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter .MyViewHolder>
             coursePrice = (TextView) itemView.findViewById(R.id.coursePricee);
             courseId = (TextView) itemView.findViewById(R.id.courseIdd);
             deleteBtn = (TextView) itemView.findViewById(R.id.deleteBtn);
-
+            chooseBox = (CheckBox) itemView.findViewById(R.id.chooseCourse);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
