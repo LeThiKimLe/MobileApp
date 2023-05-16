@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
 import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,6 +18,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.iotstar.finalproject.Adapter.KHAdapter;
 import vn.iotstar.finalproject.Adapter.KhoaHocAdapter;
 import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.Retrofit.KhoaHocAPI;
@@ -29,16 +32,21 @@ public class MyCourseActivity extends AppCompatActivity {
     KhoaHocAPI apiService;
     List<KhoaHoc> KhoaHocList;
     RecyclerView recyclerView;
-    KhoaHocAdapter KhoaHocAdapter;
+    KHAdapter khAdapter;
+    private static MyCourseActivity instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
         mycourseLayoutBinding = MycourseLayoutBinding.inflate(getLayoutInflater());
         setContentView(mycourseLayoutBinding.getRoot());
-       GetMyCourse("HV0001");
+        String maHocVien=MainActivity.hocVien.getMaHocVien();
+       GetMyCourse(maHocVien);
     }
-
+    public static MyCourseActivity getInstance() {
+        return instance;
+    }
     private void GetMyCourse(String maHocVien) {
         apiService = RetrofitClient.getRetrofit().create(KhoaHocAPI.class);
         recyclerView = mycourseLayoutBinding.recycle;
@@ -47,17 +55,24 @@ public class MyCourseActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<List<KhoaHoc>> call, Response<List<KhoaHoc>> response) {
+
                 if (response.isSuccessful()) {
                     KhoaHocList = response.body();
-                    Log.d(TAG,"log "+ KhoaHocList.get(0).getMaKhoaHoc());
-                    KhoaHocAdapter = new KhoaHocAdapter(MainActivity.getInstance(), KhoaHocList);
+                    if(KhoaHocList.size()==0)
+                    {
+                        mycourseLayoutBinding.textView8.setText("Bạn chưa có khóa học nào");
+                        mycourseLayoutBinding.textView8.setVisibility(TextView.VISIBLE);
+                        mycourseLayoutBinding.recycle.setVisibility(RecyclerView.INVISIBLE);
+                    }
+                    khAdapter = new KHAdapter(MyCourseActivity.getInstance(), KhoaHocList);
                     recyclerView.setHasFixedSize(true);
-                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MainActivity.getInstance().getApplicationContext(), 1);
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MyCourseActivity.this, 1);
                     recyclerView.setLayoutManager(layoutManager);
-                    recyclerView.setAdapter(KhoaHocAdapter);
-                    KhoaHocAdapter.notifyDataSetChanged();
+                    recyclerView.setAdapter(khAdapter);
+                    khAdapter.notifyDataSetChanged();
                 } else {
-                    int statusCode = response.code();
+                    Toast.makeText(MyCourseActivity.this, "Không gọi được", Toast.LENGTH_SHORT).show();
+
                 }
             }
 
@@ -68,5 +83,15 @@ public class MyCourseActivity extends AppCompatActivity {
         });
 
 
+    }
+    public void goToCourseLession(String maKhoaHoc)
+    {
+        Intent intent = new Intent(MyCourseActivity.this, MyLessionActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("maKhoaHoc", maKhoaHoc);
+        intent.putExtras(bundle);
+        startActivity(intent);
+//        startActivityForResult(intent, 1);
+//        finish();
     }
 }

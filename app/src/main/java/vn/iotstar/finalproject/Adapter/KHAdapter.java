@@ -25,12 +25,12 @@ import vn.iotstar.finalproject.databinding.BillItemLayoutBinding;
 
 import vn.iotstar.finalproject.databinding.SignupLayoutBinding;
 
-public class KhoaHocAdapter extends RecyclerView.Adapter<KhoaHocAdapter.MyViewHolder> {
+public class KHAdapter extends RecyclerView.Adapter<KHAdapter.MyViewHolder> {
     Context context;
     List<KhoaHoc> array;
 
 
-    public KhoaHocAdapter(Context context, List<KhoaHoc> array)
+    public KHAdapter(Context context, List<KhoaHoc> array)
     {
         this.context=context;
         this.array=array;
@@ -79,9 +79,8 @@ public class KhoaHocAdapter extends RecyclerView.Adapter<KhoaHocAdapter.MyViewHo
                 @Override
                 public void onClick(View view) {
 //                    Toast.makeText(context,"Bạn đã chọn Khóa học", Toast.LENGTH_SHORT).show();
-                   MainActivity.getInstance().goToCourseDetail((String) maKhoa.getText());
-
-
+                    //MainActivity.getInstance().goToCourseDetail((String) maKhoa.getText());
+                    MyCourseActivity.getInstance().goToCourseLession((String) maKhoa.getText());
                 }
             });
         }
