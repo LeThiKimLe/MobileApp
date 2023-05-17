@@ -54,6 +54,7 @@ public class KhoaHocAdapter extends RecyclerView.Adapter<KhoaHocAdapter.MyViewHo
         holder.tengv.setText(product.getGiaoVien());
         holder.tenpm.setText(product.getPhanMon());
         holder.maKhoa.setText(product.getMaKhoaHoc());
+        holder.giaTien.setText(product.getGiaTien().toString());
     }
 
 
@@ -64,7 +65,8 @@ public class KhoaHocAdapter extends RecyclerView.Adapter<KhoaHocAdapter.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public ImageView images;
-        public TextView tenkh,tengv,tenpm, maKhoa;
+        public TextView tenkh,tengv,tenpm, maKhoa,giaTien;
+
 
         public MyViewHolder(@NonNull View itemView)
         {
@@ -74,6 +76,7 @@ public class KhoaHocAdapter extends RecyclerView.Adapter<KhoaHocAdapter.MyViewHo
             tengv=(TextView)itemView.findViewById(R.id.teacherName) ;
             tenpm=(TextView)itemView.findViewById(R.id.typeName) ;
             maKhoa= (TextView)itemView.findViewById(R.id.maCourse);
+            giaTien=(TextView)itemView.findViewById(R.id.giatien_tv);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
