@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import vn.iotstar.finalproject.Adapter.CartAdapter;
+import vn.iotstar.finalproject.Adapter.TypicalCourseAdapter;
 import vn.iotstar.finalproject.BottomNav.HomePageFragment;
 import vn.iotstar.finalproject.Dao.iClickListener;
 import vn.iotstar.finalproject.Database.CartDatabase;
@@ -25,6 +30,11 @@ import vn.iotstar.finalproject.PageActivity.LoginActivity;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
 import vn.iotstar.finalproject.PageActivity.RegisterActivity;
 import vn.iotstar.finalproject.R;
+import vn.iotstar.finalproject.Response.SoDuResponse;
+import vn.iotstar.finalproject.Response.StatisticResponse;
+import vn.iotstar.finalproject.Retrofit.GeneralAPI;
+import vn.iotstar.finalproject.Retrofit.HocVienApi;
+import vn.iotstar.finalproject.Retrofit.RetrofitClient;
 import vn.iotstar.finalproject.Storage.CartItem;
 import vn.iotstar.finalproject.databinding.CartLayoutBinding;
 import vn.iotstar.finalproject.databinding.MainLayoutBinding;
@@ -50,6 +60,15 @@ public class CartFragment extends Fragment {
     private CartAdapter adapter;
 
     private CartLayoutBinding binding;
+
+    private int current_pay;
+    private int my_pay;
+
+    private int current_count;
+
+    HocVienApi apiService;
+
+    private SoDuResponse soDu;
 
     public CartFragment() {
         // Required empty public constructor
@@ -89,6 +108,7 @@ public class CartFragment extends Fragment {
         View root = binding.getRoot();
         getCart();
         addRegisterBtn();
+        GetBalance();
         return root;
     }
 
@@ -107,6 +127,8 @@ public class CartFragment extends Fragment {
             public void updateBill(int count, int price) {
                 binding.numCourse.setText(""+count);
                 binding.sumTotal.setText("đ"+price);
+                current_pay= price;
+                current_count=count;
             }
         });
         loadData();
@@ -114,6 +136,28 @@ public class CartFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.getInstance());
         binding.cartItemList.setLayoutManager(layoutManager);
         binding.cartItemList.setAdapter(adapter);
+    }
+
+    private void GetBalance() {
+        apiService = RetrofitClient.getRetrofit().create(HocVienApi.class);
+        soDu= new SoDuResponse();
+        apiService.getBalance(MainActivity.hocVien.getMaHocVien()).enqueue(new Callback<SoDuResponse>() {
+            @Override
+            public void onResponse(Call<SoDuResponse> call, Response<SoDuResponse> response) {
+                if(response.isSuccessful()) {
+                    soDu = response.body();
+                    binding.myPay.setText(""+soDu.getSoDu());
+                    my_pay= soDu.getSoDu();
+                }else {
+                    int statusCode = response.code();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SoDuResponse> call, Throwable t) {
+                Log.d("logg",t.getMessage());
+            }
+        });
     }
 
     private void clickDeleteFromCart(CartItem khoaHoc)
@@ -134,13 +178,33 @@ public class CartFragment extends Fragment {
         binding.checkOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.getInstance(), CourseRegisterActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("registerCourse", (Serializable) adapter.getRegisterCourse());
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if (checkBalance()){
+                    Intent intent = new Intent(MainActivity.getInstance(), CourseRegisterActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("registerCourse", (Serializable) adapter.getRegisterCourse());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             }
         });
+
     }
 
+    private boolean checkBalance()
+    {
+        if (current_pay > my_pay)
+        {
+            Toast.makeText(MainActivity.getInstance(), "Tài khoản của bạn không đủ", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (current_count==0)
+        {
+            Toast.makeText(MainActivity.getInstance(), "Vui lòng chọn khóa học", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+
+    }
 }

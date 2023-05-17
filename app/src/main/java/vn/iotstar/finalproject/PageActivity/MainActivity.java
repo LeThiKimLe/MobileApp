@@ -190,4 +190,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void goToBillDetail(String billId)
+    {
+        Intent intent = new Intent(MainActivity.this, BillActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("billId", billId);
+        intent.putExtras(bundle);
+        startActivity(intent);
+//        startActivityForResult(intent, 1);
+//        finish();
+    }
+
 }

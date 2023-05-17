@@ -9,7 +9,7 @@ public class GiaoVien implements Serializable {
     private String sdt;
     private String cccd;
     private String diaChi;
-    private Date ngayKyKet;
+    private long ngayKyKet;
     private String chuyenmon;
     private String email;
 
@@ -63,11 +63,11 @@ public class GiaoVien implements Serializable {
         this.diaChi = diaChi;
     }
 
-    public Date getNgayKyKet() {
+    public long getNgayKyKet() {
         return ngayKyKet;
     }
 
-    public void setNgayKyKet(Date ngayKyKet) {
+    public void setNgayKyKet(long ngayKyKet) {
         this.ngayKyKet = ngayKyKet;
     }
 
@@ -94,13 +94,13 @@ public class GiaoVien implements Serializable {
         this.email = email;
     }
 
-    public GiaoVien(String maGiaoVien, String tenGiaoVien, String sdt, String cccd, String diaChi, Date ngayKyKet, String chuyenmon, String email, String listKhoaHocs) {
+    public GiaoVien(String maGiaoVien, String tenGiaoVien, String sdt, String cccd, String diaChi, long ngayKyKet, String chuyenmon, String email, String listKhoaHocs) {
         this.maGiaoVien = maGiaoVien;
         this.tenGiaoVien = tenGiaoVien;
         this.sdt = sdt;
         this.cccd = cccd;
         this.diaChi = diaChi;
-        this.ngayKyKet = ngayKyKet;
+        this.ngayKyKet=ngayKyKet;
         this.chuyenmon = chuyenmon;
         this.email = email;
         this.listKhoaHocs = listKhoaHocs;
