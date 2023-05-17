@@ -171,14 +171,12 @@ public class MainActivity extends AppCompatActivity {
 //        finish();
     }
 
-    private void tabHost() {
-
-    }
-    public void addTabHost(String tabhostID )
+    public void addTabHost(String tabhostID, String maBaiHoc)
     {
         Intent intent = new Intent(MainActivity.this, TabHostActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("tabhostID", tabhostID);
+        bundle.putString("maBaiHoc", maBaiHoc);
         intent.putExtras(bundle);
         startActivity(intent);
     }

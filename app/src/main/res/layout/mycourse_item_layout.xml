@@ -56,4 +56,5 @@
         android:textColor="#B3AFAF"
         android:textSize="12sp"
         android:textStyle="italic" />
+
 </RelativeLayout>

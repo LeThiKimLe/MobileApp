@@ -34,8 +34,6 @@ public class MyCourseInforAdapter extends RecyclerView.Adapter<MyCourseInforAdap
     @Override
     public MyCourseInforAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-
-
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.lesson_item_layout, null);
         MyCourseInforAdapter.MyViewHolder myViewHolder= new MyCourseInforAdapter.MyViewHolder(view);
         return myViewHolder;
@@ -46,6 +44,7 @@ public class MyCourseInforAdapter extends RecyclerView.Adapter<MyCourseInforAdap
         BaiHoc product= array.get(position);
 
         holder.tenbh.setText(product.getTenBaiHoc());
+        holder.lessionid.setText(product.getMaBaiHoc());
     }
 
 
@@ -58,16 +57,19 @@ public class MyCourseInforAdapter extends RecyclerView.Adapter<MyCourseInforAdap
 
         public TextView tenbh;
 
+        public TextView lessionid;
+
         public MyViewHolder(@NonNull View itemView)
         {
             super(itemView);
 
             tenbh= (TextView)itemView.findViewById(R.id.textView_tenbaihoc);
-
+            lessionid =(TextView)itemView.findViewById(R.id.id_lession);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                 Toast.makeText(context,"Bạn đã chọn bài học", Toast.LENGTH_SHORT).show();
+                MainActivity.getInstance().addTabHost((String) tenbh.getText(), (String) lessionid.getText());
 
                 }
             });

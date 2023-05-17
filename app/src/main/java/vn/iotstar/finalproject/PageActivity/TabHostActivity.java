@@ -7,34 +7,41 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 import vn.iotstar.finalproject.R;
-import vn.iotstar.finalproject.TabHost.CommentFragment;
-import vn.iotstar.finalproject.TabHost.DocumentFragment;
-import vn.iotstar.finalproject.TabHost.LectureFragment;
+import vn.iotstar.finalproject.TabHost.CommentActivity;
+import vn.iotstar.finalproject.TabHost.DocumentActivity;
+import vn.iotstar.finalproject.TabHost.LectureActivity;
 
 public class TabHostActivity extends TabActivity {
+    private  String maBaiHoc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.tabhost_layout);
+
+        Bundle extras = getIntent().getExtras();
+
         TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
         TabHost.TabSpec spec;
         Intent intent;
 
         spec = tabHost.newTabSpec("Lecture");
         spec.setIndicator("LECTURE");
-        intent = new Intent(this, LectureFragment.class);
+        intent = new Intent(this, LectureActivity.class);
+        intent.putExtras(extras);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
         spec = tabHost.newTabSpec("Document");
         spec.setIndicator("DOCUMENT");
-        intent = new Intent(this, DocumentFragment.class);
+        intent = new Intent(this, DocumentActivity.class);
+        intent.putExtras(extras);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
         spec = tabHost.newTabSpec("Comment");
         spec.setIndicator("COMMENT");
-        intent = new Intent(this, CommentFragment.class);
+        intent = new Intent(this, CommentActivity.class);
+        intent.putExtras(extras);
         spec.setContent(intent);
         tabHost.addTab(spec);
 

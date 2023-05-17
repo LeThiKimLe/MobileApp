@@ -151,11 +151,6 @@ public class PersonalFragment extends Fragment {
                         }
                     });
                 }
-//
-//                TableRow tableRow = (TableRow) binding.tableLayout.getChildAt(1);
-//                //vitri = (TableRow) binding.tableLayout.indexOfChild(tableRow);
-//                TextView textView = (TextView) tableRow.getChildAt(1);
-//                textView.setText("Nguyễn Thị Thùy Trang");
             }
         });
 

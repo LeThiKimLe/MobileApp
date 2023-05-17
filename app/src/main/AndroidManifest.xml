@@ -64,6 +64,16 @@
             android:name=".PageActivity.RegisterActivity"
             android:exported="false"
             android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
+
+        <activity
+            android:name=".PageActivity.TabHostActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
+
+        <activity android:name=".TabHost.CommentActivity"/>
+        <activity android:name=".TabHost.DocumentActivity"/>
+        <activity android:name=".TabHost.LectureActivity"/>
+
         <activity
             android:name=".PageActivity.IntroActivity"
             android:exported="true"
