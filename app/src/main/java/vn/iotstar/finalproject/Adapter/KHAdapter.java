@@ -39,8 +39,6 @@ public class KHAdapter extends RecyclerView.Adapter<KHAdapter.MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-
-
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.course_item_layout, null);
         MyViewHolder myViewHolder= new MyViewHolder(view);
         return myViewHolder;
@@ -56,7 +54,6 @@ public class KHAdapter extends RecyclerView.Adapter<KHAdapter.MyViewHolder> {
         holder.maKhoa.setText(product.getMaKhoaHoc());
         holder.giaTien.setText(product.getGiaTien().toString());
     }
-
 
     @Override
     public int getItemCount() {
