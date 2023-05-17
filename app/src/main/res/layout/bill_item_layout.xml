@@ -12,6 +12,7 @@
         android:layout_weight="1.5"
         android:gravity="center"
         android:paddingVertical="10dp"
+        android:text="0"
         android:textAlignment="center"
         android:textSize="16sp" />
 

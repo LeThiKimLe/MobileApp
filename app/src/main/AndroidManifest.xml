@@ -25,8 +25,7 @@
         tools:targetApi="31">
         <activity
             android:name=".PageActivity.CourseRegisterActivity"
-            android:exported="false" />
-        <!-- <activity -->
+            android:exported="false" /> <!-- <activity -->
         <!-- android:name=".PageActivity.IntroActivity" -->
         <!-- android:exported="false" /> -->
         <activity
@@ -40,7 +39,12 @@
         <activity
             android:name=".PageActivity.DetailCourseActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
+
+        <activity
+            android:name=".PageActivity.BillActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
 
         <activity
             android:name=".PageActivity.LoginActivity"

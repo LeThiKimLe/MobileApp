@@ -19,14 +19,16 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.MyViewHolder> 
     List<KhoaHoc> array;
     Context context;
 
-    public BillAdapter(CourseRegisterActivity courseRegisterActivity, List<KhoaHoc> khoaHocs)
-    { this.array=khoaHocs;}
+    public BillAdapter(Context context,List<KhoaHoc> khoaHocs)
+    {
+        this.context=context;
+        this.array=khoaHocs;
+    }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        context=parent.getContext();
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.bill_item_layout, null);
         MyViewHolder myViewHolder= new MyViewHolder(view);
         return myViewHolder;

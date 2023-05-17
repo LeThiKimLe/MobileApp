@@ -39,8 +39,6 @@ public class KHAdapter extends RecyclerView.Adapter<KHAdapter.MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-
-
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.course_item_layout, null);
         MyViewHolder myViewHolder= new MyViewHolder(view);
         return myViewHolder;
@@ -54,8 +52,8 @@ public class KHAdapter extends RecyclerView.Adapter<KHAdapter.MyViewHolder> {
         holder.tengv.setText(product.getGiaoVien());
         holder.tenpm.setText(product.getPhanMon());
         holder.maKhoa.setText(product.getMaKhoaHoc());
+        holder.giaTien.setText(product.getGiaTien().toString());
     }
-
 
     @Override
     public int getItemCount() {
@@ -64,7 +62,7 @@ public class KHAdapter extends RecyclerView.Adapter<KHAdapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public ImageView images;
-        public TextView tenkh,tengv,tenpm, maKhoa;
+        public TextView tenkh,tengv,tenpm, maKhoa,giaTien;
 
         public MyViewHolder(@NonNull View itemView)
         {
@@ -74,6 +72,7 @@ public class KHAdapter extends RecyclerView.Adapter<KHAdapter.MyViewHolder> {
             tengv=(TextView)itemView.findViewById(R.id.teacherName) ;
             tenpm=(TextView)itemView.findViewById(R.id.typeName) ;
             maKhoa= (TextView)itemView.findViewById(R.id.maCourse);
+            giaTien=(TextView)itemView.findViewById(R.id.giatien_tv);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

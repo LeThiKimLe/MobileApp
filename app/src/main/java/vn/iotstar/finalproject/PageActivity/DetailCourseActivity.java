@@ -90,6 +90,7 @@ public class DetailCourseActivity extends AppCompatActivity {
                     binding.teacherName.setText(giaoVien.getTenGiaoVien());
                     binding.teacherSdt.setText(giaoVien.getSdt());
                     binding.teacherEmail.setText(giaoVien.getEmail());
+//                    Toast.makeText(DetailCourseActivity.this, "Email: " + giaoVien.getEmail(), Toast.LENGTH_SHORT).show();
                 }else {
                     int statusCode = response.code();
                 }

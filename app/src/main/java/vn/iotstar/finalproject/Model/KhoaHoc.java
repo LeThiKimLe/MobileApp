@@ -102,4 +102,11 @@ public class  KhoaHoc implements Serializable {
         this.ngayCapNhat = ngayCapNhat;
         this.hinhAnhMoTa = hinhAnhMoTa;
     }
+
+    public KhoaHoc(String maKhoaHoc, String tenKhoaHoc, int giaTien)
+    {
+        this.maKhoaHoc=maKhoaHoc;
+        this.tenKhoaHoc=tenKhoaHoc;
+        this.giaTien=giaTien;
+    }
 }
