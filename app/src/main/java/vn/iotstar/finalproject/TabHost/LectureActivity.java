@@ -1,8 +1,13 @@
 package vn.iotstar.finalproject.TabHost;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -24,7 +29,7 @@ public class LectureActivity extends Activity {
     TaiNguyenAPI taiNguyenAPI;
     TaiNguyenReponse taiNguyenReponse;
     TextView tenBH, noidung;
-    //VideoView videoBH;
+    VideoView videoBH;
     String maBaiHoc;
 
     @Override
@@ -37,6 +42,8 @@ public class LectureActivity extends Activity {
             maBaiHoc = extras.getString("maBaiHoc");
         }
         GetLeture(maBaiHoc);
+        playVideo();
+
     }
 
     //Video bai giang
@@ -64,5 +71,14 @@ public class LectureActivity extends Activity {
     {
         tenBH = (TextView) findViewById(R.id.tv_tenBG);
         noidung =(TextView) findViewById(R.id.tv_MoTaND);
+        videoBH =(VideoView) findViewById(R.id.video);
+    }
+
+    private void playVideo()
+    {
+        videoBH.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.baigiang));
+        MediaController mediaController = new MediaController(this);
+        videoBH.setMediaController(mediaController);
+        mediaController.setAnchorView(videoBH);
     }
 }
