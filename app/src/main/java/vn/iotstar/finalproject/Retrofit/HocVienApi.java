@@ -12,7 +12,6 @@ import vn.iotstar.finalproject.Response.DonHangInfor;
 import vn.iotstar.finalproject.Response.HocVienReponse;
 import vn.iotstar.finalproject.Response.RegisResponse;
 import vn.iotstar.finalproject.Response.SoDuResponse;
-import vn.iotstar.finalproject.Response.StatisticResponse;
 
 public interface HocVienApi {
 

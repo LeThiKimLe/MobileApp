@@ -88,6 +88,7 @@
                     android:layout_height="match_parent"
                     android:ems="10"
                     android:inputType="textPersonName"
+                    android:textSize="20sp"
                     android:text="Name" />
 
             </TableRow>
@@ -187,25 +188,11 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="52dp"
-            android:background="@drawable/button_goc"
-            android:text="REFUSE"
-            android:textColor="#F4F2F2"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-            tools:ignore="MissingConstraints" />
-
-        <Button
             android:id="@+id/updatebtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="136dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/button_goc"
             android:text="UPDATE"
             android:textColor="#FAF7F7"
@@ -251,18 +238,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageButton
-        android:id="@+id/backBtn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/btn_arrow2"
-        android:contentDescription="click to login"
-        android:scaleType="fitXY"
-        android:translationZ="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -108,7 +108,6 @@ public class PersonalFragment extends Fragment {
         loadData();
         Modify();
         update();
-        back();
         return root;
     }
     public void loadData()
@@ -196,15 +195,6 @@ public class PersonalFragment extends Fragment {
                 }
             });
         } );
-    }
-
-    private void back(){
-        binding.backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setExitTransition(this);
-            }
-        });
     }
 
 
