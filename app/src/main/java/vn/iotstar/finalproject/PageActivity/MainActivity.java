@@ -26,6 +26,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
+import vn.iotstar.finalproject.Model.BaiHoc;
 import vn.iotstar.finalproject.Model.HocVien;
 import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.Storage.SharedPrefManager;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageViewprofile;
 
     public static HocVien hocVien;
+    public  static BaiHoc baiHoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,5 +202,6 @@ public class MainActivity extends AppCompatActivity {
 //        startActivityForResult(intent, 1);
 //        finish();
     }
+
 
 }
