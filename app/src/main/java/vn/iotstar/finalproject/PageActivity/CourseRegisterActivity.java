@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,6 +114,7 @@ public class CourseRegisterActivity extends AppCompatActivity {
                                 showNotice("Đăng ký thành công", "Bạn đã đăng ký khóa học thành công. Hãy đợi quan trị viên xác nhận đon nha");
                                 NoticeRecord new_notice= new NoticeRecord("Đơn hàng: "+ resp.getMaHoaDon() +" đã được gửi yêu cầu thành công", "Click vào đây để xem chi tiết đơn hàng và tình trạng", resp.getMaHoaDon(), MainActivity.userId);
                                 NoticeDatabase.getInstance(CourseRegisterActivity.this).noticeDao().insertAll(new_notice);
+                                xoaKhoiGioHang();
                             }
 
                         }else {
@@ -145,6 +147,19 @@ public class CourseRegisterActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
     }
+
+    private void xoaKhoiGioHang()
+    {
+        List<CartItem> temp_list;
+        for(int i=0;i<regisList.size();i++)
+        {
+            temp_list = CartDatabase.getInstance(this).cartDao().checkCourse(regisList.get(i).getMaKhoaHoc(), MainActivity.userId);
+            CartDatabase.getInstance(this).cartDao().delete(temp_list.get(0));
+        }
+
+    }
+
+
 
 
 }

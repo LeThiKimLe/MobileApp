@@ -86,7 +86,7 @@ public class BillActivity extends AppCompatActivity {
         binding.payBtn.setEnabled(false);
         boolean check1=false;
 
-        binding.createDay.setText(formatter.format(donHang.getDonHang().getNgayTao()));
+        binding.createDay.setText(donHang.getDonHang().getNgayTao());
 
         if (donHang.getDonHang().getTinhTrangXacNhan()!=null) {
             if (donHang.getDonHang().getTinhTrangXacNhan()==true) {
@@ -103,8 +103,8 @@ public class BillActivity extends AppCompatActivity {
             binding.stateBill.setText("Bị từ chối");
         }
 
-        if (donHang.getDonHang().getNgayThanhToan()!=0) {
-            binding.payDay.setText(formatter.format(donHang.getDonHang().getNgayThanhToan()));
+        if (donHang.getDonHang().getNgayThanhToan()!=null) {
+            binding.payDay.setText(donHang.getDonHang().getNgayThanhToan());
             binding.payBtn.setEnabled(false);
         }
         else {

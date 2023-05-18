@@ -173,7 +173,6 @@ public class CartFragment extends Fragment {
 
     private void addRegisterBtn()
     {
-
         binding.checkOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

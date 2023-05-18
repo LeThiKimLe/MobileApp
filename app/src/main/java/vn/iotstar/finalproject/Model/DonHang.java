@@ -7,9 +7,9 @@ public class DonHang implements Serializable {
     private String maDonHang;
     private String hocVien;
     private int tongSoTien;
-    private long ngayThanhToan;
+    private String ngayThanhToan;
     private Boolean tinhTrangXacNhan;
-    private long ngayTao;
+    private String ngayTao;
 
     public String getMaDonHang() {
         return maDonHang;
@@ -35,7 +35,6 @@ public class DonHang implements Serializable {
         this.tongSoTien = tongSoTien;
     }
 
-
     public boolean isTinhTrangXacNhan() {
         return tinhTrangXacNhan;
     }
@@ -44,19 +43,19 @@ public class DonHang implements Serializable {
         this.tinhTrangXacNhan = tinhTrangXacNhan;
     }
 
-    public long getNgayThanhToan() {
+    public String getNgayThanhToan() {
         return ngayThanhToan;
     }
 
-    public void setNgayThanhToan(long ngayThanhToan) {
+    public void setNgayThanhToan(String ngayThanhToan) {
         this.ngayThanhToan = ngayThanhToan;
     }
 
-    public long getNgayTao() {
+    public String getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(long ngayTao) {
+    public void setNgayTao(String ngayTao) {
         this.ngayTao = ngayTao;
     }
 

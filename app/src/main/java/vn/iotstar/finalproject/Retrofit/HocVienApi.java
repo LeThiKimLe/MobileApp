@@ -12,6 +12,7 @@ import vn.iotstar.finalproject.Response.DonHangInfor;
 import vn.iotstar.finalproject.Response.HocVienReponse;
 import vn.iotstar.finalproject.Response.RegisResponse;
 import vn.iotstar.finalproject.Response.SoDuResponse;
+import vn.iotstar.finalproject.Response.ViThanhToanResponse;
 
 public interface HocVienApi {
 
@@ -42,5 +43,10 @@ public interface HocVienApi {
     @FormUrlEncoded
     @POST("api/student/payBill")
     Call<RegisResponse> payBill(@Field("maHocVien") String maUser, @Field("maHoaDon") String maDon);
+
+    @FormUrlEncoded
+    @POST("api/student/getWallet")
+    Call<ViThanhToanResponse> getWallet(@Field("maHocVien") String maUser);
+
 
 }
