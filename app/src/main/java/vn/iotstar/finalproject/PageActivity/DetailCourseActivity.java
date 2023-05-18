@@ -52,6 +52,7 @@ public class DetailCourseActivity extends AppCompatActivity {
     FeedbackAdapter adapter;
 
     List<Feedback> list_feed;
+    String maKhoaHoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class DetailCourseActivity extends AppCompatActivity {
         GetTeacherInfor();
         addCartBtn();
         getRating();
+        HienBaiHoc();
     }
 
     private void GetCourseInfor() {
@@ -76,6 +78,7 @@ public class DetailCourseActivity extends AppCompatActivity {
             public void onResponse(Call<KhoaHoc> call, Response<KhoaHoc> response) {
                 if(response.isSuccessful()) {
                     khoaHoc = response.body();
+                    maKhoaHoc=khoaHoc.getMaKhoaHoc();
                     binding.courseNamee.setText(khoaHoc.getTenKhoaHoc());
                     binding.courseDescript.setText(khoaHoc.getMoTa());
                     binding.courseCost.setText("Giá: "+khoaHoc.getGiaTien() +"đ");
@@ -137,6 +140,26 @@ public class DetailCourseActivity extends AppCompatActivity {
 //        returnIntent.putExtra("result","1");
 //        setResult(Activity.RESULT_OK,returnIntent);
         finish();
+    }
+    public  void HienBaiHoc()
+    {
+        binding.textView10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToCourseLession(maKhoaHoc);
+
+
+            }
+        });
+    }
+    public void goToCourseLession(String maKhoaHoc)
+    {
+        Intent intent = new Intent(DetailCourseActivity.this, LessionActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("maKhoaHoc", maKhoaHoc);
+        intent.putExtras(bundle);
+        startActivity(intent);
+
     }
 
     private boolean isCheckExist(@NonNull KhoaHoc kH){
