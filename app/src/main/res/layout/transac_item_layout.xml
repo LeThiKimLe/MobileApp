@@ -73,6 +73,7 @@
                 android:gravity="center"
                 android:paddingVertical="5dp"
                 android:text="Xem hóa đơn"
+                android:textColor="#2D7A9C"
                 android:textStyle="bold|italic" />
 
             <TextView

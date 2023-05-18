@@ -54,6 +54,12 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder.thoigian.setText(formatter.format(giaoDich.getNgayGiaoDich()));
         holder.maGD.setText("Mã GD: "+giaoDich.getMaGiaoDich());
         holder.sotien.setText("-"+ giaoDich.getSoTienGiaoDich().intValue()+" đ");
+        holder.btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.getInstance().goToBillDetail((String) giaoDich.getMaGiaoDich());
+            }
+        });
     }
 
     @Override
@@ -63,7 +69,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView noidung, sotien, thoigian, sodu,maGD;
+        public TextView noidung, sotien, thoigian, sodu,maGD, btnView;
 
         public MyViewHolder(@NonNull View itemView)
         {
@@ -73,6 +79,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             thoigian=(TextView) itemView.findViewById(R.id.tgianGD);
             sodu= (TextView)itemView.findViewById(R.id.soduCapNhat);
             maGD= (TextView)itemView.findViewById(R.id.maGD);
+            btnView = (TextView)itemView.findViewById(R.id.btnViewBill);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.manager.SupportRequestManagerFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.ParseException;
 import java.util.List;
 
 import vn.iotstar.finalproject.Model.BaiHoc;
@@ -69,40 +70,88 @@ public class MainActivity extends AppCompatActivity {
 
         if(SharedPrefManager.getInstance(this).isLoggedIn()) {
             role= SharedPrefManager.getInstance(this).getRole();
-            Toast.makeText(instance, role, Toast.LENGTH_SHORT).show();
             if (role.equals("HV")) {
                 hocVien = SharedPrefManager.getInstance(this).getHocVien();
-                userId=hocVien.getMaHocVien();
-//                setPersonalInfor();
+                setHocVienInfor();
+            }
+            else if (role.equals("GV"))
+            {
+                try {
+                    giaoVien= SharedPrefManager.getInstance(this).getGiaoVien();
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            else if (role.equals("QTV"))
+            {
+                quanTriVien= SharedPrefManager.getInstance(this).getQuanTriVien();
             }
         }
         else{
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            hocVien = (HocVien) extras.getSerializable("currentUser1");
+            role= extras.getString("role");
+            if (role.equals("HV")) {
+                hocVien = (HocVien) extras.getSerializable("hocVien");
+
+            }
+            else if (role.equals("GV")) {
+                giaoVien = (GiaoVien) extras.getSerializable("giaoVien");
+
+
+            }
+            else if (role.equals("QTV")) {
+                quanTriVien = (QuanTriVien) extras.getSerializable("quanTriVien");
+            }
         }
         }
         //setContentView(R.layout.activity_main2);
         //AnhXa();
         addSideBar();
-        setPersonalInfor();
-        //addViewPager();
+        getHeader();
+        if (role.equals("HV"))
+            setHocVienInfor();
+        else if (role.equals("GV"))
+            setGiaoVienInfor();
+        else if (role.equals("QTV"))
+            setQuanTriVienInfor();
+        addLogOut();
 
     }
 
-    public void setPersonalInfor()
+    private void getHeader()
     {
         headerView = binding.navView.getHeaderView(0);
         userName=(TextView)headerView.findViewById(R.id.personName);
         userEmail = (TextView) headerView.findViewById(R.id.personalEmail);
         imageViewprofile = (ImageView) headerView.findViewById(R.id.personalImg);
-//        userName.setText(hocVien.getTenHocVien());
-//        userEmail.setText(hocVien.getEmail());
-//        userId=hocVien.getMaHocVien();
-//        Glide.with(getApplicationContext()).load(hocVien.getImage()).into(imageViewprofile);
-        userName.setText(SharedPrefManager.getInstance(this).getUsername());
-        userEmail.setText(SharedPrefManager.getInstance(this).getEmail());
-        addLogOut();
+    }
+
+    public void setHocVienInfor()
+    {
+
+        userName.setText(hocVien.getTenHocVien());
+        userEmail.setText(hocVien.getEmail());
+        userId=hocVien.getMaHocVien();
+        Glide.with(getApplicationContext()).load(hocVien.getImage()).into(imageViewprofile);
+
+    }
+
+    public void setGiaoVienInfor()
+    {
+        userName.setText(giaoVien.getTenGiaoVien());
+        userEmail.setText(giaoVien.getEmail());
+        userId=giaoVien.getMaGiaoVien();
+
+
+    }
+
+    public void setQuanTriVienInfor()
+    {
+        userName.setText(quanTriVien.getHoTen());
+        userEmail.setText(quanTriVien.getEmail());
+        userId=quanTriVien.getMaQtv();
+
     }
 
     public static MainActivity getInstance() {

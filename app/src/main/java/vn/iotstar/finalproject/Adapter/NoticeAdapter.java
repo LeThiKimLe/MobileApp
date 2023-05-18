@@ -47,7 +47,6 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         NoticeRecord noticeRecord= array.get(position);
-
         holder.title.setText(noticeRecord.getTitleMsg());
         holder.content.setText(noticeRecord.getContent());
         holder.time.setText(noticeRecord.getNgayTao());

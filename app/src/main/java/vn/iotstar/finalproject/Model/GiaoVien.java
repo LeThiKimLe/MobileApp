@@ -2,6 +2,7 @@ package vn.iotstar.finalproject.Model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class GiaoVien implements Serializable {
     private String maGiaoVien;
@@ -11,6 +12,17 @@ public class GiaoVien implements Serializable {
     private String diaChi;
     private long ngayKyKet;
     private String chuyenmon;
+
+    private List<PhanMon> chuyen;
+
+    public List<PhanMon> getChuyen() {
+        return chuyen;
+    }
+
+    public void setChuyen(List<PhanMon> chuyen) {
+        this.chuyen = chuyen;
+    }
+
     private String email;
 
     private String listKhoaHocs;
@@ -91,6 +103,17 @@ public class GiaoVien implements Serializable {
         this.maGiaoVien = maGiaoVien;
         this.tenGiaoVien = tenGiaoVien;
         this.sdt = sdt;
+        this.email = email;
+    }
+
+    public GiaoVien(String maGiaoVien, String tenGiaoVien, String sdt, String cccd, String diaChi, String email, long ngayKyKet, String chuyenmon) {
+        this.maGiaoVien = maGiaoVien;
+        this.tenGiaoVien = tenGiaoVien;
+        this.sdt = sdt;
+        this.cccd = cccd;
+        this.diaChi = diaChi;
+        this.ngayKyKet = ngayKyKet;
+        this.chuyenmon = chuyenmon;
         this.email = email;
     }
 

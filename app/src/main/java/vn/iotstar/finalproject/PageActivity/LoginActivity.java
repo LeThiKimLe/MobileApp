@@ -79,21 +79,21 @@ public class LoginActivity extends AppCompatActivity {
                                     if (login_layout.checkBoxRemember.isChecked())
                                         SharedPrefManager.getInstance(getApplicationContext()).userLogin(hvReponse.getHocVien());
                                     hocVien = hvReponse.getHocVien();
-                                    goToHomeActivity();
+                                    goToHomeActivity1();
                                 }
                                 else if (hvReponse.getQtv()!=null)
                                 {
                                     if (login_layout.checkBoxRemember.isChecked())
                                         SharedPrefManager.getInstance(getApplicationContext()).userLogin(hvReponse.getQtv());
                                     quanTriVien = hvReponse.getQtv();
-                                    goToHomeActivity();
+                                    goToHomeActivity3();
                                 }
                                 else if (hvReponse.getGiaoVien()!=null)
                                 {
                                     if (login_layout.checkBoxRemember.isChecked())
                                         SharedPrefManager.getInstance(getApplicationContext()).userLogin(hvReponse.getGiaoVien());
                                     giaoVien = hvReponse.getGiaoVien();
-                                    goToHomeActivity();
+                                    goToHomeActivity2();
                                 }
                             }
                         }
@@ -126,7 +126,8 @@ public class LoginActivity extends AppCompatActivity {
     private void goToHomeActivity1() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("currentUser1",hocVien);
+        bundle.putSerializable("hocVien",hocVien);
+        bundle.putString("role", "HV");
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
@@ -135,7 +136,8 @@ public class LoginActivity extends AppCompatActivity {
     private void goToHomeActivity2() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("currentUser2",giaoVien);
+        bundle.putSerializable("giaoVien",giaoVien);
+        bundle.putString("role", "GV");
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
@@ -144,7 +146,8 @@ public class LoginActivity extends AppCompatActivity {
     private void goToHomeActivity3() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("currentUser3",quanTriVien);
+        bundle.putSerializable("quanTriVien",quanTriVien);
+        bundle.putString("role", "QTV");
         intent.putExtras(bundle);
         startActivity(intent);
         finish();

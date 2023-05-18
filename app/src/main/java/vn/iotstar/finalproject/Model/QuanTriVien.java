@@ -57,4 +57,13 @@ public class QuanTriVien implements Serializable {
     public void setCccd(String cccd) {
         this.cccd = cccd;
     }
+
+    public QuanTriVien(String maQtv, String hoTen, String sdt, String email, String diaChi, String cccd) {
+        this.maQtv = maQtv;
+        this.hoTen = hoTen;
+        this.sdt = sdt;
+        this.email = email;
+        this.diaChi = diaChi;
+        this.cccd = cccd;
+    }
 }
