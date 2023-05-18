@@ -28,6 +28,7 @@
             android:exported="false" /> <!-- <activity -->
         <!-- android:name=".PageActivity.IntroActivity" -->
         <!-- android:exported="false" /> -->
+
         <activity
             android:name=".PageActivity.CartActivity"
             android:exported="false" />
@@ -68,6 +69,31 @@
             android:name=".PageActivity.RegisterActivity"
             android:exported="false"
             android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
+
+        <activity
+            android:name=".PageActivity.TabHostActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
+
+        <activity android:name=".TabHost.CommentActivity"/>
+        <activity android:name=".TabHost.DocumentActivity"/>
+        <activity
+            android:name=".TabHost.LectureActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="*"
+                    android:pathPattern=".*\\.mp4"
+                    android:scheme="content"
+                    android:mimeType="video/mp4" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".PageActivity.IntroActivity"
             android:exported="true"

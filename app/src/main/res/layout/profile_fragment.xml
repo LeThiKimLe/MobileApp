@@ -29,10 +29,10 @@
 
         <TableLayout
             android:id="@+id/tableLayout"
-            android:layout_width="351dp"
-            android:layout_height="275dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="180dp"
+            android:layout_width="359dp"
+            android:layout_height="346dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="168dp"
             android:shrinkColumns="*"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -82,12 +82,15 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <EditText
                     android:id="@+id/username_box"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textSize="20sp" />
+                    android:layout_width="230dp"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textSize="20sp"
+                    android:text="Name" />
+
             </TableRow>
 
             <TableRow
@@ -108,7 +111,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <EditText
                     android:id="@+id/email_box"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -134,7 +137,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <EditText
                     android:id="@+id/sdt_box"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -151,7 +154,7 @@
 
                 <TextView
                     android:id="@+id/date_name"
-                    android:layout_width="108dp"
+                    android:layout_width="138dp"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginStart="15dp"
@@ -160,7 +163,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <EditText
                     android:id="@+id/date_box"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -175,9 +178,9 @@
             android:id="@+id/image2"
             android:layout_width="107dp"
             android:layout_height="97dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="36dp"
-            android:src="@android:drawable/btn_star_big_on"
+            android:src="@drawable/avatar1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearance="@style/circle"
@@ -185,27 +188,13 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/updatebtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginStart="136dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/button_goc"
-            android:text="REFUSE"
-            android:textColor="#F4F2F2"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-            tools:ignore="MissingConstraints" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/button_goc"
-            android:text="UPGRADE"
+            android:text="UPDATE"
             android:textColor="#FAF7F7"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -217,7 +206,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
-            android:layout_marginEnd="44dp"
+            android:layout_marginEnd="60dp"
             android:text="HỒ SƠ CÁ NHÂN"
             android:textColor="#303F9F"
             android:textSize="24sp"
@@ -227,10 +216,10 @@
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="202dp"
-            android:layout_height="28dp"
+            android:layout_width="167dp"
+            android:layout_height="47dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="22dp"
+            android:layout_marginEnd="72dp"
             android:text="TextView"
             android:textSize="20sp"
             android:textStyle="bold|italic"
@@ -238,29 +227,16 @@
             app:layout_constraintTop_toBottomOf="@+id/personalEmail" />
 
         <ImageView
-            android:id="@+id/update_btn"
+            android:id="@+id/modify_btn"
             android:layout_width="58dp"
             android:layout_height="51dp"
-            android:layout_marginTop="124dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/update_pen" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageButton
-        android:id="@+id/signInBtn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/btn_arrow2"
-        android:contentDescription="click to login"
-        android:scaleType="fitXY"
-        android:translationZ="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

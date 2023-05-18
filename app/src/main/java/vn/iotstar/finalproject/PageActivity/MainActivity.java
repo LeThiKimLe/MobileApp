@@ -183,6 +183,16 @@ public class MainActivity extends AppCompatActivity {
 //        finish();
     }
 
+    public void addTabHost(String tabhostID, String maBaiHoc)
+    {
+        Intent intent = new Intent(MainActivity.this, TabHostActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("tabhostID", tabhostID);
+        bundle.putString("maBaiHoc", maBaiHoc);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

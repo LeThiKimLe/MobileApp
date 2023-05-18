@@ -12,7 +12,6 @@ import vn.iotstar.finalproject.Response.DonHangInfor;
 import vn.iotstar.finalproject.Response.HocVienReponse;
 import vn.iotstar.finalproject.Response.RegisResponse;
 import vn.iotstar.finalproject.Response.SoDuResponse;
-import vn.iotstar.finalproject.Response.StatisticResponse;
 
 public interface HocVienApi {
 
@@ -22,10 +21,11 @@ public interface HocVienApi {
     @FormUrlEncoded
     @POST("api/general/login")
     Call<HocVienReponse> loginHocVien(@Field("username") String username, @Field("password") String password);
-
-
+    @GET("api/general/listCourse")
+    Call<List<KhoaHoc>> getKHAll();
+    @FormUrlEncoded
     @POST("api/general/updateProfile")
-    Call<HocVienReponse> updateProfilr(@Field("maUser") String maUser,@Field("name") String name, @Field("sdt") String sdt, @Field("email") String email, @Field("ngaysinh") String ngaysinh, @Field("images") String images);
+    Call<HocVienReponse> updateProfile(@Field("maUser") String maUser,@Field("name") String name, @Field("ngaysinh") String ngaysinh, @Field("sdt") String sdt, @Field("email") String email, @Field("images") String images);
 
     @FormUrlEncoded
     @POST("api/student/getBalance")
