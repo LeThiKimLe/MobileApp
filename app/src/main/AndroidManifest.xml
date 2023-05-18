@@ -51,6 +51,10 @@
             android:name=".PageActivity.LoginActivity"
             android:exported="false"
             android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
+        <activity
+            android:name=".PageActivity.LessionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FinalProject.NoActionBar"></activity><!-- <activity -->
 
         <activity
             android:name=".PageActivity.MyCourseActivity"
