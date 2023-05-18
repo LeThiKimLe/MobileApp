@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import vn.iotstar.finalproject.Model.GiaoVien;
 import vn.iotstar.finalproject.Model.HocVien;
+import vn.iotstar.finalproject.Model.QuanTriVien;
 import vn.iotstar.finalproject.PageActivity.LoginActivity;
 
 public class SharedPrefManager {
@@ -20,6 +22,8 @@ public class SharedPrefManager {
     private static final String KEY_DATE = "keydate";
 
     private static final String KEY_ID = "keyid";
+
+    private static final String ROLE = "role";
 
     private static SharedPrefManager mInstance;
     private static Context ctx;
@@ -39,7 +43,7 @@ public class SharedPrefManager {
         return mInstance;
     }
 
-    public void hocvienLogin(HocVien hv)
+    public void userLogin(HocVien hv)
     {
         Toast.makeText(ctx, "Đã lưu", Toast.LENGTH_SHORT).show();
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -50,13 +54,35 @@ public class SharedPrefManager {
         editor.putString(KEY_IMAGE,hv.getImage());
         editor.putString(KEY_SDT, hv.getSdt());
         editor.putString(KEY_DATE, hv.getNgaySinh());
+        editor.putString(ROLE, "HV");
         editor.apply();
     }
+
+    public void userLogin(GiaoVien gv)
+    {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.putString(ROLE, "GV");
+        editor.putString(KEY_NAME, gv.getTenGiaoVien());
+        editor.putString(KEY_EMAIL, gv.getEmail());
+        editor.apply();
+    }
+
+    public void userLogin(QuanTriVien qtv)
+    {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.putString(ROLE, "QTV");
+        editor.putString(KEY_NAME, qtv.getHoTen());
+        editor.putString(KEY_EMAIL, qtv.getEmail());
+        editor.apply();
+    }
+
 
     public boolean isLoggedIn()
     {
         SharedPreferences sharedPreferences=ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_NAME, null)!= null;
+        return sharedPreferences.getString(ROLE, null)!= null;
     }
 
     public HocVien getHocVien()
@@ -72,6 +98,26 @@ public class SharedPrefManager {
             );
 
     }
+
+    public String getRole()
+    {
+        SharedPreferences sharedPreferences= ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(ROLE, null);
+    }
+
+    public String getUsername()
+    {
+        SharedPreferences sharedPreferences= ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_NAME, null);
+    }
+
+    public String getEmail()
+    {
+        SharedPreferences sharedPreferences= ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_EMAIL, null);
+    }
+
+
 
     public void logout()
     {

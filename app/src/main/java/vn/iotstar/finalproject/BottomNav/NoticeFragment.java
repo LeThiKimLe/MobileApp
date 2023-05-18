@@ -83,7 +83,8 @@ public class NoticeFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = NotifyFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        loadData();
+        if (MainActivity.role.equals("HV"))
+            loadData();
         return root;
     }
 
@@ -97,5 +98,10 @@ public class NoticeFragment extends Fragment {
             binding.rcNoticelist.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }
+    }
+
+    private void loadData2()
+    {
+
     }
 }
