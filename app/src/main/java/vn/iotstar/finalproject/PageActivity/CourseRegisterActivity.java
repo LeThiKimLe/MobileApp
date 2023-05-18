@@ -105,7 +105,7 @@ public class CourseRegisterActivity extends AppCompatActivity {
                     public void onResponse(Call<RegisResponse> call, Response<RegisResponse> response) {
                         if(response.isSuccessful()) {
                             resp = response.body();
-                            if (resp.getResult()=="fail")
+                            if (resp.getResult().equals("fail"))
                             {
                                 showNotice("Đăng ký không thành công" , resp.getMessage());
                             }
