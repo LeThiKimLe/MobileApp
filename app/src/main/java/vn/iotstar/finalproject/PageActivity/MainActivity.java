@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(instance, role, Toast.LENGTH_SHORT).show();
             if (role.equals("HV")) {
                 hocVien = SharedPrefManager.getInstance(this).getHocVien();
+                userId=hocVien.getMaHocVien();
 //                setPersonalInfor();
             }
         }
