@@ -7,6 +7,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import vn.iotstar.finalproject.Model.Feedback;
 import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.Model.KhoiLop;
 
@@ -26,6 +27,12 @@ public interface KhoaHocAPI {
     @FormUrlEncoded
     @POST("api/student/myCourse")
     Call<List<KhoaHoc>>getMyCourse(@Field("maHocVien") String maHocVien);
+
+    @FormUrlEncoded
+    @POST("api/general/getFeedback")
+    Call<List<Feedback>>getFeedback(@Field("maKhoaHoc") String maKhoaHoc);
+
+
 
 
 }

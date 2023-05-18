@@ -27,7 +27,9 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.List;
 
 import vn.iotstar.finalproject.Model.BaiHoc;
+import vn.iotstar.finalproject.Model.GiaoVien;
 import vn.iotstar.finalproject.Model.HocVien;
+import vn.iotstar.finalproject.Model.QuanTriVien;
 import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.Storage.SharedPrefManager;
 import vn.iotstar.finalproject.databinding.ActivityMain2Binding;
@@ -53,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static HocVien hocVien;
     public  static BaiHoc baiHoc;
+    public static GiaoVien giaoVien;
+    public static QuanTriVien quanTriVien;
+    public static String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +70,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         if(SharedPrefManager.getInstance(this).isLoggedIn()) {
-            hocVien = SharedPrefManager.getInstance(this).getHocVien();
+            role= SharedPrefManager.getInstance(this).getRole();
+            Toast.makeText(instance, role, Toast.LENGTH_SHORT).show();
+            if (role.equals("HV")) {
+                hocVien = SharedPrefManager.getInstance(this).getHocVien();
+//                setPersonalInfor();
+            }
         }
         else{
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            hocVien = (HocVien) extras.getSerializable("currentUser");
+            hocVien = (HocVien) extras.getSerializable("currentUser1");
         }
         }
         //setContentView(R.layout.activity_main2);
@@ -79,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         addSideBar();
         setPersonalInfor();
         //addViewPager();
+
     }
 
     public void setPersonalInfor()
@@ -87,10 +97,12 @@ public class MainActivity extends AppCompatActivity {
         userName=(TextView)headerView.findViewById(R.id.personName);
         userEmail = (TextView) headerView.findViewById(R.id.personalEmail);
         imageViewprofile = (ImageView) headerView.findViewById(R.id.personalImg);
-        userName.setText(hocVien.getTenHocVien());
-        userEmail.setText(hocVien.getEmail());
-        userId=hocVien.getMaHocVien();
-        Glide.with(getApplicationContext()).load(hocVien.getImage()).into(imageViewprofile);
+//        userName.setText(hocVien.getTenHocVien());
+//        userEmail.setText(hocVien.getEmail());
+//        userId=hocVien.getMaHocVien();
+//        Glide.with(getApplicationContext()).load(hocVien.getImage()).into(imageViewprofile);
+        userName.setText(SharedPrefManager.getInstance(this).getUsername());
+        userEmail.setText(SharedPrefManager.getInstance(this).getEmail());
         addLogOut();
     }
 

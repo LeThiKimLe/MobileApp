@@ -4,7 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import vn.iotstar.finalproject.Model.GiaoVien;
 import vn.iotstar.finalproject.Model.HocVien;
+import vn.iotstar.finalproject.Model.QuanTriVien;
 
 public class HocVienReponse implements Serializable {
     @SerializedName("result")
@@ -13,6 +15,25 @@ public class HocVienReponse implements Serializable {
     private String message;
     @SerializedName("hocVien")
     private HocVien hocVien;
+
+    private GiaoVien giaoVien;
+    private QuanTriVien qtv;
+
+    public GiaoVien getGiaoVien() {
+        return giaoVien;
+    }
+
+    public void setGiaoVien(GiaoVien giaoVien) {
+        this.giaoVien = giaoVien;
+    }
+
+    public QuanTriVien getQtv() {
+        return qtv;
+    }
+
+    public void setQtv(QuanTriVien qtv) {
+        this.qtv = qtv;
+    }
 
     public String getResult() {
         return result;

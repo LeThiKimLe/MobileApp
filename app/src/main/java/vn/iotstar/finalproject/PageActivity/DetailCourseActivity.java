@@ -11,19 +11,24 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import vn.iotstar.finalproject.Adapter.CartAdapter;
+import vn.iotstar.finalproject.Adapter.FeedbackAdapter;
+import vn.iotstar.finalproject.Adapter.NoticeAdapter;
 import vn.iotstar.finalproject.Adapter.TypicalCourseAdapter;
 import vn.iotstar.finalproject.Database.CartDatabase;
+import vn.iotstar.finalproject.Model.Feedback;
 import vn.iotstar.finalproject.Model.GiaoVien;
 import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.Response.StatisticResponse;
 import vn.iotstar.finalproject.Retrofit.GeneralAPI;
+import vn.iotstar.finalproject.Retrofit.KhoaHocAPI;
 import vn.iotstar.finalproject.Retrofit.RetrofitClient;
 import vn.iotstar.finalproject.Storage.CartItem;
 import vn.iotstar.finalproject.databinding.ActivityMain2Binding;
@@ -34,6 +39,8 @@ public class DetailCourseActivity extends AppCompatActivity {
     String courseId;
     GeneralAPI apiService;
 
+    KhoaHocAPI apiService2;
+
     KhoaHoc khoaHoc;
 
     GiaoVien giaoVien;
@@ -41,6 +48,10 @@ public class DetailCourseActivity extends AppCompatActivity {
     CourseInforLayoutBinding binding;
 
     CartItem new_item;
+
+    FeedbackAdapter adapter;
+
+    List<Feedback> list_feed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +65,7 @@ public class DetailCourseActivity extends AppCompatActivity {
         GetCourseInfor();
         GetTeacherInfor();
         addCartBtn();
+        getRating();
     }
 
     private void GetCourseInfor() {
@@ -130,5 +142,32 @@ public class DetailCourseActivity extends AppCompatActivity {
     private boolean isCheckExist(@NonNull KhoaHoc kH){
         List<CartItem> list = CartDatabase.getInstance(this).cartDao().checkCourse(kH.getMaKhoaHoc(), MainActivity.userId);
         return list!=null && !list.isEmpty();
+    }
+
+    private void getRating()
+    {
+        apiService2 = RetrofitClient.getRetrofit().create(KhoaHocAPI.class);
+        list_feed= new ArrayList<>();
+        apiService2.getFeedback(courseId).enqueue(new Callback<List<Feedback>>() {
+            @Override
+            public void onResponse(Call<List<Feedback>> call, Response<List<Feedback>> response) {
+                if(response.isSuccessful()) {
+                    list_feed = response.body();
+                    adapter = new FeedbackAdapter(getApplicationContext(), list_feed);
+                    binding.rcFeedback.setHasFixedSize(true);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                    binding.rcFeedback.setLayoutManager(layoutManager);
+                    binding.rcFeedback.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+//                    Toast.makeText(DetailCourseActivity.this, "Email: " + giaoVien.getEmail(), Toast.LENGTH_SHORT).show();
+                }else {
+                    int statusCode = response.code();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Feedback>> call, Throwable t) {
+                Log.d("logg",t.getMessage());
+            }
+        });
     }
 }

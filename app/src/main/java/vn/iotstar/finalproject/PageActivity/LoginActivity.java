@@ -15,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.iotstar.finalproject.Model.GiaoVien;
 import vn.iotstar.finalproject.Model.HocVien;
+import vn.iotstar.finalproject.Model.QuanTriVien;
 import vn.iotstar.finalproject.Response.HocVienReponse;
 import vn.iotstar.finalproject.Retrofit.HocVienApi;
 import vn.iotstar.finalproject.Storage.SharedPrefManager;
@@ -28,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
     HocVienApi hvApi;
     HocVienReponse hvReponse;
     HocVien hocVien;
+    GiaoVien giaoVien;
+    QuanTriVien quanTriVien;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,14 +70,32 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<HocVienReponse> call, Response<HocVienReponse> response)
                     {
 //                        System.out.printf("hi "+response.body().toString());
-                        if (response.isSuccessful() && response.body().getHocVien()!=null)
+                        if (response.isSuccessful())
                         {
                             hvReponse= response.body();
-                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                            if (login_layout.checkBoxRemember.isChecked())
-                                SharedPrefManager.getInstance(getApplicationContext()).hocvienLogin(hvReponse.getHocVien());
-                            hocVien= hvReponse.getHocVien();
-                            goToHomeActivity();
+                            if (hvReponse.getResult().equals("success")) {
+                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                if(hvReponse.getHocVien()!=null) {
+                                    if (login_layout.checkBoxRemember.isChecked())
+                                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(hvReponse.getHocVien());
+                                    hocVien = hvReponse.getHocVien();
+                                    goToHomeActivity();
+                                }
+                                else if (hvReponse.getQtv()!=null)
+                                {
+                                    if (login_layout.checkBoxRemember.isChecked())
+                                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(hvReponse.getQtv());
+                                    quanTriVien = hvReponse.getQtv();
+                                    goToHomeActivity();
+                                }
+                                else if (hvReponse.getGiaoVien()!=null)
+                                {
+                                    if (login_layout.checkBoxRemember.isChecked())
+                                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(hvReponse.getGiaoVien());
+                                    giaoVien = hvReponse.getGiaoVien();
+                                    goToHomeActivity();
+                                }
+                            }
                         }
                         else
                         {
@@ -97,12 +119,38 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToHomeActivity() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void goToHomeActivity1() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("currentUser",hocVien);
+        bundle.putSerializable("currentUser1",hocVien);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
     }
+
+    private void goToHomeActivity2() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("currentUser2",giaoVien);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
+    }
+
+    private void goToHomeActivity3() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("currentUser3",quanTriVien);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
+    }
+
+
 
     private  void goToRegisterForm() {
         login_layout.textDangky.setOnClickListener(view -> {
