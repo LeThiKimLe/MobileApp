@@ -47,9 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_REQUEST_CODE=10;
     public static final String TAG = MainActivity.class.getName();
     public static String userId;
-
     View headerView;
-
     TextView userName, userEmail, logout;
     ImageView imageViewprofile;
 
@@ -151,7 +149,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void showDialog()
     {
         AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.getInstance());
