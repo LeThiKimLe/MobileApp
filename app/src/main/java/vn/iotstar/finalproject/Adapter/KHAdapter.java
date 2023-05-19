@@ -92,7 +92,7 @@ public class KHAdapter extends RecyclerView.Adapter<KHAdapter.MyViewHolder> {
                 public void onClick(View view) {
 //                    Toast.makeText(context,"Bạn đã chọn Khóa học", Toast.LENGTH_SHORT).show();
                     //MainActivity.getInstance().goToCourseDetail((String) maKhoa.getText());
-                    MyCourseActivity.getInstance().goToCourseLession((String) maKhoa.getText());
+                    MyCourseActivity.getInstance().goToCourseLession((String) maKhoa.getText(), (String)tenkh.getText());
                 }
             });
         }
