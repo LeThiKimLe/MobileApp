@@ -8,6 +8,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import vn.iotstar.finalproject.Model.KhoaHoc;
+import vn.iotstar.finalproject.Model.PhanHoi;
 import vn.iotstar.finalproject.Response.DonHangInfor;
 import vn.iotstar.finalproject.Response.HocVienReponse;
 import vn.iotstar.finalproject.Response.RegisResponse;
@@ -47,6 +48,10 @@ public interface HocVienApi {
     @FormUrlEncoded
     @POST("api/student/getWallet")
     Call<ViThanhToanResponse> getWallet(@Field("maHocVien") String maUser);
+
+    @FormUrlEncoded
+    @POST("api/general/sendFeedback")
+    Call<PhanHoi> sendFeedback(@Field("maKhoaHoc") String maKhoaHoc, @Field("maHocVien") String maHocVien, @Field("rate") int rate, @Field("content") String content);
 
 
 }

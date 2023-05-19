@@ -16,7 +16,7 @@ public interface BaiHocAPI {
     Call<BaiHocReponse> getLession(@Field("maHocVien") String maHocVien, @Field("maKhoaHoc") String maKhoaHoc);
 
     @FormUrlEncoded
-    @POST("api/general/lession")
+    @POST("api/general/lesson")
     Call<List<BaiHoc>>getBaiHoc(@Field("maKhoaHoc") String maKhoaHoc);
 
 

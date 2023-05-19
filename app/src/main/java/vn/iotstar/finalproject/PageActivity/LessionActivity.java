@@ -48,10 +48,7 @@ public class LessionActivity extends AppCompatActivity {
         if (bundle != null) {
             maKhoaHoc = bundle.getString("maKhoaHoc");
             GetCourseLession(maKhoaHoc);
-
         }
-
-
     }
 
     private void GetCourseLession(String maKhoaHoc) {

@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_main2);
         //AnhXa();
         addSideBar();
-        getHeader();
+
         if (role.equals("HV"))
             setHocVienInfor();
         else if (role.equals("GV"))
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setHocVienInfor()
     {
-
+        getHeader();
         userName.setText(hocVien.getTenHocVien());
         userEmail.setText(hocVien.getEmail());
         userId=hocVien.getMaHocVien();
@@ -139,19 +139,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void setGiaoVienInfor()
     {
+        getHeader();
         userName.setText(giaoVien.getTenGiaoVien());
         userEmail.setText(giaoVien.getEmail());
         userId=giaoVien.getMaGiaoVien();
-
-
     }
 
     public void setQuanTriVienInfor()
     {
+        getHeader();
         userName.setText(quanTriVien.getHoTen());
         userEmail.setText(quanTriVien.getEmail());
         userId=quanTriVien.getMaQtv();
-
     }
 
     public static MainActivity getInstance() {

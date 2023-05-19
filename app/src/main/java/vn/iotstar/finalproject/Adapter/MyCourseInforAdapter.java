@@ -70,7 +70,6 @@ public class MyCourseInforAdapter extends RecyclerView.Adapter<MyCourseInforAdap
                 public void onClick(View view) {
                 Toast.makeText(context,"Bạn đã chọn bài học", Toast.LENGTH_SHORT).show();
                 MainActivity.getInstance().addTabHost((String) tenbh.getText(), (String) lessionid.getText());
-
                 }
             });
         }

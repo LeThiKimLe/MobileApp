@@ -29,18 +29,29 @@ public class KHAdapter extends RecyclerView.Adapter<KHAdapter.MyViewHolder> {
     Context context;
     List<KhoaHoc> array;
 
+    boolean isHocVien;
 
-    public KHAdapter(Context context, List<KhoaHoc> array)
+
+    public KHAdapter(Context context, List<KhoaHoc> array, boolean isHocVien)
     {
         this.context=context;
         this.array=array;
+        this.isHocVien=isHocVien;
     }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.course_item_layout, null);
-        MyViewHolder myViewHolder= new MyViewHolder(view);
+        View view;
+        MyViewHolder myViewHolder;
+        if (isHocVien) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.course_item_layout, null);
+        }
+        else
+        {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mycourse_item_layout, null);
+        }
+        myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
 
@@ -49,10 +60,12 @@ public class KHAdapter extends RecyclerView.Adapter<KHAdapter.MyViewHolder> {
         KhoaHoc product= array.get(position);
         Glide.with(context).load(product.getHinhAnhMoTa()).into(holder.images);
         holder.tenkh.setText(product.getTenKhoaHoc());
-        holder.tengv.setText(product.getGiaoVien());
+        if (holder.tengv!=null)
+            holder.tengv.setText(product.getGiaoVien());
         holder.tenpm.setText(product.getPhanMon());
         holder.maKhoa.setText(product.getMaKhoaHoc());
-        holder.giaTien.setText(product.getGiaTien().toString());
+        if (holder.giaTien!=null)
+            holder.giaTien.setText(product.getGiaTien()+"");
     }
 
     @Override

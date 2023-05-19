@@ -65,7 +65,12 @@ public class DetailCourseActivity extends AppCompatActivity {
         }
         GetCourseInfor();
         GetTeacherInfor();
-        addCartBtn();
+        if (MainActivity.role.equals("HV")) {
+            binding.addToCartBtn.setVisibility(View.VISIBLE);
+            addCartBtn();
+        }
+        else
+            binding.addToCartBtn.setVisibility(View.INVISIBLE);
         getRating();
         HienBaiHoc();
     }

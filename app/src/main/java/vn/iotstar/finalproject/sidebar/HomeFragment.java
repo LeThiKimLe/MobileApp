@@ -143,9 +143,14 @@ public class HomeFragment extends Fragment {
     public  void onMyCourse()
     {
         binding.fab.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.getInstance(), MyCourseActivity.class);
-            startActivity(intent);
+            if (!MainActivity.role.equals("QTV")) {
+                Intent intent = new Intent(MainActivity.getInstance(), MyCourseActivity.class);
+                startActivity(intent);
+            }
+            else
+            {
 
+            }
         });
     }
 }
