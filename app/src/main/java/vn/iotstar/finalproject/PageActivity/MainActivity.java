@@ -164,10 +164,23 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_mypage,R.id.nav_cart, R.id.nav_wallet)
-                .setOpenableLayout(drawer)
-                .build();
+        if (MainActivity.role.equals("QTV"))
+        {
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.manager_main_drawer);
+            mAppBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.nav_home, R.id.nav_mypage,R.id.nav_courseManage, R.id.nav_teacherManage,R.id.nav_billManage)
+                    .setOpenableLayout(drawer)
+                    .build();
+        }
+        else {
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.activity_main_drawer);
+            mAppBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.nav_home, R.id.nav_mypage, R.id.nav_cart, R.id.nav_wallet)
+                    .setOpenableLayout(drawer)
+                    .build();
+        }
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
