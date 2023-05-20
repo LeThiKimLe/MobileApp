@@ -3,12 +3,30 @@ package vn.iotstar.finalproject.sidebar;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import vn.iotstar.finalproject.Adapter.OrderAdapter;
+import vn.iotstar.finalproject.Adapter.TypicalCourseAdapter;
+import vn.iotstar.finalproject.BottomNav.HomePageFragment;
+import vn.iotstar.finalproject.Model.DonHang;
+import vn.iotstar.finalproject.PageActivity.MainActivity;
 import vn.iotstar.finalproject.R;
+import vn.iotstar.finalproject.Response.StatisticResponse;
+import vn.iotstar.finalproject.Retrofit.GeneralAPI;
+import vn.iotstar.finalproject.Retrofit.QuanTriVienAPI;
+import vn.iotstar.finalproject.Retrofit.RetrofitClient;
+import vn.iotstar.finalproject.databinding.FragmentBillManageBinding;
+import vn.iotstar.finalproject.databinding.MainLayoutBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +43,12 @@ public class BillManageFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    QuanTriVienAPI apiService;
+    OrderAdapter adapter;
+    List<DonHang> listDon;
+
+    private FragmentBillManageBinding binding;
 
     public BillManageFragment() {
         // Required empty public constructor
@@ -61,6 +85,36 @@ public class BillManageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bill_manage, container, false);
+        binding = FragmentBillManageBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        loadOrder();
+        return root;
+    }
+
+    private void loadOrder()
+    {
+        apiService = RetrofitClient.getRetrofit().create(QuanTriVienAPI.class);
+        apiService.getOrder().enqueue(new Callback<List<DonHang>>() {
+            @Override
+            public void onResponse(Call<List<DonHang>> call, Response<List<DonHang>> response) {
+                if(response.isSuccessful()) {
+                    listDon = response.body();
+                    adapter = new OrderAdapter(MainActivity.getInstance(),listDon);
+                    binding.recycle.setHasFixedSize(true);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.getInstance().getApplicationContext());
+                    binding.recycle.setLayoutManager(layoutManager);
+                    binding.recycle.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }else {
+                    int statusCode = response.code();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<DonHang>> call, Throwable t) {
+                Log.d("logg",t.getMessage());
+            }
+        });
+
     }
 }

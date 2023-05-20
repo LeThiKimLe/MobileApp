@@ -28,6 +28,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import vn.iotstar.finalproject.Model.BaiHoc;
+import vn.iotstar.finalproject.Model.DonHang;
 import vn.iotstar.finalproject.Model.GiaoVien;
 import vn.iotstar.finalproject.Model.HocVien;
 import vn.iotstar.finalproject.Model.QuanTriVien;
@@ -37,14 +38,12 @@ import vn.iotstar.finalproject.databinding.ActivityMain2Binding;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private DrawerLayout drawerLayout;
     private SupportRequestManagerFragment supportRequestManagerFragment;
     private NavController navController;
     private ActivityMain2Binding binding;
     private AppBarConfiguration mAppBarConfiguration;
     private static MainActivity instance;
-
     private static final int MY_REQUEST_CODE=10;
     public static final String TAG = MainActivity.class.getName();
     public static String userId;
@@ -93,12 +92,9 @@ public class MainActivity extends AppCompatActivity {
             role= extras.getString("role");
             if (role.equals("HV")) {
                 hocVien = (HocVien) extras.getSerializable("hocVien");
-
             }
             else if (role.equals("GV")) {
                 giaoVien = (GiaoVien) extras.getSerializable("giaoVien");
-
-
             }
             else if (role.equals("QTV")) {
                 quanTriVien = (QuanTriVien) extras.getSerializable("quanTriVien");
@@ -278,6 +274,17 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, BillActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("billId", billId);
+        intent.putExtras(bundle);
+        startActivity(intent);
+//        startActivityForResult(intent, 1);
+//        finish();
+    }
+
+    public void goToOrderDetail(DonHang donHang)
+    {
+        Intent intent = new Intent(MainActivity.this, ConfirmOrderActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("donHang", donHang);
         intent.putExtras(bundle);
         startActivity(intent);
 //        startActivityForResult(intent, 1);
