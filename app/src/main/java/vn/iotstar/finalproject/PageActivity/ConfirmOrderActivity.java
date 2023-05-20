@@ -3,6 +3,8 @@ package vn.iotstar.finalproject.PageActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +42,11 @@ public class ConfirmOrderActivity extends AppCompatActivity {
 
     private OrderConfirmResponse confirm_response;
 
+    public static final String KQ_DUYET = "KQ_DUYET";
+
+    boolean choose=false;
+
+    final Intent data = new Intent();
 
 
     @Override
@@ -47,7 +54,6 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding= ActivityConfirmOrderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             donHang = (DonHang) extras.getSerializable("donHang");
@@ -137,8 +143,14 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         binding.btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 sendConfirm("1");
+                binding.btnAccept.setEnabled(false);
+                data.putExtra(KQ_DUYET, "true");
+                choose=true;
+
             }
+
         });
     }
 
@@ -148,8 +160,20 @@ public class ConfirmOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sendConfirm("0");
+                binding.btnDeny.setEnabled(false);
+                data.putExtra(KQ_DUYET, "false");
+                choose=true;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (choose)
+            setResult(Activity.RESULT_OK, data);
+        else
+            setResult(Activity.RESULT_CANCELED);
+        super.onBackPressed();
     }
 
 }

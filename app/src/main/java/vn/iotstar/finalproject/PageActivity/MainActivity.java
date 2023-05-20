@@ -1,5 +1,9 @@
 package vn.iotstar.finalproject.PageActivity;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -8,6 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_REQUEST_CODE=10;
     public static final String TAG = MainActivity.class.getName();
     public static String userId;
+    public String kqActivity;
     View headerView;
     TextView userName, userEmail, logout;
     ImageView imageViewprofile;
@@ -248,15 +254,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                getSupportFragmentManager().popBackStack();
-            }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 1) {
+//            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+//                getSupportFragmentManager().popBackStack();
+//            }
+//        }
+//    }
 
     @Override
     public void onBackPressed() {
@@ -280,15 +286,31 @@ public class MainActivity extends AppCompatActivity {
 //        finish();
     }
 
-    public void goToOrderDetail(DonHang donHang)
+    public String goToOrderDetail(DonHang donHang)
     {
         Intent intent = new Intent(MainActivity.this, ConfirmOrderActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("donHang", donHang);
         intent.putExtras(bundle);
-        startActivity(intent);
+//        startActivity(intent);
+        startActivityForResult(intent, 1);
+        return kqActivity;
 //        startActivityForResult(intent, 1);
 //        finish();
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK) {
+                // Nhận dữ liệu từ Intent trả về
+                final String result = data.getStringExtra(ConfirmOrderActivity.KQ_DUYET);
+                kqActivity=result;
+            } else {
+                kqActivity="";
+            }
+        }
     }
 
 

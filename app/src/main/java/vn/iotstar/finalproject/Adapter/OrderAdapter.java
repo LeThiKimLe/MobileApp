@@ -58,9 +58,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         holder.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.getInstance().goToOrderDetail(donHang);
 
-
+                String kq= MainActivity.getInstance().goToOrderDetail(donHang);
+                if (kq!="")
+                    removeItem(donHang);
             }
         });
     }
@@ -91,7 +92,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
             thoigian=(TextView) itemView.findViewById(R.id.tgianGD);
             maHocVien= (TextView)itemView.findViewById(R.id.maHocVien);
             btnView = (TextView)itemView.findViewById(R.id.btnViewBill);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
