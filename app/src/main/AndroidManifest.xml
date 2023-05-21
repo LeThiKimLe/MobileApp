@@ -75,6 +75,10 @@
             android:name=".PageActivity.TabHostActivity"
             android:exported="false"
             android:theme="@style/Theme.FinalProject.NoActionBar" />
+        <activity
+            android:name=".PageActivity.AddTeacherActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
         <activity android:name=".TabHost.CommentActivity" />
         <activity android:name=".TabHost.DocumentActivity" />
         <activity

@@ -12,6 +12,7 @@ import vn.iotstar.finalproject.Model.DonHang;
 import vn.iotstar.finalproject.Model.Feedback;
 import vn.iotstar.finalproject.Model.GiaoVien;
 import vn.iotstar.finalproject.Model.KhoaHoc;
+import vn.iotstar.finalproject.Response.AddGVReponse;
 import vn.iotstar.finalproject.Response.OrderConfirmResponse;
 import vn.iotstar.finalproject.Response.OrderInforResponse;
 
@@ -31,5 +32,9 @@ public interface QuanTriVienAPI {
     @POST("api/manager/getOrderDetail")
     Call<OrderInforResponse>getChiTietDon(@Field("maDonHang") String maDonHang);
 
+
+    @FormUrlEncoded
+    @POST("api/manager/getOrderDetail")
+    Call<AddGVReponse>AddGiaoVien(@Field("action") String action,@Field("tenGiaoVien") String tenGV,@Field("sdt") String sdt,@Field("email") String email,@Field("cccd") String cccd,@Field("ngayKyKet") String ngaykk,@Field("chuyenmon") String chuyenmon);
 
 }
