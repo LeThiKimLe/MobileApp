@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "914331081394",
+    "project_id": "finalproject-27a30",
+    "storage_bucket": "finalproject-27a30.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914331081394:android:6799213364f73f0a4347ab",
+        "android_client_info": {
+          "package_name": "vn.iotstar.finalproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914331081394-2oec6d2b74judc9u5b2jovsf2grdjk8h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT88u3qp4ppnTtDqn_llvGBOeswEQb4ZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914331081394-2oec6d2b74judc9u5b2jovsf2grdjk8h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

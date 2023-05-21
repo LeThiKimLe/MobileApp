@@ -14,7 +14,7 @@ import vn.iotstar.finalproject.Dao.CartDao;
 import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.Storage.CartItem;
 
-@Database(entities = {CartItem.class}, version = 2)
+@Database(entities = {CartItem.class}, version = 2, exportSchema = true)
 public abstract class CartDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "cart.db";
     private static CartDatabase instance;
