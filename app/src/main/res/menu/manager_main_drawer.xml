@@ -12,15 +12,20 @@
             android:id="@+id/nav_mypage"
             android:icon="@drawable/ic_personal"
             android:title="Trang của tôi" />
-        <item
-            android:id="@+id/nav_cart"
-            android:icon="@drawable/ic_cart"
-            android:title="Giỏ hàng của tôi" />
 
         <item
-            android:id="@+id/nav_wallet"
+            android:id="@+id/nav_courseManage"
+            android:icon="@drawable/ic_course_mana"
+            android:title="Quản lý khóa học" />
+
+        <item
+            android:id="@+id/nav_teacherManage"
+            android:icon="@drawable/ic_teacher"
+            android:title="Quản lý giáo viên" />
+
+        <item
+            android:id="@+id/nav_billManage"
             android:icon="@drawable/ic_wallet"
-            android:title="Ví của tôi" />
-
+            android:title="Quản lý đơn hàng" />
     </group>
 </menu>

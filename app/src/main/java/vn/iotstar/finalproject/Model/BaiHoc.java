@@ -6,7 +6,20 @@ public class BaiHoc implements Serializable {
     private String maBaiHoc;
     private String maKhoaHoc;
     private String tenBaiHoc;
-    private String MoTaNoiDung;
+    private String moTaNoiDung;
+
+    public BaiHoc(String tenBaiHoc, String moTaNoiDung) {
+        this.tenBaiHoc = tenBaiHoc;
+        this.moTaNoiDung = moTaNoiDung;
+    }
+
+    public BaiHoc(String maBaiHoc,String tenBaiHoc, String moTaNoiDung) {
+        this.maBaiHoc= maBaiHoc;
+        this.tenBaiHoc = tenBaiHoc;
+        this.moTaNoiDung = moTaNoiDung;
+    }
+
+
 
     public String getMaBaiHoc() {
         return maBaiHoc;
@@ -33,17 +46,17 @@ public class BaiHoc implements Serializable {
     }
 
     public String getMoTaNoiDung() {
-        return MoTaNoiDung;
+        return moTaNoiDung;
     }
 
     public void setMoTaNoiDung(String moTaNoiDung) {
-        MoTaNoiDung = moTaNoiDung;
+        this.moTaNoiDung = moTaNoiDung;
     }
 
     public BaiHoc(String maBaiHoc, String maKhoaHoc, String tenBaiHoc, String moTaNoiDung) {
         this.maBaiHoc = maBaiHoc;
         this.maKhoaHoc = maKhoaHoc;
         this.tenBaiHoc = tenBaiHoc;
-        MoTaNoiDung = moTaNoiDung;
+        this.moTaNoiDung = moTaNoiDung;
     }
 }

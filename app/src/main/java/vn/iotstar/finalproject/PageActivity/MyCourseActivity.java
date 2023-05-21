@@ -1,10 +1,7 @@
 package vn.iotstar.finalproject.PageActivity;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,13 +16,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import vn.iotstar.finalproject.Adapter.KHAdapter;
-import vn.iotstar.finalproject.Adapter.KhoaHocAdapter;
 import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.Retrofit.GiaoVienAPI;
 import vn.iotstar.finalproject.Retrofit.KhoaHocAPI;
 import vn.iotstar.finalproject.Retrofit.RetrofitClient;
-import vn.iotstar.finalproject.Storage.SharedPrefManager;
-import vn.iotstar.finalproject.databinding.LoginLayoutBinding;
 import vn.iotstar.finalproject.databinding.MycourseLayoutBinding;
 
 public class MyCourseActivity extends AppCompatActivity {
@@ -129,11 +123,12 @@ public class MyCourseActivity extends AppCompatActivity {
         });
 
     }
-    public void goToCourseLession(String maKhoaHoc)
+    public void goToCourseLession(String maKhoaHoc, String tenKhoaHoc)
     {
         Intent intent = new Intent(MyCourseActivity.this, MyLessionActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("maKhoaHoc", maKhoaHoc);
+        bundle.putString("tenKhoaHoc", tenKhoaHoc);
         intent.putExtras(bundle);
         startActivity(intent);
 //        startActivityForResult(intent, 1);

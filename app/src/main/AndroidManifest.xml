@@ -24,46 +24,44 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".PageActivity.ConfirmOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".PageActivity.CourseRegisterActivity"
             android:exported="false" /> <!-- <activity -->
         <!-- android:name=".PageActivity.IntroActivity" -->
         <!-- android:exported="false" /> -->
-
         <activity
             android:name=".PageActivity.CartActivity"
             android:exported="false" />
         <activity
             android:name=".PageActivity.MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
-
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
         <activity
             android:name=".PageActivity.DetailCourseActivity"
             android:exported="false"
             android:theme="@style/Theme.FinalProject.NoActionBar" />
-
         <activity
             android:name=".PageActivity.BillActivity"
             android:exported="false"
             android:theme="@style/Theme.FinalProject.NoActionBar" />
-
         <activity
             android:name=".PageActivity.LoginActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
         <activity
             android:name=".PageActivity.LessionActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity><!-- <activity -->
-
+            android:theme="@style/Theme.FinalProject.NoActionBar" /> <!-- <activity -->
         <activity
             android:name=".PageActivity.MyCourseActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity><!-- <activity -->
+            android:theme="@style/Theme.FinalProject.NoActionBar" /> <!-- <activity -->
         <activity
             android:name=".PageActivity.MyLessionActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity><!-- <activity -->
+            android:theme="@style/Theme.FinalProject.NoActionBar" /> <!-- <activity -->
         <!-- android:name=".PageActivity.IntroActivity" -->
         <!-- android:exported="false" -->
         <!-- android:theme="@style/Theme.FinalProject.NoActionBar" -->
@@ -72,15 +70,13 @@
         <activity
             android:name=".PageActivity.RegisterActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
-
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
         <activity
             android:name=".PageActivity.TabHostActivity"
             android:exported="false"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
-
-        <activity android:name=".TabHost.CommentActivity"/>
-        <activity android:name=".TabHost.DocumentActivity"/>
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
+        <activity android:name=".TabHost.CommentActivity" />
+        <activity android:name=".TabHost.DocumentActivity" />
         <activity
             android:name=".TabHost.LectureActivity"
             android:exported="true">
@@ -92,12 +88,11 @@
 
                 <data
                     android:host="*"
+                    android:mimeType="video/mp4"
                     android:pathPattern=".*\\.mp4"
-                    android:scheme="content"
-                    android:mimeType="video/mp4" />
+                    android:scheme="content" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".PageActivity.IntroActivity"
             android:exported="true"

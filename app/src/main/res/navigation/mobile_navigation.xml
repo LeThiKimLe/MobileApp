@@ -28,4 +28,24 @@
         android:name="vn.iotstar.finalproject.sidebar.WalletFragment"
         android:label="Giỏ hàng của tôi"
         tools:layout="@layout/fragment_wallet" />
+
+    <fragment
+        android:id="@+id/nav_courseManage"
+        android:name="vn.iotstar.finalproject.sidebar.CourseManageFragment"
+        android:label="Quản lý khóa học"
+        tools:layout="@layout/fragment_course_manage"
+         />
+
+    <fragment
+        android:id="@+id/nav_teacherManage"
+        android:name="vn.iotstar.finalproject.sidebar.TeacherManageFragment"
+        android:label="Quản lý giáo viên"
+        tools:layout="@layout/fragment_teacher_manage" />
+
+    <fragment
+        android:id="@+id/nav_billManage"
+        android:name="vn.iotstar.finalproject.sidebar.BillManageFragment"
+        android:label="Quản lý đơn hàng"
+        tools:layout="@layout/fragment_bill_manage"
+         />
 </navigation>

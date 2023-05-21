@@ -112,12 +112,7 @@ public class CourseFragment extends Fragment {
         View root = binding.getRoot();
         HienSpinner();
         ClickTimKiem();
-
-
-
         return root;
-
-
     }
     private void HienSpinner(){
         spinner=binding.spinner;
@@ -146,14 +141,10 @@ public class CourseFragment extends Fragment {
                             else{
                                 LayKhoaHoc();
                             }
-
-
                         }
 
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
-
-
                         }
                     });
                 }else {
@@ -165,9 +156,6 @@ public class CourseFragment extends Fragment {
                 Log.d("logg",t.getMessage());
             }
         });
-
-
-
     }
     private void ClickTimKiem(){
         binding.searchBt.setOnClickListener(new View.OnClickListener() {
