@@ -30,7 +30,7 @@
                 tools:layout_editor_absoluteY="5dp">
 
                 <ImageView
-                    android:id="@+id/personalImg"
+                    android:id="@+id/personalImg1"
                     android:layout_width="59dp"
                     android:layout_height="55dp"
                     android:layout_marginTop="110dp"
@@ -38,7 +38,7 @@
                     android:scaleType="fitXY"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/state4" />
+                     />
 
                 <TextView
                     android:id="@+id/txtHi"
@@ -49,7 +49,7 @@
                     android:text="Chào bạn"
                     android:textColor="#103A6C"
                     android:textSize="16sp"
-                    app:layout_constraintEnd_toStartOf="@+id/personalImg"
+                    app:layout_constraintEnd_toStartOf="@+id/personalImg1"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
