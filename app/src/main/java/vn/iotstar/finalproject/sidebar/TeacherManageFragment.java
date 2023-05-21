@@ -1,14 +1,39 @@
 package vn.iotstar.finalproject.sidebar;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import vn.iotstar.finalproject.Adapter.SpinnerAdapter;
+import vn.iotstar.finalproject.Adapter.TeacherAdapter;
+import vn.iotstar.finalproject.Model.GiaoVien;
+import vn.iotstar.finalproject.Model.KhoaHoc;
+import vn.iotstar.finalproject.Model.KhoiLop;
+import vn.iotstar.finalproject.PageActivity.MainActivity;
 import vn.iotstar.finalproject.R;
+import vn.iotstar.finalproject.Retrofit.KhoaHocAPI;
+import vn.iotstar.finalproject.Retrofit.QuanTriVienAPI;
+import vn.iotstar.finalproject.Retrofit.RetrofitClient;
+import vn.iotstar.finalproject.databinding.FragmentTeacherManageBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,9 +47,23 @@ public class TeacherManageFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private Spinner spinner;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    QuanTriVienAPI apiService;
+
+    KhoaHocAPI apiService3;
+    TeacherAdapter adapter;
+    List<GiaoVien> listGiaoVien;
+
+    SpinnerAdapter spinnerAdapter;
+
+    List<KhoiLop> listkhoilop;
+
+    private FragmentTeacherManageBinding binding;
 
     public TeacherManageFragment() {
         // Required empty public constructor
@@ -61,6 +100,101 @@ public class TeacherManageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_teacher_manage, container, false);
+        binding = FragmentTeacherManageBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        loadTeacher();
+        HienSpinner();
+        return root;
     }
+
+    private void loadTeacher()
+    {
+        apiService = RetrofitClient.getRetrofit().create(QuanTriVienAPI.class);
+        apiService.getTeacher().enqueue(new Callback<List<GiaoVien>>() {
+            @Override
+            public void onResponse(Call<List<GiaoVien>> call, Response<List<GiaoVien>> response) {
+                if(response.isSuccessful()) {
+                    listGiaoVien = response.body();
+                    adapter = new TeacherAdapter(MainActivity.getInstance(),listGiaoVien);
+                    binding.recycle.setHasFixedSize(true);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.getInstance().getApplicationContext());
+                    binding.recycle.setLayoutManager(layoutManager);
+                    binding.recycle.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }else {
+                    int statusCode = response.code();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<GiaoVien>> call, Throwable t) {
+                Log.d("logg",t.getMessage());
+            }
+        });
+
+    }
+
+    private void HienSpinner(){
+        spinner=binding.spinner2;
+        apiService3 = RetrofitClient.getRetrofit().create(KhoaHocAPI.class);
+
+        apiService3.getKhoiLop().enqueue(new Callback<List<KhoiLop>>() {
+            @Override
+            public void onResponse(Call<List<KhoiLop>> call, Response<List<KhoiLop>> response) {
+                if(response.isSuccessful()) {
+                    listkhoilop = response.body();
+
+                    listkhoilop.add(0,new KhoiLop(null,"Tất cả"));
+
+                    spinnerAdapter = new SpinnerAdapter(MainActivity.getInstance().getApplication(),listkhoilop);
+                    spinner.setAdapter(spinnerAdapter);
+
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                            String maKhoi=listkhoilop.get(i).getMaKhoi();
+                            if(maKhoi!=null) {
+                                String lop= maKhoi.substring(2);
+                                TimTheoLop(lop);
+//                                LayKhoaHocTheoPhanMon(maKhoi);
+                            }
+                            else{
+                                loadTeacher();
+                            }
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                        }
+                    });
+                }else {
+                    int statusCode = response.code();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<KhoiLop>> call, Throwable t) {
+                Log.d("logg",t.getMessage());
+            }
+        });
+    }
+
+    private void TimTheoLop(String lop)
+    {
+//        List<GiaoVien> list_filter= new ArrayList<>();
+        for(int i=0;i<listGiaoVien.size();i++)
+        {
+            if (!(listGiaoVien.get(i).getChuoiChuyenMon()).contains(lop)) {
+                adapter.removeItem(listGiaoVien.get(i));
+                i--;
+            }
+            else
+            {
+            }
+        }
+//        listGiaoVien=list_filter;
+//        adapter.notifyDataSetChanged();
+    }
+
 }

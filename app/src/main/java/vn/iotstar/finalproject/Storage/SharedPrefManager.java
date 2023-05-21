@@ -85,7 +85,7 @@ public class SharedPrefManager {
         editor.putString(KEY_EMAIL, gv.getEmail());
         editor.putString(KEY_COOPDATE,formatter.format(gv.getNgayKyKet()));
         Gson gson = new Gson();
-        String json = gson.toJson(gv.getChuyen());
+        String json = gson.toJson(gv.getListPhanMon());
         editor.putString(KEY_PHANMON, json);
 //        Cách đọc kiểu Serieslizable
 //        Gson gson = new Gson();

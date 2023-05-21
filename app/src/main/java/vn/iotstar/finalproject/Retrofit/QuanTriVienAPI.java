@@ -31,4 +31,5 @@ public interface QuanTriVienAPI {
     @POST("api/manager/getOrderDetail")
     Call<OrderInforResponse>getChiTietDon(@Field("maDonHang") String maDonHang);
 
+
 }
