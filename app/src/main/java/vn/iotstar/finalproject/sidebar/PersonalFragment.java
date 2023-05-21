@@ -171,10 +171,9 @@ public class PersonalFragment extends Fragment {
         bindinggv.sdtBox.setText(String.valueOf(gv.getSdt()));
         bindinggv.diachiBox.setText(String.valueOf(gv.getDiaChi()));
         bindinggv.cccd.setText(String.valueOf(gv.getCccd()));
+        bindinggv.majorBox.setText(String.valueOf(gv.getChuoiChuyenMon()));
         // TrangThai(tt);
     }
-
-
 
     boolean tt = false;
     public void TrangThai( boolean tt)

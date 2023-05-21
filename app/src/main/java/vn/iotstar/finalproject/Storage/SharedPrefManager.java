@@ -88,9 +88,7 @@ public class SharedPrefManager {
         String json = gson.toJson(gv.getListPhanMon());
         editor.putString(KEY_PHANMON, json);
 //        Cách đọc kiểu Serieslizable
-//        Gson gson = new Gson();
-//        String json = mPrefs.getString("SerializableObject", "");
-//        yourSerializableObject = gson.fromJson(json, YourSerializableObject.class);
+//
         editor.apply();
     }
 

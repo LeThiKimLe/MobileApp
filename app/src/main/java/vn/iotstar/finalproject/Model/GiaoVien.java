@@ -1,6 +1,10 @@
 package vn.iotstar.finalproject.Model;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -115,7 +119,13 @@ public class GiaoVien implements Serializable {
         this.diaChi = diaChi;
         this.ngayKyKet = ngayKyKet;
         this.chuyenmon = chuyenmon;
+        this.listPhanMon=getListFromJson();
         this.email = email;
+    }
+    private List<PhanMon> getListFromJson()
+    {
+        Type listType = new TypeToken<List<PhanMon>>() {}.getType();
+        return new Gson().fromJson(this.chuyenmon, listType);
     }
 
     public GiaoVien(String maGiaoVien, String tenGiaoVien, String sdt, String cccd, String diaChi, long ngayKyKet, String chuyenmon, String email, String listKhoaHocs) {
