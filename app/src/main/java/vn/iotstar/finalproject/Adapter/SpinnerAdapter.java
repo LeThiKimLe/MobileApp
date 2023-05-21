@@ -26,7 +26,6 @@ public class SpinnerAdapter extends BaseAdapter{
     public SpinnerAdapter(Context context, List<KhoiLop> khoilop) {
         this.context = context;
         this.khoilop = khoilop;
-
         inflter = (LayoutInflater.from(context));
     }
 
@@ -50,9 +49,7 @@ public class SpinnerAdapter extends BaseAdapter{
 
         View rootview=inflter.inflate(R.layout.rowpinner_layout,null);
         TextView tenkhoi=rootview.findViewById(R.id.tenkhoi);
-
         tenkhoi.setText(khoilop.get(i).getTenKhoi());
-
         return  rootview;
 
     }

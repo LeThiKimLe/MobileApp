@@ -27,4 +27,9 @@ public class PhanMon implements Serializable {
         this.maPhanMon = maPhanMon;
         this.tenPhanMon = tenPhanMon;
     }
+
+    @Override
+    public String toString()  {
+        return this.getTenPhanMon();
+    }
 }

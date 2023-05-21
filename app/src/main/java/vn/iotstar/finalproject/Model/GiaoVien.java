@@ -152,4 +152,9 @@ public class GiaoVien implements Serializable {
         }
         return kQua;
     }
+
+    @Override
+    public String toString()  {
+        return this.getTenGiaoVien();
+    }
 }

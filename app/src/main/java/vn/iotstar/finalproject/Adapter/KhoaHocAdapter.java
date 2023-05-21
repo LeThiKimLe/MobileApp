@@ -82,9 +82,7 @@ public class KhoaHocAdapter extends RecyclerView.Adapter<KhoaHocAdapter.MyViewHo
                 @Override
                 public void onClick(View view) {
 //                    Toast.makeText(context,"Bạn đã chọn Khóa học", Toast.LENGTH_SHORT).show();
-                   MainActivity.getInstance().goToCourseDetail((String) maKhoa.getText());
-
-
+                   MainActivity.getInstance().goToCourseDetail(array.get(getAdapterPosition()).getMaKhoaHoc());
                 }
             });
         }

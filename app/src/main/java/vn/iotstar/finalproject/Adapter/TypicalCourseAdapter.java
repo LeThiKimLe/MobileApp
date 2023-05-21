@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
 import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.Response.StatisticResponse;
@@ -67,7 +68,7 @@ public class TypicalCourseAdapter extends RecyclerView.Adapter<TypicalCourseAdap
                 @Override
                 public void onClick(View view) {
 //                    Toast.makeText(context,"Bạn đã chọn product", Toast.LENGTH_SHORT).show();
-                    MainActivity.getInstance().goToCourseDetail((String) courseId.getText());
+                    MainActivity.getInstance().goToCourseDetail(array.get(getAdapterPosition()).getMaKhoaHoc());
                 }
             });
         }

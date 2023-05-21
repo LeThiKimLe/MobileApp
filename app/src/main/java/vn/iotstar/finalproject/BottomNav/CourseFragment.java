@@ -62,7 +62,6 @@ public class CourseFragment extends Fragment {
     List<KhoaHoc> KhoaHocList,KhoaHocList2;
     SpinnerAdapter spinnerAdapter;
 
-
     KhoaHocAdapter KhoaHocAdapter;
 
     KhoaHocAPI apiService,apiService2,apiService3;
@@ -96,11 +95,6 @@ public class CourseFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
-
-
-
-
         }
     }
 

@@ -311,6 +311,15 @@ public class MainActivity extends AppCompatActivity {
                 kqActivity="";
             }
         }
+        if(requestCode == 2) {
+            if(resultCode == Activity.RESULT_OK) {
+                // Nhận dữ liệu từ Intent trả về
+                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_courseManage);
+                fragment.onActivityResult(requestCode, resultCode, data);
+            } else {
+
+            }
+        }
     }
 
 
