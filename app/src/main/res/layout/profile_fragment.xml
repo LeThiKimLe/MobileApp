@@ -175,7 +175,7 @@
         </TableLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/image2"
+            android:id="@+id/profilePic"
             android:layout_width="107dp"
             android:layout_height="97dp"
             android:layout_marginStart="16dp"

@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -125,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
         userName=(TextView)headerView.findViewById(R.id.personName);
         userEmail = (TextView) headerView.findViewById(R.id.personalEmail);
         imageViewprofile = (ImageView) headerView.findViewById(R.id.personalImg);
+
     }
 
     public void setHocVienInfor()
@@ -133,7 +135,9 @@ public class MainActivity extends AppCompatActivity {
         userName.setText(hocVien.getTenHocVien());
         userEmail.setText(hocVien.getEmail());
         userId=hocVien.getMaHocVien();
-        Glide.with(getApplicationContext()).load(hocVien.getImage()).into(imageViewprofile);
+        Glide.with(binding.getRoot()).load(hocVien.getImage()).into(imageViewprofile);
+//        Log.d("HocVien", hocVien.getImage().toString());
+//        Glide.with(MainActivity.this).load(hocVien.getImage()).into(binding.);
 
     }
 
