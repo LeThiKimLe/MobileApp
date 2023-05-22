@@ -54,14 +54,12 @@ public class MyCourseInforAdapter extends RecyclerView.Adapter<MyCourseInforAdap
         holder.tenbh.setText(product.getTenBaiHoc());
         holder.lessionid.setText(product.getMaBaiHoc());
         holder.lessonDesc.setText(product.getMoTaNoiDung());
-        if (!this.isHocVien)
-            holder.showContent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    MainActivity.getInstance().addTabHost(product.getTenBaiHoc(),product.getMaBaiHoc());
-                }
-            });
-
+        holder.showContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.getInstance().addTabHost(product.getTenBaiHoc(),product.getMaBaiHoc());
+            }
+        });
         if (!this.isHocVien)
             holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
