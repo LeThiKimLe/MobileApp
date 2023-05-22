@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -35,10 +36,8 @@ import vn.iotstar.finalproject.databinding.ActivityMain2Binding;
 import vn.iotstar.finalproject.databinding.CourseInforLayoutBinding;
 
 public class DetailCourseActivity extends AppCompatActivity {
-
     String courseId;
     GeneralAPI apiService;
-
     KhoaHocAPI apiService2;
 
     KhoaHoc khoaHoc;
@@ -50,7 +49,6 @@ public class DetailCourseActivity extends AppCompatActivity {
     CartItem new_item;
 
     FeedbackAdapter adapter;
-
     List<Feedback> list_feed;
     String maKhoaHoc;
 
@@ -65,14 +63,47 @@ public class DetailCourseActivity extends AppCompatActivity {
         }
         GetCourseInfor();
         GetTeacherInfor();
+        MofidyLayout();
         if (MainActivity.role.equals("HV")) {
-            binding.addToCartBtn.setVisibility(View.VISIBLE);
             addCartBtn();
         }
-        else
-            binding.addToCartBtn.setVisibility(View.INVISIBLE);
+        else if (MainActivity.role.equals("QTV"))
+            goToEditActivity();
         getRating();
         HienBaiHoc();
+    }
+
+    private void MofidyLayout()
+    {
+        LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 0);
+        params1.weight = 0f;
+
+        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 0);
+        params2.weight=1.5f;
+
+        if (MainActivity.role.equals("HV"))
+        {
+            binding.addToCartBtn.setVisibility(View.VISIBLE);
+            binding.addToCartBtn.setLayoutParams(params2);
+            binding.editKhoaHoc.setLayoutParams(params1);
+            binding.editKhoaHoc.setVisibility(View.INVISIBLE);
+        }
+        else if (MainActivity.role.equals("GV"))
+        {
+            binding.addToCartBtn.setVisibility(View.INVISIBLE);
+            binding.addToCartBtn.setLayoutParams(params1);
+            binding.editKhoaHoc.setLayoutParams(params1);
+            binding.editKhoaHoc.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            binding.addToCartBtn.setVisibility(View.INVISIBLE);
+            binding.addToCartBtn.setLayoutParams(params1);
+            binding.editKhoaHoc.setLayoutParams(params2);
+            binding.editKhoaHoc.setVisibility(View.VISIBLE);
+        }
     }
 
     private void GetCourseInfor() {
@@ -164,7 +195,6 @@ public class DetailCourseActivity extends AppCompatActivity {
         bundle.putString("maKhoaHoc", maKhoaHoc);
         intent.putExtras(bundle);
         startActivity(intent);
-
     }
 
     private boolean isCheckExist(@NonNull KhoaHoc kH){
@@ -198,4 +228,34 @@ public class DetailCourseActivity extends AppCompatActivity {
             }
         });
     }
+    private void goToEditActivity()
+    {
+        binding.editKhoaHoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailCourseActivity.this, EditCourseActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("khoaHoc", khoaHoc);
+                intent.putExtras(bundle);
+//                startActivity(intent);
+                startActivityForResult(intent, 1);
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK) {
+                // Nhận dữ liệu từ Intent trả về
+                final String result = data.getStringExtra(EditCourseActivity.KQ_EDIT);
+                GetCourseInfor();
+            } else {
+
+            }
+        }
+    }
+
 }

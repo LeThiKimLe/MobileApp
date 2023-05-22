@@ -16,6 +16,7 @@ import vn.iotstar.finalproject.Model.KhoiLop;
 import vn.iotstar.finalproject.Model.PhanMon;
 import vn.iotstar.finalproject.Response.AddGVReponse;
 import vn.iotstar.finalproject.Response.GVReponse;
+import vn.iotstar.finalproject.Response.KhoaHocResponse;
 import vn.iotstar.finalproject.Response.OrderConfirmResponse;
 import vn.iotstar.finalproject.Response.OrderInforResponse;
 import vn.iotstar.finalproject.Response.QTVReponse;
@@ -36,6 +37,13 @@ public interface QuanTriVienAPI {
     @POST("api/manager/getOrderDetail")
     Call<OrderInforResponse>getChiTietDon(@Field("maDonHang") String maDonHang);
 
+    @FormUrlEncoded
+    @POST("api/manager/getTeacherByPhanMon")
+    Call<List<GiaoVien>>getTeacherByPhanMon(@Field("maPhanMon") String maPhanMon);
+
+    @FormUrlEncoded
+    @POST("api/manager/setCourse")
+    Call<KhoaHocResponse>updateCourse(@Field("action") String action, @Field("maKhoaHoc") String maKhoaHoc, @Field("tenKhoaHoc") String tenKhoaHoc, @Field("phanMon") String phanMon, @Field("moTa") String moTa, @Field("giaTien") String giaTien, @Field("giaoVien") String giaoVien, @Field("ngayCapNhat") String ngayCapNhat);
 
     @FormUrlEncoded
     @POST("api/manager/setTeacher")

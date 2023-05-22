@@ -80,18 +80,28 @@
                     android:layout_weight="2"
                     android:gravity="center"
                     android:paddingHorizontal="20dp"
-                    android:text="Mô tả: "
+                    android:text="Khóa học hóa nhân văn"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/courseDescript"
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="3.5"
-                    android:padding="10dp"
-                    android:text="TextView"
-                    android:textSize="16sp" />
+                    android:fillViewport="true">
+
+                    <TextView
+                        android:id="@+id/courseDescript"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3.5"
+                        android:drawableStart="@drawable/ic_notify"
+                        android:drawablePadding="5dp"
+                        android:padding="10dp"
+                        android:paddingStart="20dp"
+                        android:text="Nội dung mô tả"
+                        android:textSize="16sp" />
+                </androidx.core.widget.NestedScrollView>
 
                 <TextView
                     android:id="@+id/lessonNum"
@@ -227,9 +237,18 @@
                     android:layout_width="200dp"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
-                    android:layout_weight="1.5"
+                    android:layout_weight="0"
                     android:background="@drawable/border_15_stroke"
                     android:text="Thêm vào giỏ hàng" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/editKhoaHoc"
+                    android:layout_width="200dp"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/border_15_stroke"
+                    android:text="Sửa thông tin khóa học" />
 
             </LinearLayout>
 

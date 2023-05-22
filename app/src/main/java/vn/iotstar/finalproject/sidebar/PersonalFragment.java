@@ -2,10 +2,18 @@ package vn.iotstar.finalproject.sidebar;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -21,6 +29,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.internal.Constants;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -54,9 +75,13 @@ import vn.iotstar.finalproject.ui.home.HomeFragment;
  */
 public class PersonalFragment extends Fragment {
 
-    EditText id, userName,name, userEmail, sdt, date;
+    EditText id, userName, name, userEmail, sdt, date;
     Button Update, Refuse;
     ImageView update_btn;
+    Uri imageUri;
+    String myDownloadImage = null;
+    FirebaseStorage storage;
+    StorageReference storageReference;
     //CircleImageView imageViewprofile;
     private static PersonalFragment instance;
 
@@ -113,6 +138,8 @@ public class PersonalFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
     }
 
     @Override
@@ -153,8 +180,8 @@ public class PersonalFragment extends Fragment {
         update();
         return root;
     }
-    public void loadData()
-    {
+
+    public void loadData() {
         HocVien hocVien = MainActivity.hocVien;
         binding.idBox.setText(String.valueOf(hocVien.getMaHocVien()));
         binding.usernameBox.setText(String.valueOf(hocVien.getTenHocVien()));
@@ -162,6 +189,11 @@ public class PersonalFragment extends Fragment {
         binding.sdtBox.setText(String.valueOf(hocVien.getSdt()));
         binding.dateBox.setText(String.valueOf(hocVien.getNgaySinh()));
         binding.tvName.setText(String.valueOf(hocVien.getTenHocVien()));
+        if (hocVien.getImage() != null) {
+            myDownloadImage = hocVien.getImage();
+            binding.profilePic.setImageURI(Uri.parse(hocVien.getImage()));
+        }
+        Glide.with(getActivity().getApplicationContext()).load(hocVien.getImage()).into(binding.profilePic);
         TrangThai(tt);
     }
     public void loadDataqtv()
@@ -189,8 +221,8 @@ public class PersonalFragment extends Fragment {
     }
 
     boolean tt = false;
-    public void TrangThai( boolean tt)
-    {
+
+    public void TrangThai(boolean tt) {
         binding.usernameBox.setEnabled(tt);
         binding.emailBox.setEnabled(tt);
         binding.sdtBox.setEnabled(tt);
@@ -216,9 +248,10 @@ public class PersonalFragment extends Fragment {
 
 
     }
+
     int vitri = -1;
-    public void Modify()
-    {
+
+    public void Modify() {
         binding.modifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -236,6 +269,31 @@ public class PersonalFragment extends Fragment {
                         }
                     });
                 }
+            }
+        });
+
+        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == -1) {
+                            Intent data = result.getData();
+                            imageUri = data.getData();
+                            binding.profilePic.setImageURI(imageUri);
+                            uploadPicture();
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), "No Image Selected", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
+        binding.profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                activityResultLauncher.launch(intent);
             }
         });
 
@@ -287,46 +345,96 @@ public class PersonalFragment extends Fragment {
 
     }
 
-    public void update(){
+    private void uploadPicture() {
+        final ProgressDialog pd = new ProgressDialog(getActivity());
+        pd.setTitle("Uploading Image ...");
+        pd.show();
+
+        final String randomKey = UUID.randomUUID().toString();
+        StorageReference fileRef = storageReference.child("image/*" + randomKey);
+
+        UploadTask uploadTask = fileRef.putFile(imageUri);
+
+        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                //change made here
+                return fileRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    myDownloadImage = downloadUri.toString();
+                }
+            }
+        });
+        uploadTask
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        pd.dismiss();
+                        Toast.makeText(getActivity().getApplicationContext(), "Image Uploaded", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        pd.dismiss();
+                        Toast.makeText(getActivity().getApplicationContext(), "Failed To Upload", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                        pd.setMessage("Percentage: " + (int) progressPercent + "%");
+                    }
+                });
+    }
+
+    public void update() {
         binding.updatebtn.setOnClickListener(view -> {
             String maUser = binding.idBox.getText().toString();
             String name = binding.usernameBox.getText().toString();
             String email = binding.emailBox.getText().toString();
             String sdt = binding.sdtBox.getText().toString();
             String ngaysinh = binding.dateBox.getText().toString();
-            String images = binding.image2.toString();
+            String image = myDownloadImage;
+            Log.d("Image Download", image);
+
+
             tt = false;
             TrangThai(tt);
 
-            hvApi.updateProfile(maUser,name,ngaysinh,sdt,email,images).enqueue(new Callback<HocVienReponse>(){
+            hvApi.updateProfile(maUser, name, ngaysinh, sdt, email, image).enqueue(new Callback<HocVienReponse>() {
                 @Override
-                public void onResponse(Call<HocVienReponse> call, Response<HocVienReponse> response)
-                {
-                    if (response.isSuccessful())
-                    {
+                public void onResponse(Call<HocVienReponse> call, Response<HocVienReponse> response) {
+                    if (response.isSuccessful()) {
                         hvReponse = response.body();
-                        if (hvReponse.getResult().compareTo("success")==0) {
-                            Toast.makeText(MainActivity.getInstance(),"Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        if (hvReponse.getResult().compareTo("success") == 0) {
+                            Toast.makeText(MainActivity.getInstance(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MainActivity.getInstance(), "Cập nhật dữ liệu chưa thành công", Toast.LENGTH_SHORT).show();
                         }
-                        else
-                        {
-                            Toast.makeText(MainActivity.getInstance(),"Cập nhật dữ liệu chưa thành công", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else {
-                        Toast.makeText(MainActivity.getInstance(),"Không kết nối", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.getInstance(), "Không kết nối", Toast.LENGTH_SHORT).show();
 
                     }
                 }
 
                 @Override
-                public void onFailure(Call<HocVienReponse> call, Throwable t)
-                {
+                public void onFailure(Call<HocVienReponse> call, Throwable t) {
                     Toast.makeText(MainActivity.getInstance(), t.getMessage(), Toast.LENGTH_SHORT).show();
                     Log.d(TAG, t.getMessage());
                 }
             });
-        } );
+        });
     }
     public void updateGV(){
         bindinggv.updatebtn.setOnClickListener(view -> {

@@ -16,7 +16,7 @@ import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.Storage.CartItem;
 import vn.iotstar.finalproject.Storage.NoticeRecord;
 
-@Database(entities = {NoticeRecord.class}, version = 1)
+@Database(entities = {NoticeRecord.class}, version = 1, exportSchema = true)
 public abstract class NoticeDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "notice.db";
     private static NoticeDatabase instance;

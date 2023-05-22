@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PageActivity.EditCourseActivity">
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/backcolor"
+        android:paddingVertical="10dp"
+        android:text="Sửa thông tin khóa học"
+        android:textAlignment="center"
+        android:textColor="#0C0C0C"
+        android:textSize="18sp"
+        android:textStyle="bold"
+         />
+
+    <TextView
+        android:id="@+id/maKhTitle"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView21"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:text="Mã khóa học"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/maKhTitle"
+        android:layout_alignStart="@id/maKhTitle"
+        android:layout_marginTop="20dp"
+        android:text="Tên khóa học"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameKH"
+        android:layout_alignStart="@id/textView28"
+        android:layout_marginTop="20dp"
+        android:text="Mô tả khóa học"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/maKH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/maKhTitle"
+        android:layout_marginStart="100dp"
+        android:layout_toEndOf="@id/maKhTitle"
+        android:text="TextView"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/nameKH"
+        android:layout_width="359dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/textView28"
+        android:layout_alignStart="@id/textView28"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="Tên khóa học"
+        android:inputType="textMultiLine|textPersonName" />
+
+    <EditText
+        android:id="@+id/descKH"
+        android:layout_width="359dp"
+        android:layout_height="188dp"
+        android:layout_below="@id/textView30"
+        android:layout_alignStart="@id/textView30"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="Mô tả nội dung khóa học"
+        android:inputType="textMultiLine|textPersonName" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descKH"
+        android:layout_alignStart="@id/descKH"
+        android:layout_marginTop="20dp"
+        android:text="Giá khóa học: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/priceKH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/textView32"
+        android:layout_marginStart="30dp"
+        android:layout_toEndOf="@id/textView32"
+        android:ems="10"
+        android:hint="Giá khóa học"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView32"
+        android:layout_alignStart="@id/textView32"
+        android:layout_marginTop="20dp"
+        android:text="Phân môn: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinnerPhanMon"
+        android:layout_width="225dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/textView33"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/textView33"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView33"
+        android:layout_alignStart="@id/textView33"
+        android:layout_marginTop="20dp"
+        android:text="Giáo viên: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinnerGiaoVien"
+        android:layout_width="225dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/textView34"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/textView34" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/border_15_stroke"
+        android:text="Lưu thông tin"
+        android:textSize="16sp" />
+</RelativeLayout>

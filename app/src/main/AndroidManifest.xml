@@ -24,6 +24,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".PageActivity.EditCourseActivity"
+            android:exported="false" />
+        <activity
             android:name=".PageActivity.ConfirmOrderActivity"
             android:exported="false" />
         <activity
