@@ -6,6 +6,15 @@ public class PhanMon implements Serializable {
     private String maPhanMon;
 
     private String tenPhanMon;
+    private boolean check;
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
 
     public String getMaPhanMon() {
         return maPhanMon;

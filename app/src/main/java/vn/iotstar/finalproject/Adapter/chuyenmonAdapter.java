@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ import vn.iotstar.finalproject.R;
 public class chuyenmonAdapter extends RecyclerView.Adapter<chuyenmonAdapter.MyViewHolder>{
         Context context;
         List<PhanMon> array;
+
 
     public chuyenmonAdapter(Context context, List<PhanMon> array) {
         this.context = context;
@@ -43,8 +46,22 @@ public class chuyenmonAdapter extends RecyclerView.Adapter<chuyenmonAdapter.MyVi
     public void onBindViewHolder(@NonNull chuyenmonAdapter.MyViewHolder holder, int position) {
         PhanMon product= array.get(position);
         holder.pm.setText(product.getTenPhanMon());
-        holder.pm.setText(product.getMaPhanMon());
+        holder.mapm.setText(product.getMaPhanMon());
+        holder.pm.setOnCheckedChangeListener(null);
+        holder.pm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                {
+                    product.setCheck(true);
 
+                }
+                else {
+                    product.setCheck(false);
+
+                }
+            }
+        });
     }
 
 
@@ -59,11 +76,12 @@ public class chuyenmonAdapter extends RecyclerView.Adapter<chuyenmonAdapter.MyVi
 
 
 
+
         public MyViewHolder(@NonNull View itemView)
         {
             super(itemView);
             pm = (CheckBox) itemView.findViewById(R.id.checkBox);
-            mapm=(TextView) itemView.findViewById(R.id.mapm);
+            mapm=(TextView) itemView.findViewById(R.id.textView28);
         }
     }
 }

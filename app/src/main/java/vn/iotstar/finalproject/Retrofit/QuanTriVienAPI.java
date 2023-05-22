@@ -47,7 +47,7 @@ public interface QuanTriVienAPI {
 
     @FormUrlEncoded
     @POST("api/manager/setTeacher")
-    Call<AddGVReponse>AddGiaoVien(@Field("action") String action,@Field("tenGiaoVien") String tenGV,@Field("sdt") String sdt,@Field("email") String email,@Field("cccd") String cccd,@Field("ngayKyKet") String ngaykk,@Field("chuyenmon") String chuyenmon);
+    Call<AddGVReponse>AddGiaoVien(@Field("action") String action,@Field("tenGiaoVien") String tenGV,@Field("sdt") String sdt,@Field("email") String email,@Field("cccd") String cccd,@Field("diaChi") String diachi,@Field("ngayKyKet") String ngaykk,@Field("chuyenmon") String chuyenmon);
 
     @GET("api/general/subject")
     Call<List<PhanMon>> getPhanMon();

@@ -102,7 +102,7 @@
                             android:layout_height="match_parent"
                             android:ems="10"
                             android:inputType="textPersonName"
-                            android:text="Name"
+                            android:hint="Nhập tên"
                             android:textSize="20sp" />
 
                     </TableRow>
@@ -129,7 +129,7 @@
                             android:id="@+id/diachi_box"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView"
+                            android:hint="Nhập địa chỉ"
                             android:textSize="20sp" />
                     </TableRow>
 
@@ -147,7 +147,7 @@
                             android:layout_marginHorizontal="20dp"
                             android:layout_marginStart="15dp"
                             android:layout_marginEnd="30dp"
-                            android:text="SĐT"
+                            android:hint="SĐT"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -155,7 +155,7 @@
                             android:id="@+id/sdt_box"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView"
+                            android:hint="Nhập số điện thoại"
                             android:textSize="20sp" />
                     </TableRow>
 
@@ -181,10 +181,9 @@
                             android:id="@+id/cccd"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView"
+                            android:hint="Nhập CCCD"
                             android:textSize="20sp" />
                     </TableRow>
-
                     <TableRow
                         android:id="@+id/Email_row"
                         android:layout_width="match_parent"
@@ -207,9 +206,37 @@
                             android:id="@+id/email_box"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView"
+                            android:hint="Nhập email"
                             android:textSize="20sp" />
                     </TableRow>
+                    <TableRow
+                        android:id="@+id/ngaykk"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="10sp"
+                        android:gravity="clip_horizontal">
+
+                        <ImageButton
+                            android:id="@+id/ngaykk_bt"
+                            android:layout_width="20dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="110dp"
+                            app:srcCompat="@drawable/ngaysinh_bt"
+                            android:background="@android:color/transparent"
+                            android:scaleType="fitXY" />
+
+                        <EditText
+                            android:id="@+id/ngaykk_box"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="Chọn ngày ký kết"
+                            android:textSize="20sp" />
+                    </TableRow>
+
+
+
 
                     <TableRow
                         android:id="@+id/major_row"

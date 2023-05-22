@@ -1,7 +1,9 @@
 package vn.iotstar.finalproject.PageActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,16 +24,19 @@ import vn.iotstar.finalproject.Retrofit.GiaoVienAPI;
 import vn.iotstar.finalproject.Retrofit.KhoaHocAPI;
 import vn.iotstar.finalproject.Retrofit.QuanTriVienAPI;
 import vn.iotstar.finalproject.Retrofit.RetrofitClient;
+import vn.iotstar.finalproject.databinding.AddgiaovienLayoutBinding;
 import vn.iotstar.finalproject.databinding.ListChuyenmonBinding;
 import vn.iotstar.finalproject.databinding.MycourseLayoutBinding;
 
 public class AddMaijorActivity extends AppCompatActivity {
     private ListChuyenmonBinding binding;
+
     QuanTriVienAPI apiService;
 
     List<PhanMon> PMList;
     RecyclerView recyclerView;
     chuyenmonAdapter cmAdapter;
+    String pm="";
 
 
 
@@ -43,6 +48,7 @@ public class AddMaijorActivity extends AppCompatActivity {
         binding = ListChuyenmonBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         GetListPhanMon();
+        LaymaPM();
 
     }
 
@@ -60,7 +66,7 @@ public class AddMaijorActivity extends AppCompatActivity {
 
                     cmAdapter = new chuyenmonAdapter(AddMaijorActivity.this, PMList);
                     recyclerView.setHasFixedSize(true);
-                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(AddMaijorActivity.this, 2);
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(AddMaijorActivity.this.getApplicationContext(), 1);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setAdapter(cmAdapter);
                     cmAdapter.notifyDataSetChanged();
@@ -75,6 +81,39 @@ public class AddMaijorActivity extends AppCompatActivity {
                 Log.d("logg", t.getMessage());
             }
         });
+    }
+    public void LaymaPM()
+    {
+
+        binding.btnCommit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                for(int i=0;i<PMList.size();i++)
+                {
+
+                    if(PMList.get(i).isCheck())
+                    {
+                        pm=pm+PMList.get(i).getMaPhanMon().trim()+", ";
+
+                    }
+
+
+                }
+                Intent intent = new Intent(AddMaijorActivity.this, AddTeacherActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("chuyen", pm);
+
+
+                intent.putExtras(bundle);
+                startActivity(intent);
+                //Toast.makeText(AddMaijorActivity.this, pm, Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+
     }
 
 
