@@ -54,6 +54,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:20.0.1'
     implementation 'com.google.firebase:firebase-database-ktx:20.2.1'
     implementation 'com.google.firebase:firebase-storage-ktx:20.2.0'
+    implementation 'com.google.firebase:firebase-database:20.0.4'
     annotationProcessor "androidx.room:room-compiler:2.5.1"
     //Load ảnh với Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
