@@ -34,8 +34,12 @@ import vn.iotstar.finalproject.PageActivity.LoginActivity;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
 import vn.iotstar.finalproject.PageActivity.RegisterActivity;
 import vn.iotstar.finalproject.R;
+import vn.iotstar.finalproject.Response.GVReponse;
 import vn.iotstar.finalproject.Response.HocVienReponse;
+import vn.iotstar.finalproject.Response.QTVReponse;
+import vn.iotstar.finalproject.Retrofit.GiaoVienAPI;
 import vn.iotstar.finalproject.Retrofit.HocVienApi;
+import vn.iotstar.finalproject.Retrofit.QuanTriVienAPI;
 import vn.iotstar.finalproject.Storage.SharedPrefManager;
 import vn.iotstar.finalproject.databinding.GvProfilelayoutBinding;
 import vn.iotstar.finalproject.databinding.MainLayoutBinding;
@@ -67,8 +71,12 @@ public class PersonalFragment extends Fragment {
 
 
     HocVienApi hvApi;
+    GiaoVienAPI gvApi;
+    QuanTriVienAPI quanTriVienAPI;
 
     HocVienReponse hvReponse;
+    GVReponse gvReponse;
+    QTVReponse qtvReponse;
 
     private ProfileFragmentBinding binding;
     private QtvProfilelayoutBinding bindingqtv;
@@ -114,12 +122,15 @@ public class PersonalFragment extends Fragment {
         View root;
 
         role=MainActivity.role;
+        initComponents();
 
         if(role.equals("GV"))
         {
             bindinggv = GvProfilelayoutBinding.inflate(inflater, container, false);
             root = bindinggv.getRoot();
             loadDatagv();
+            ModifyGV();
+            updateGV();
             return  root;
 
         }
@@ -129,12 +140,14 @@ public class PersonalFragment extends Fragment {
 
             root = bindingqtv.getRoot();
             loadDataqtv();
+            ModifyQTV();
+            updateQTV();
             return  root;
 
         }
         binding = ProfileFragmentBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-        initComponents();
+
         loadData();
         Modify();
         update();
@@ -160,7 +173,7 @@ public class PersonalFragment extends Fragment {
         bindingqtv.sdtBox.setText(String.valueOf(qtv.getSdt()));
         bindingqtv.diachiBox.setText(String.valueOf(qtv.getDiaChi()));
         bindingqtv.cccd.setText(String.valueOf(qtv.getCccd()));
-        //TrangThai(tt);
+        TrangThaiQTV(tt);
     }
     public void loadDatagv()
     {
@@ -172,7 +185,7 @@ public class PersonalFragment extends Fragment {
         bindinggv.diachiBox.setText(String.valueOf(gv.getDiaChi()));
         bindinggv.cccd.setText(String.valueOf(gv.getCccd()));
         bindinggv.majorBox.setText(String.valueOf(gv.getChuoiChuyenMon()));
-        // TrangThai(tt);
+        TrangThaiGV(tt);
     }
 
     boolean tt = false;
@@ -182,6 +195,26 @@ public class PersonalFragment extends Fragment {
         binding.emailBox.setEnabled(tt);
         binding.sdtBox.setEnabled(tt);
         binding.dateBox.setEnabled(tt);
+
+    }
+    public void TrangThaiGV( boolean tt)
+    {
+        bindinggv.usernameBox.setEnabled(tt);
+        bindinggv.emailBox.setEnabled(tt);
+        bindinggv.sdtBox.setEnabled(tt);
+        bindinggv.cccd.setEnabled(tt);
+        bindinggv.diachiBox.setEnabled(tt);
+
+    }
+    public void TrangThaiQTV( boolean tt)
+    {
+        bindingqtv.usernameBox.setEnabled(tt);
+        bindingqtv.emailBox.setEnabled(tt);
+        bindingqtv.sdtBox.setEnabled(tt);
+        bindingqtv.cccd.setEnabled(tt);
+        bindingqtv.diachiBox.setEnabled(tt);
+
+
     }
     int vitri = -1;
     public void Modify()
@@ -196,6 +229,52 @@ public class PersonalFragment extends Fragment {
                     final int rowIndex = i;
 
                     TableRow tableRow = (TableRow) binding.tableLayout.getChildAt(i);
+                    tableRow.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+    public void ModifyGV()
+    {
+        bindinggv.modifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tt = true;
+                TrangThaiGV(tt);
+
+                for (int i = 0; i < bindinggv.tableLayout.getChildCount(); i++) {
+                    final int rowIndex = i;
+
+                    TableRow tableRow = (TableRow) bindinggv.tableLayout.getChildAt(i);
+                    tableRow.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+    public void ModifyQTV()
+    {
+        bindingqtv.modifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tt = true;
+                TrangThaiQTV(tt);
+
+                for (int i = 0; i < bindingqtv.tableLayout.getChildCount(); i++) {
+                    final int rowIndex = i;
+
+                    TableRow tableRow = (TableRow) bindingqtv.tableLayout.getChildAt(i);
                     tableRow.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -249,9 +328,97 @@ public class PersonalFragment extends Fragment {
             });
         } );
     }
+    public void updateGV(){
+        bindinggv.updatebtn.setOnClickListener(view -> {
+            String maGV = bindinggv.idBox.getText().toString();
+            String name = bindinggv.usernameBox.getText().toString();
+            String email = bindinggv.emailBox.getText().toString();
+            String sdt = bindinggv.sdtBox.getText().toString();
+            String cccd = bindinggv.cccd.getText().toString();
+
+            String diachi = bindinggv.diachiBox.getText().toString();
+            tt = false;
+            TrangThaiGV(tt);
+
+            gvApi.updateGV(maGV,name,sdt,email,diachi,cccd).enqueue(new Callback<GVReponse>(){
+                @Override
+                public void onResponse(Call<GVReponse> call, Response<GVReponse> response)
+                {
+                    if (response.isSuccessful())
+                    {
+                        gvReponse = response.body();
+                        if (gvReponse.getResult().compareTo("success")==0) {
+                            Toast.makeText(MainActivity.getInstance(),"Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(MainActivity.getInstance(),"Cập nhật dữ liệu chưa thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        Toast.makeText(MainActivity.getInstance(),"Không kết nối", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GVReponse> call, Throwable t)
+                {
+                    Toast.makeText(MainActivity.getInstance(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, t.getMessage());
+                }
+            });
+        } );
+    }
+    public void updateQTV(){
+        bindingqtv.updatebtn.setOnClickListener(view -> {
+            String maQTV = bindingqtv.idBox.getText().toString();
+            String name = bindingqtv.usernameBox.getText().toString();
+            String email = bindingqtv.emailBox.getText().toString();
+            String sdt = bindingqtv.sdtBox.getText().toString();
+            String cccd = bindingqtv.cccd.getText().toString();
+
+            String diachi = bindingqtv.diachiBox.getText().toString();
+            tt = false;
+            TrangThaiQTV(tt);
+
+            quanTriVienAPI.updateQTV(maQTV,name,sdt,email,diachi,cccd).enqueue(new Callback<QTVReponse>(){
+                @Override
+                public void onResponse(Call<QTVReponse> call, Response<QTVReponse> response)
+                {
+                    if (response.isSuccessful())
+                    {
+                        qtvReponse = response.body();
+                        if (qtvReponse.getResult().compareTo("success")==0) {
+                            Toast.makeText(MainActivity.getInstance(),"Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(MainActivity.getInstance(),"Cập nhật dữ liệu chưa thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        Toast.makeText(MainActivity.getInstance(),"Không kết nối", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<QTVReponse> call, Throwable t)
+                {
+                    Toast.makeText(MainActivity.getInstance(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, t.getMessage());
+                }
+            });
+        } );
+    }
+
 
 
     private void initComponents() {
         hvApi = vn.iotstar.finalproject.Retrofit.RetrofitClient.getRetrofit().create(HocVienApi.class);
+        gvApi = vn.iotstar.finalproject.Retrofit.RetrofitClient.getRetrofit().create(GiaoVienAPI.class);
+        quanTriVienAPI = vn.iotstar.finalproject.Retrofit.RetrofitClient.getRetrofit().create(QuanTriVienAPI.class);
+
     }
 }

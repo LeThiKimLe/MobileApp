@@ -76,6 +76,10 @@
             android:exported="false"
             android:theme="@style/Theme.FinalProject.NoActionBar" />
         <activity
+            android:name=".PageActivity.AddMaijorActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
+        <activity
             android:name=".PageActivity.AddTeacherActivity"
             android:exported="false"
             android:theme="@style/Theme.FinalProject.NoActionBar" />

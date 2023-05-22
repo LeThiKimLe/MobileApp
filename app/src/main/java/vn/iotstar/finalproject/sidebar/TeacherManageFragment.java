@@ -1,5 +1,6 @@
 package vn.iotstar.finalproject.sidebar;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -28,7 +29,11 @@ import vn.iotstar.finalproject.Adapter.TeacherAdapter;
 import vn.iotstar.finalproject.Model.GiaoVien;
 import vn.iotstar.finalproject.Model.KhoaHoc;
 import vn.iotstar.finalproject.Model.KhoiLop;
+import vn.iotstar.finalproject.PageActivity.AddMaijorActivity;
+import vn.iotstar.finalproject.PageActivity.AddTeacherActivity;
+import vn.iotstar.finalproject.PageActivity.LoginActivity;
 import vn.iotstar.finalproject.PageActivity.MainActivity;
+import vn.iotstar.finalproject.PageActivity.RegisterActivity;
 import vn.iotstar.finalproject.R;
 import vn.iotstar.finalproject.Retrofit.KhoaHocAPI;
 import vn.iotstar.finalproject.Retrofit.QuanTriVienAPI;
@@ -104,6 +109,7 @@ public class TeacherManageFragment extends Fragment {
         View root = binding.getRoot();
         loadTeacher();
         HienSpinner();
+        ThemGV();
         return root;
     }
 
@@ -195,6 +201,16 @@ public class TeacherManageFragment extends Fragment {
         }
 //        listGiaoVien=list_filter;
 //        adapter.notifyDataSetChanged();
+    }
+    public  void ThemGV()
+    {
+        binding.buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.getInstance(), AddTeacherActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

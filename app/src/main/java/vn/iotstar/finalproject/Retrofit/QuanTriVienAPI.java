@@ -12,9 +12,13 @@ import vn.iotstar.finalproject.Model.DonHang;
 import vn.iotstar.finalproject.Model.Feedback;
 import vn.iotstar.finalproject.Model.GiaoVien;
 import vn.iotstar.finalproject.Model.KhoaHoc;
+import vn.iotstar.finalproject.Model.KhoiLop;
+import vn.iotstar.finalproject.Model.PhanMon;
 import vn.iotstar.finalproject.Response.AddGVReponse;
+import vn.iotstar.finalproject.Response.GVReponse;
 import vn.iotstar.finalproject.Response.OrderConfirmResponse;
 import vn.iotstar.finalproject.Response.OrderInforResponse;
+import vn.iotstar.finalproject.Response.QTVReponse;
 
 public interface QuanTriVienAPI {
 
@@ -34,7 +38,15 @@ public interface QuanTriVienAPI {
 
 
     @FormUrlEncoded
-    @POST("api/manager/getOrderDetail")
+    @POST("api/manager/setTeacher")
     Call<AddGVReponse>AddGiaoVien(@Field("action") String action,@Field("tenGiaoVien") String tenGV,@Field("sdt") String sdt,@Field("email") String email,@Field("cccd") String cccd,@Field("ngayKyKet") String ngaykk,@Field("chuyenmon") String chuyenmon);
+
+    @GET("api/general/subject")
+    Call<List<PhanMon>> getPhanMon();
+
+    @FormUrlEncoded
+    @POST("api/general/updateQTV")
+    Call<QTVReponse> updateQTV(@Field("MaQTV") String maQTV, @Field("name") String name, @Field("sdt") String sdt, @Field("email") String email, @Field("diachi") String diachi, @Field("cccd") String cccd);
+
 
 }
