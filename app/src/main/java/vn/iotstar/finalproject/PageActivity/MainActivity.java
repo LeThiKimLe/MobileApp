@@ -278,7 +278,6 @@ public class MainActivity extends AppCompatActivity {
             System.exit(0);
         }
     }
-
     public void goToBillDetail(String billId)
     {
         Intent intent = new Intent(MainActivity.this, BillActivity.class);

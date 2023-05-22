@@ -42,9 +42,10 @@ public class LessionAdapter extends RecyclerView.Adapter<LessionAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull LessionAdapter.MyViewHolder holder, int position) {
         BaiHoc product= array.get(position);
-
         holder.tenbh.setText(product.getTenBaiHoc());
         holder.lessionid.setText(product.getMaBaiHoc());
+        holder.open.setVisibility(View.INVISIBLE);
+        holder.delete.setVisibility(View.INVISIBLE);
     }
 
 
@@ -57,7 +58,7 @@ public class LessionAdapter extends RecyclerView.Adapter<LessionAdapter.MyViewHo
 
         public TextView tenbh;
 
-        public TextView lessionid;
+        public TextView lessionid, open, delete;
 
         public MyViewHolder(@NonNull View itemView)
         {
@@ -65,6 +66,8 @@ public class LessionAdapter extends RecyclerView.Adapter<LessionAdapter.MyViewHo
 
             tenbh= (TextView)itemView.findViewById(R.id.textView_tenbaihoc);
             lessionid =(TextView)itemView.findViewById(R.id.id_lession);
+            open = (TextView)itemView.findViewById(R.id.openBtn);
+            delete= (TextView)itemView.findViewById(R.id.btnDelete);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
